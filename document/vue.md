@@ -75,6 +75,9 @@ export default {
 - '@click'    : adalah attribute fungsi yang akan menjalankan component jika user melakukan interaksi ( life cycle ).
 
 
+
+
+<!--0000000000000000000000000000000000000000000000000000000000000000000000000 Abstract Note 0000000000000000000000000000000000000000000000000000000000000000000000000000000000 -->
 ***
 # Abstract Note
 ***
@@ -101,7 +104,7 @@ import Hello01 from '.'component/Hello01.vue
 
 ## Tahapan untuk menempelkan komponent ke HTML halaman
 
-```
+```js
 <template>
 
 <Hello01/>
@@ -112,7 +115,7 @@ import Hello01 from '.'component/Hello01.vue
 
 ## Package yang di export 
 
-```
+```Js
 
 <script setup>
 
@@ -201,7 +204,95 @@ Breakdowncode:
 - 'message.value' adalah cara menampilkan state
 - `message.value = 'Changed'` adalah cara melakukan perubahan state
 
+## Attribute binding
 
+Adalah metode mengunakan state ditempat lain.
+
+```Js
+<script setup>
+import { ref } from 'vue'
+
+const titleClass = ref('title')
+</script>
+
+<template>
+  <h1 :class="titleClass">Make me red ({{titleClass}})</h1> <!-- add dynamic class binding here -->
+</template>
+
+<style>
+.title {
+  color: red;
+}
+</style>
+```
+Breakdown:
+- Gunakan 'ref'
+- Dan buat state (titleClass)
+- State bisa digunakan sebagai txt value atau sebagai judul yang merujuk ke class css
+- state dengan value 'title' merujuk kepada class css.
+
+Contoh penggunaan lainnya adalah 
+
+```html
+<div v-bind:id="dynamicId"></div>
+```
+
+Atau 
+
+```html
+<div :id="dynamicId"></div>
+```
+
+## Event listener
+
+Adalah fungsi vue yang dimana dia akan memperhatikan interaksi yang diberikan oleh user. 
+Sebagai contoh dibawah ini adalah, vue memperhatikan aksi 'click' yang dilakukan oleh user.
+
+```html
+<script setup>
+import { ref } from 'vue'
+
+const count = ref(0) // State 
+
+function increment() { // blok fungsi 
+  count.value++ 
+}
+</script>
+
+<template>
+  <!-- Fungsi Event Listener -->
+  <button @click="increment">Tambah : {{ count }}</button>
+</template>
+```
+Breakdown code:
+- Panggil ref 
+- tentukan state awal
+- buat blok fungsi, yang dimana dia akan dijalankan setiap kali ada interaksi (Event Listener)
+- Buat pembuka event listener (@click)
+
+
+Pembuka event listener memiliki dua macam:
+
+
+`<button v-on:click="increment">{{ count }}</button>`
+
+
+atau bentuk shorthand
+
+
+`<button @click="increment">{{ count }}</button>`
+
+<!-- 
+// ===========================================================   Progress saat ini ================================================================
+// Pastikan ini selalu di bagian bawah dari (abstract)
+// 03/19/2025
+// https://vuejs.org/tutorial/#step-5
+// ===========================================================   Progress saat ini ================================================================
+-->
+
+
+
+<!--0000000000000000000000000000000000000000000000000000000000000000000000000 Glosariunm 0000000000000000000000000000000000000000000000000000000000000000000000000000000000 -->
 ***
 # Glosarium | Kata kunci 
 ***
