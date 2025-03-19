@@ -158,7 +158,48 @@ npm run dev
 
 Ref: https://vuejs.org/guide/quick-start
 
+## Declarative Rendering
 
+Adalah tindakan untuk membuat state dan melakukan perubahan kepada state tersebut.
+Terdapat dua cara untuk melakukannya:
+- Reactive() 
+- ref()
+
+**Reactive()**
+```Js
+import { reactive } from 'vue'
+
+const counter = reactive({
+  count: 0
+})
+
+console.log(counter.count) // 0
+counter.count++
+```
+Breakdowcode:
+- Memangil fungsi reactive
+- Membuat sebuah array of object (tempat menyimpan state)
+- 'count' adalah state
+- 'counter.count' adalah cara menampilkan value didalam state
+- 'counter.count++' adalah melakukan perubahan data
+
+Reactive bekerja seperti halnya perintah 'map' dan 'set' didalam array.
+
+**ref()**
+```Js
+import { ref } from 'vue'
+
+const message = ref('Hello World!')
+
+console.log(message.value) // "Hello World!"
+message.value = 'Changed'
+
+```
+Breakdowncode:
+- Panggil 'ref'
+- buat sebuah variabel yang akan menjadi state
+- 'message.value' adalah cara menampilkan state
+- `message.value = 'Changed'` adalah cara melakukan perubahan state
 
 
 ***
