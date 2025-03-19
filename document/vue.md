@@ -208,7 +208,7 @@ Breakdowncode:
 
 Adalah metode mengunakan state ditempat lain.
 
-```Js
+```html
 <script setup>
 import { ref } from 'vue'
 
@@ -282,11 +282,75 @@ atau bentuk shorthand
 
 `<button @click="increment">{{ count }}</button>`
 
+## Form Binding
+
+adalah fungsi dimana vue akan menjadi perantara form dan code fungsi javascript kita.
+terdapat dua cara untuk melakukan Form Binding:
+
+### Cara lama ( Manual )
+
+```<input :value="text" @input="onInput">```
+
+Disini:
+- ':value=text' -- adalah sebagai output (menampilkan value ke form)
+- '@input'      -- adalah sebagai input (mengirim value ke state onInput)
+
+
+```html
+function onInput(e) {
+  // a v-on handler receives the native DOM event
+  // as the argument.
+  text.value = e.target.value
+}
+```
+
+Disini:
+- 'text.value' adalah state yang akan ditampikan oleh form
+- 'e.target.value' adalah nilai yang didapatkan form
+- 'text' akan berubah setiap kali ada data baru dari fungsi onInput()
+
+
+### Cara baru (Automatis)
+
+```html
+<input v-model="text">
+```
+
+adalah bentuk penyederhanaan dari proses diatas. 
+Kita tidak perlu lagi membuat function yang harus menerima setiap interaksi didalam form.
+
+'v-model' juga bisa digunakan untuk checkbox.
+
+
+### Contoh Form binding
+
+```html
+
+<script setup>
+import { ref } from 'vue'
+
+const text = ref('') // adalah state
+
+</script>
+
+<template>
+  <!-- v-model -->
+  <input v-model="text" placeholder="Type here">
+  <!-- menampilkan hasil state -->
+  <p>{{ text }}</p>
+</template>
+```
+
+Ref: https://vuejs.org/tutorial/#step-5
+
+
+## 
+
 <!-- 
 // ===========================================================   Progress saat ini ================================================================
 // Pastikan ini selalu di bagian bawah dari (abstract)
 // 03/19/2025
-// https://vuejs.org/tutorial/#step-5
+// https://vuejs.org/tutorial/#step-6
 // ===========================================================   Progress saat ini ================================================================
 -->
 
