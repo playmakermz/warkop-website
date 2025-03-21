@@ -344,13 +344,53 @@ const text = ref('') // adalah state
 Ref: https://vuejs.org/tutorial/#step-5
 
 
+## Conditional Rendering
+
+Disini element HTMl hanya akan dilakukan rendering oleh vue jika condition ( boolean ) adalah True. 
+
+```html
+<script setup>
+import { ref } from 'vue'
+
+const awesome = ref(true) // boolean state 
+
+function toggle() {
+  awesome.value = !awesome.value // timpa value bollean lama ke baru '!state'
+}
+</script>
+
+<template>
+  <button @click="toggle">Toggle</button> <!-- Event listener ke blok 'toggle'  -->
+  <h1 v-if="awesome">Vue is awesome!</h1> <!-- Mengacu ke boolean state  -->
+  <h1 v-else>Oh no 😢</h1> <!-- akan menjadi ini jika state adalah FALSE -->
+</template>
+```
+
+Ref: https://vuejs.org/guide/essentials/conditional.html
+
 ## 
+
+
+## Table of Content
+- [Halaman Utama web](#halaman-utama-website-disini)
+- [menerima komponent](#tahapan-menerima-komponent)
+- [menerapkan komponent](#tahapan-untuk-menempelkan-komponent-ke-html-halaman)
+- [export package](#package-yang-di-export)
+- [menjalankan-vue](#menjalankan-vue)
+- [declarative-rendering](#declarative-rendering)
+- [attribute-binding](#attribute-binding)
+- [event-listener](#event-listener)
+- [form-binding](#form-binding)
+- [contoh-form-binding](#contoh-form-binding)
+- [conditional-rendering](#conditional-rendering)
+
+
 
 <!-- 
 // ===========================================================   Progress saat ini ================================================================
 // Pastikan ini selalu di bagian bawah dari (abstract)
 // 03/19/2025
-// https://vuejs.org/tutorial/#step-6
+// https://vuejs.org/tutorial/#step-7
 // ===========================================================   Progress saat ini ================================================================
 -->
 
