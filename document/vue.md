@@ -368,7 +368,60 @@ function toggle() {
 
 Ref: https://vuejs.org/guide/essentials/conditional.html
 
-## 
+## List Rendering
+
+adalah cara untuk menampilkan data array kedalam halaman HTML.
+
+Berikut adalah contoh Todo list sederhana:
+
+```html
+<script setup>
+import { ref } from 'vue'
+
+// give each todo a unique id
+let id = 0 
+
+const newTodo = ref('') // ini sebagai form state
+const todos = ref([
+  { id: id++, text: 'Learn HTML' },
+  { id: id++, text: 'Learn JavaScript' },
+  { id: id++, text: 'Learn Vue' }
+])
+
+function addTodo() { // ini adalah item yang terprint
+  todos.value.push({ id: id++, text: newTodo.value }) // tambahkan value kedalam todos array
+  newTodo.value = '' // bersihkan form state
+}
+
+function removeTodo(todo) { // ini adalah aksesoris delete tambahan
+  todos.value = todos.value.filter((t) => t !== todo) // hapus item yang dipilih
+  // filter, simpan semua item kecuali yang memiliki id sama dengan 't' atau 'todo'
+}
+</script>
+
+<template>
+  <!-- Form Start -->
+  <form @submit.prevent="addTodo">
+    <input v-model="newTodo" required placeholder="new todo">
+    <button>Add Todo</button>
+  </form>
+  <!-- Form End -->
+
+   <!-- Pack -->
+  <ul>
+    <!-- 1 pcs -->
+    <li v-for="todo in todos" :key="todo.id">
+      <p>
+        {{ todo.text }}
+      </p>
+      <button @click="removeTodo(todo)">X</button>
+    </li>
+    <!-- 1 pcs -->
+  </ul>
+  <!-- Pack -->
+</template>
+```
+
 
 
 ## Table of Content
@@ -383,6 +436,8 @@ Ref: https://vuejs.org/guide/essentials/conditional.html
 - [form-binding](#form-binding)
 - [contoh-form-binding](#contoh-form-binding)
 - [conditional-rendering](#conditional-rendering)
+- [List Rendering](#list-rendering)
+- []
 
 
 
