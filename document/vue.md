@@ -485,6 +485,37 @@ function removeTodo(todo) {
 </style>
 ```
 
+## Lifecyle
+### LifeCyle and template Refs
+Adalah panduan untuk melakukan configurasi DOM secara manual tidak lagi otomatis seperti sebelumnya. 
+
+```html
+
+<script setup>
+import { ref, onMounted } from 'vue' 
+
+// Ambil alamat dengan 'Template Ref'
+const pElementRef = ref(null)
+
+onMounted(() => {
+  // onMounted adalah kondisi status saat component Mounted didalam LifeCyle
+  // ini adalah blok code yang akan di eksekusi jika statusnya adalah mounted
+  pElementRef.value.textContent = 'mounted!' // timpa text
+})
+
+</script>
+
+<template>
+  <!-- Gunakan alamat tersebut di element HTML yang dituju -->
+  <p ref="pElementRef">Hello</p>
+</template>
+```
+
+ Kondisi component ( hooks  ):
+ - onMounted
+ - onUpdate 
+ - onUnmounted
+
 ## Table of Content
 - [Halaman Utama web](#halaman-utama-website-disini)
 - [menerima komponent](#tahapan-menerima-komponent)
@@ -499,6 +530,7 @@ function removeTodo(todo) {
 - [conditional-rendering](#conditional-rendering)
 - [List Rendering](#list-rendering)
 - [computed property](#computed-property)
+- [Lifecyle](#Lifecyle)
 
 
 
