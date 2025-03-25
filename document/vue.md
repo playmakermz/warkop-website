@@ -435,27 +435,28 @@ import { ref, computed } from 'vue'
 
 let id = 0
 
-const newTodo = ref('')
-const hideCompleted = ref(false)
+const newTodo = ref('') // form state
+const hideCompleted = ref(false) // indikator hide and show dari element tersebut
 const todos = ref([
   { id: id++, text: 'Learn HTML', done: true },
   { id: id++, text: 'Learn JavaScript', done: true },
   { id: id++, text: 'Learn Vue', done: false }
 ])
 
-const filteredTodos = computed(() => {
-  return hideCompleted.value
-    ? todos.value.filter((t) => !t.done)
-    : todos.value
+const filteredTodos = computed(() => { 
+  return hideCompleted.value ? todos.value.filter((t) => !t.done) : todos.value // True : False
+  // Jika True, maka
+  // tampilkan hasil filter dari 'todos.value.filter((t) => !t.done)'
+  // nilai default adalah false 'todos.value'
 })
 
 function addTodo() {
-  todos.value.push({ id: id++, text: newTodo.value, done: false })
-  newTodo.value = ''
+  todos.value.push({ id: id++, text: newTodo.value, done: false }) // tambahkan item kedalamn state
+  newTodo.value = '' // refresh form
 }
 
 function removeTodo(todo) {
-  todos.value = todos.value.filter((t) => t !== todo)
+  todos.value = todos.value.filter((t) => t !== todo) // hapus item sesuai dengan id yang dipilih
 }
 </script>
 
