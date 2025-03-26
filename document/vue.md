@@ -516,6 +516,25 @@ onMounted(() => {
  - onUpdate 
  - onUnmounted
 
+ ## Components
+
+ salah satu hal yang akan menjadi media terbaik dari vue adalah components.
+ Yaitu dimana kita akan membuat component dan akan dilekatkan kepada component lain.
+
+ Contoh:
+ ```html
+<script setup>
+// Panggil component lain
+import ChildComp from './ChildComp.vue'
+</script>
+
+<template>
+  <!-- render child component -->
+   <!-- Tempel mereka disini -->
+  <ChildComp />
+</template>
+ ```
+
 ## Table of Content
 - [Halaman Utama web](#halaman-utama-website-disini)
 - [menerima komponent](#tahapan-menerima-komponent)
@@ -538,7 +557,7 @@ onMounted(() => {
 // ===========================================================   Progress saat ini ================================================================
 // Pastikan ini selalu di bagian bawah dari (abstract)
 // 03/19/2025
-// https://vuejs.org/tutorial/#step-8
+// https://vuejs.org/tutorial/#step-11
 // ===========================================================   Progress saat ini ================================================================
 -->
 
