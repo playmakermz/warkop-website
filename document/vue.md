@@ -535,6 +535,45 @@ import ChildComp from './ChildComp.vue'
 </template>
  ```
 
+ ## Props
+
+ adalah metode mengirim data kepada component lain dari penerima.
+ bentuknya seperti ini:
+- Komponen A (Import / penerima / Parent component) adalah sebagai penerima komponen lain
+- Komponen B (Export / pengirim / child component) adalah komponen lain yang akan melengkapi
+
+Code Komponen A (Parent component)
+```html
+<script setup>
+import { ref } from 'vue'
+import ChildComp from './ChildComp.vue' // panggil komponen B
+
+const greeting = ref('Hello from parent') // buat state
+</script>
+
+<template>
+  <ChildComp :msg="greeting" /> <!-- Kirim data State ke komponen B -->
+</template>
+```
+
+
+code komponen B (child component)
+```html
+<script setup>
+const props = defineProps({ // Buat metode menerima data
+  msg: String // 'msg' adalah alamat variabel yang digunakan untuk menerima
+})
+</script>
+
+<template>
+  <h2>{{ msg || 'No props passed yet' }}</h2> <!-- pasang variabel -->
+</template>
+
+```
+Note:
+- 'defineProps()' sudah built-in, oleh karena itu komponen B tidak perlu melakukan import
+
+
 ## Table of Content
 - [Halaman Utama web](#halaman-utama-website-disini)
 - [menerima komponent](#tahapan-menerima-komponent)
@@ -550,6 +589,8 @@ import ChildComp from './ChildComp.vue'
 - [List Rendering](#list-rendering)
 - [computed property](#computed-property)
 - [Lifecyle](#Lifecyle)
+- [Components](#Components)
+- [Props](#Props)
 
 
 
@@ -557,7 +598,7 @@ import ChildComp from './ChildComp.vue'
 // ===========================================================   Progress saat ini ================================================================
 // Pastikan ini selalu di bagian bawah dari (abstract)
 // 03/19/2025
-// https://vuejs.org/tutorial/#step-11
+// https://vuejs.org/tutorial/#step-12
 // ===========================================================   Progress saat ini ================================================================
 -->
 
