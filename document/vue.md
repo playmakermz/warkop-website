@@ -574,6 +574,43 @@ Note:
 - 'defineProps()' sudah built-in, oleh karena itu komponen B tidak perlu melakukan import
 
 
+## Emits
+
+adalah aksi parent (Komponent A) mengirim state ke komponent child (Komponent B)
+
+```html
+<script setup>
+  // ========= Ini adalah komponent parent (Komponent A) =======
+import { ref } from 'vue'
+import ChildComp from './ChildComp.vue' // panggil komponent child
+
+const childMsg = ref('No child msg yet') // Buat state
+</script>
+
+<template>
+  <!-- panggil 'ChildComp' untuk menggambil state component child-->
+   <!-- ChildComp hanya akan menampilkkan 'template' saja-->
+  <ChildComp @response="(msg) => childMsg = msg" />
+  <!-- 'hello from child' akan ditampikan dibawah sini (state awal di timpa)-->
+  <p>{{ childMsg }}</p>
+</template>
+```
+
+
+```html
+<script setup>
+   // ========= Ini adalah komponent child (Komponent B) =======
+const emit = defineEmits(['response'])
+
+emit('response', 'hello from child')
+</script>
+
+<template>
+  <h2>Child component</h2>
+</template>
+```
+
+
 ## Table of Content
 - [Halaman Utama web](#halaman-utama-website-disini)
 - [menerima komponent](#tahapan-menerima-komponent)
@@ -598,7 +635,7 @@ Note:
 // ===========================================================   Progress saat ini ================================================================
 // Pastikan ini selalu di bagian bawah dari (abstract)
 // 03/19/2025
-// https://vuejs.org/tutorial/#step-12
+// https://vuejs.org/tutorial/#step-13
 // ===========================================================   Progress saat ini ================================================================
 -->
 
