@@ -2,9 +2,31 @@
 
 Memiliki konsep yang tidak beda jauh dari React. 
 
+## Table of Content
+- [Halaman Utama web](#halaman-utama-website-disini)
+- [menerima komponent](#tahapan-menerima-komponent)
+- [menerapkan komponent](#tahapan-untuk-menempelkan-komponent-ke-html-halaman)
+- [export package](#package-yang-di-export)
+- [menjalankan-vue](#menjalankan-vue)
+- [declarative-rendering](#declarative-rendering)
+- [attribute-binding](#attribute-binding)
+- [event-listener](#event-listener)
+- [form-binding](#form-binding)
+- [contoh-form-binding](#contoh-form-binding)
+- [conditional-rendering](#conditional-rendering)
+- [List Rendering](#list-rendering)
+- [computed property](#computed-property)
+- [Lifecyle](#Lifecyle)
+- [Components](#Components)
+- [Props](#Props)
+- [Emits](#Emits)
+- [Slots](#Slots)
+
+
+
 ## Bentuk Fundamental dari vue | Options API
 
-```JavaScript
+```html
 
 <script>
 
@@ -93,7 +115,7 @@ Setelah membuat component, jangan lupa untuk export dan import ke halaman yang d
 
 contoh:
 
-```javascript 
+```html
 <script setup>
 
 import HelloWorld from './components/HelloWorld.vue'
@@ -104,7 +126,7 @@ import Hello01 from '.'component/Hello01.vue
 
 ## Tahapan untuk menempelkan komponent ke HTML halaman
 
-```js
+```html
 <template>
 
 <Hello01/>
@@ -115,7 +137,7 @@ import Hello01 from '.'component/Hello01.vue
 
 ## Package yang di export 
 
-```Js
+```html
 
 <script setup>
 
@@ -151,7 +173,7 @@ const count = 'Saya komponen baru'
 
 ## Menjalankan vue 
 
-```
+```html
 cd <your-project-name>
 
 npm install
@@ -610,6 +632,40 @@ emit('response', 'hello from child')
 </template>
 ```
 
+## Slots
+
+adalah metode parent component untuk mengirimkan dara ke child component.
+
+Data dari parent akan dikirim ke element "slot", dan tidak akan mengangu element lainnya.
+
+content didalam element "slot" akan ditimpa oleh data dari parent
+
+```html
+<template>
+  <!-- Ini adalah child components -->
+  <slot>Fallback content</slot>
+  <p>
+    hanya elemnt "slot" yang diubah
+  </p>
+</template>
+```
+
+
+dibawah ini adalah parent components
+
+```html
+<script setup>
+  // Ini adalah parent component
+import { ref } from 'vue'
+import ChildComp from './ChildComp.vue'
+
+const msg = ref('from parent')
+</script>
+
+<template>
+  <ChildComp>Message: {{ msg }}</ChildComp>
+</template>
+```
 
 ## Table of Content
 - [Halaman Utama web](#halaman-utama-website-disini)
@@ -628,6 +684,8 @@ emit('response', 'hello from child')
 - [Lifecyle](#Lifecyle)
 - [Components](#Components)
 - [Props](#Props)
+- [Emits](#Emits)
+- [Slots](#Slots)
 
 
 
@@ -635,7 +693,7 @@ emit('response', 'hello from child')
 // ===========================================================   Progress saat ini ================================================================
 // Pastikan ini selalu di bagian bawah dari (abstract)
 // 03/19/2025
-// https://vuejs.org/tutorial/#step-13
+// https://vuejs.org/tutorial/#step-14
 // ===========================================================   Progress saat ini ================================================================
 -->
 
