@@ -174,6 +174,11 @@ const count = 'Saya komponen baru'
 ## Menjalankan vue 
 
 ```html
+npm install -g @vue/cli
+
+# Atau upgrade dengan ini
+# npm update -g @vue/cli
+
 cd <your-project-name>
 
 npm install
@@ -182,6 +187,8 @@ npm run dev
 ```
 
 Ref: https://vuejs.org/guide/quick-start
+
+Panduan instalasi: https://cli.vuejs.org/guide/installation.html
 
 ## Declarative Rendering
 
