@@ -174,14 +174,19 @@ const count = 'Saya komponen baru'
 ## Menjalankan vue 
 
 ```html
+# Instalasi vue js
 npm install -g @vue/cli
 
 # Atau upgrade dengan ini
 # npm update -g @vue/cli
 
-cd <your-project-name>
+# Buat Vue App
+vue create hello-world 
 
-npm install
+# Atau gunakan versi GUI untuk build
+# vue ui
+
+cd <your-project-name>
 
 npm run dev
 ```
@@ -189,6 +194,7 @@ npm run dev
 Ref: https://vuejs.org/guide/quick-start
 
 Panduan instalasi: https://cli.vuejs.org/guide/installation.html
+- https://cli.vuejs.org/guide/creating-a-project.html#vue-cli-service-build
 
 ## Declarative Rendering
 
