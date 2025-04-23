@@ -189,6 +189,9 @@ vue create hello-world
 cd <your-project-name>
 
 npm run serve
+
+# Atau ini
+# npm run dev
 ```
 
 Ref: https://vuejs.org/guide/quick-start
