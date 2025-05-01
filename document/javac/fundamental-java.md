@@ -188,8 +188,34 @@ public class Main {
 ---
 ### Expression 
 
---- 
-### Operator 
+Ekspresi adalah sebuah kondisi kombinasi dari variabel, opertaor, dan juga method yang akan menghasilkan sebuah nilai. Contoh ekspresi:
+- Perhitungan Matematika
+- Perbandingan (co: x > 10 )
+- Memangil method (co: `Math.sqrt(16)`)
+- Operasi logika (co: `isTrue && isFalse`)
+
+Contoh ekpresi sederhana:
+```
+public class ContohEkspresi {
+    public static void main(String[] args) {
+        int angka = 10; // Deklarasi variabel
+        int hasil = angka * 2 + 5; // Ekspresi matematika
+        System.out.println("Hasil ekspresi: " + hasil); // Ekspresi dengan method
+    }
+}
+```
+Breakdown:
+- Public class ContohEkspresi - adalah nama kelas utama, dan file JS harus sesuai dengan itu
+- Public static void main(String[] args) - Titik mulai eksekusi program
+- int hasil = angka * 2 + 5; - adalah bentuk ekspresi
+- System.out.println('hasil ekspresi: ' + hasil); - adalah ekspresi dengan method
+
+Contoh code ekpresi lain:
+```
+boolean isGenap = (hasil % 2 == 0); // Ekspresi perbandingan (hasil: true/false)
+boolean isValid = (angka > 0 && hasil < 30); // Ekspresi logika (AND)
+double akar = Math.sqrt(hasil); // Ekspresi dengan method (akar kuadrat)
+```
 
 --- 
 ### if statement 
@@ -273,6 +299,7 @@ public class Main {
   }
 }
 ```
+
 
 
 ---
