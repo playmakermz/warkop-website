@@ -417,5 +417,50 @@ hist(kecepatan,
      breaks = 10) # jumlah kelas
 ```
 
+## Melakukan perhitungan Coefficient of variation (CV) | Koeffisiensi keragaman
+
+```
+# matematika Fatoni 90
+# rata-rata matematika 65
+# deviasi 10
+
+# Bahasa inggris Fatoni 45
+# rata-rata bahasa inggris 70
+# deviasi 8
+
+# Data untuk ujian Matematika
+meanMatematika <- 65
+sdMatematika <- 10
+
+# Data untuk ujian Bahasa Inggris
+meanInggris <- 70
+sdInggris <- 8
+
+# CV (Coefficient of variaation) 
+# Menghitung koefisien keragaman (CV)
+# Rumus dasar CV
+# cv <- sd(data) / mean(data) * 100
+# Referensi: https://www.statology.org/coefficient-of-variation-in-r/ 
+
+
+# Menghitung koefisien keragaman (CV) untuk Matematika
+cvMatematika <- (sdMatematika / meanMatematika) * 100
+
+
+
+# Menghitung koefisien keragaman (CV) untuk Bahasa Inggris
+cvInggris <- (sdInggris / meanInggris) * 100
+
+# Menampilkan hasil
+print(paste("Koefisien keragaman untuk Matematika:", cvMatematika, "%"))
+print(paste("Koefisien keragaman untuk Bahasa Inggris:", cvInggris, "%"))
+
+
+# Output:
+
+# [1] "Koefisien keragaman untuk Matematika: 15.3846153846154 %"
+# [1] "Koefisien keragaman untuk Bahasa Inggris: 11.4285714285714 %"
+```
+
 # Referensi:
 - https://www.geeksforgeeks.org/calculate-square-root-of-a-number-in-r-language-sqrt-function/
