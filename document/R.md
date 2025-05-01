@@ -329,5 +329,30 @@ Nilai_genap <- c()
 print(Nilai_genap)
 ```
 
+## Cara melakukan perhitungan Mean(rata-rata)
+
+```R
+kecepatan <- c(4,4,7,7,8,8,9,10,10,11,11,12,12,12,13,13,13,13,114,14,14,14,15,15,15,16,16,17,17,17,17,17,18,18,18,19,19,20,20,20,20,20,21,22,23,24,24,24,25,25)
+banyak1 <- length(kecepatan)
+print(sum(kecepatan)/banyak1)
+
+# Mean(Rata-rata) Kecepatan => 17.5
+```
+
+## cara melakukan perhitungan Median(nilai tengah)
+```
+kecepatan <- c(4,4,7,7,8,8,9,10,10,11,11,12,12,12,13,13,13,13,114,14,14,14,15,15,15,16,16,17,17,17,17,17,18,18,18,19,19,20,20,20,20,20,21,22,23,24,24,24,25,25)
+medianKecepatan <- median(kecepatan)
+print(medianKecepatan)
+# Median => 16
+```
+
+## cara melakukan perhitungan SD(Standart Deviasi)
+```
+kecepatan <- c(4,4,7,7,8,8,9,10,10,11,11,12,12,12,13,13,13,13,114,14,14,14,15,15,15,16,16,17,17,17,17,17,18,18,18,19,19,20,20,20,20,20,21,22,23,24,24,24,25,25)
+sdKecepatan <- sd(kecepatan) 
+# SD => 14.9273752083963
+```
+
 # Referensi:
 - https://www.geeksforgeeks.org/calculate-square-root-of-a-number-in-r-language-sqrt-function/
