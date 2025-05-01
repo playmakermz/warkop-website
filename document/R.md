@@ -354,5 +354,68 @@ sdKecepatan <- sd(kecepatan)
 # SD => 14.9273752083963
 ```
 
+## Cara membuat scatter plot 
+```
+# contoh Data Kecepatan dan jarak pada tabel
+jarak <- c(2,10,4,20,17,13,18,28,33,18,26,12,24,22,28,24,32,34,43,24,30,58,80,20,24,55,35,40,30,44,50,46,53,70,80,36,46,68,34,48,50,56,60,64,56,72,90,92,110,85)
+banyak2 <- length(jarak)
+
+kecepatan <- c(4,4,7,7,8,8,9,10,10,11,11,12,12,12,13,13,13,13,114,14,14,14,15,15,15,16,16,17,17,17,17,17,18,18,18,19,19,20,20,20,20,20,21,22,23,24,24,24,25,25)
+banyak1 <- length(kecepatan)
+
+# Membuat scatter plot
+plot(jarak, kecepatan, 
+     main = "Scatter Plot : Kecepatan vs Jarak",  # Judul
+     xlab = "Kecepatan (km/h)", # sumbu x
+     ylab = "Jarak (meter)",  # sumbu y
+     pch = 19, # Bentuk titik 
+     col = "blue") # warna titik
+```
+
+## Contoh menambahkan regresi linear 
+```
+# contoh Data Kecepatan dan jarak pada tabel
+jarak <- c(2,10,4,20,17,13,18,28,33,18,26,12,24,22,28,24,32,34,43,24,30,58,80,20,24,55,35,40,30,44,50,46,53,70,80,36,46,68,34,48,50,56,60,64,56,72,90,92,110,85)
+banyak2 <- length(jarak)
+
+kecepatan <- c(4,4,7,7,8,8,9,10,10,11,11,12,12,12,13,13,13,13,114,14,14,14,15,15,15,16,16,17,17,17,17,17,18,18,18,19,19,20,20,20,20,20,21,22,23,24,24,24,25,25)
+banyak1 <- length(kecepatan)
+
+# Membuat scatter plot
+plot(jarak, kecepatan, 
+     main = "Scatter Plot : Kecepatan vs Jarak",  # Judul
+     xlab = "Kecepatan (km/h)", # sumbu x
+     ylab = "Jarak (meter)",  # sumbu y
+     pch = 19, # Bentuk titik 
+     col = "blue") # warna titik
+
+
+# ========================== Garis tren merah (regresi linear) ===========================
+model <- lm(kecepatan ~ jarak)
+abline(model, col = "red", lwd = 2)
+```
+
+## Membuat histogram 
+
+```
+
+# contoh Data Kecepatan dan jarak pada tabel
+jarak <- c(2,10,4,20,17,13,18,28,33,18,26,12,24,22,28,24,32,34,43,24,30,58,80,20,24,55,35,40,30,44,50,46,53,70,80,36,46,68,34,48,50,56,60,64,56,72,90,92,110,85)
+banyak2 <- length(jarak)
+
+kecepatan <- c(4,4,7,7,8,8,9,10,10,11,11,12,12,12,13,13,13,13,114,14,14,14,15,15,15,16,16,17,17,17,17,17,18,18,18,19,19,20,20,20,20,20,21,22,23,24,24,24,25,25)
+banyak1 <- length(kecepatan)
+
+
+# Membuat histogram
+hist(kecepatan, 
+     main = "Histogram Kecepatan Mobil",  # Judul
+     xlab = "Kecepatan (km/h)",  # sumbu xx
+     ylab = "Frekuensi",  # sumbu y
+     col = "blue",  # warna sumbu
+     border = "black", # batas
+     breaks = 10) # jumlah kelas
+```
+
 # Referensi:
 - https://www.geeksforgeeks.org/calculate-square-root-of-a-number-in-r-language-sqrt-function/
