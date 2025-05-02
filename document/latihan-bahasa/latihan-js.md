@@ -88,3 +88,38 @@ Indeks 3: Jeruk
 
 ```
 
+***
+## Latihan ke 3
+***
+
+Tujuan: Melatihan pemahaman mengenai array Map dan array filter
+
+Tugas:
+- Buat array `angka` dengan nilai [1,3,5,7,9]
+- Gunakan method `map()` untuk membuat array baru yang berisi setiap elemen dikali 3
+- berdasarkan array baru, gunakan method `filter()` untuk membuat array baru yang hanya berisi elemen dengan nilai lebih besar dari 10
+
+
+Output yang diharapkan:
+```r
+Hasil map:  [ 3, 9, 15, 21, 27 ]
+Hasil filter:  [ 15, 21, 27 ]
+```
+
+
+***
+## Latihan ke 4
+***
+
+Tujuan: Melatih pemahaman didalam menganalisa sebuah array
+
+Tugas:
+- Buat array dengan nama "buah" yang berisi "Apel", "Pisang", "Jeruk"
+- Buat algoritma yang akan menganilisa array "buah" untuk mencari elemen dengan value "Pisang". Jika ada elemen "Pisang" tampilkan pada indeks keberapa elemen tersebut berada
+- Buat algoritma yang akan menganilisa array "buah" untuk mencari elemen dengan value "Semangka". Tampilkan "Semangka tidak ada" jika element tersebut tidak ada pada array
+
+Output yang diharapkan:
+```r
+Elemen dengan value pisang berada pada index ke : 1
+Semangka tidak ada
+```
