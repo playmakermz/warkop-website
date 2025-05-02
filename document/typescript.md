@@ -104,11 +104,18 @@ findLocationInJakarta('udin') // Error
 ```
 
 ***
-# Sort 
+## if statement 
 ***
+
+Percabangan 
 
 ```Js 
 
+// Contoh If statement 
+let data: string | number = "Hello";
+if (typeof data === "string") {
+  console.log(data.toUpperCase()); // Mengubah huruf kecil ke besar
+}
 ```
 
 
