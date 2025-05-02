@@ -103,9 +103,9 @@ findLocationInJakarta('Selatan')
 findLocationInJakarta('udin') // Error
 ```
 
-***
+
 ## if statement 
-***
+
 
 Percabangan 
 
@@ -117,6 +117,102 @@ if (typeof data === "string") {
   console.log(data.toUpperCase()); // Mengubah huruf kecil ke besar
 }
 ```
+
+## Array 
+
+```js
+// Array number
+let angka: number[] = [1, 2, 3];
+let names: Array<string> = ["Alice", "Bob"];
+
+// array dibawah ini, tipe datanya tetap
+let tuple: [string, number] = ["Age", 25];
+
+// Readonly array
+const readOnlyArr: readonly number[] = [1, 2, 3];
+```
+
+## Loop 
+
+Untuk loop sederhana seperti dibawah, tidak ada configurasi tambahan dari typescript.
+
+```js
+// Default for loop
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+
+// For loop yang akan mengambil value item pada array 'angka'
+for (const num of angka) {
+  console.log(num * 2); // num otomatis number
+}
+
+// for loop yang akan mengambil nomor index sebagai value mereka.
+for (const index in angka) {
+  console.log(index); // string: "0", "1", "2"
+}
+```
+
+## Function 
+
+```js
+// Fungsi dasar
+function add(a: number, b: number): number {
+  return a + b;
+}
+
+// Arrow function
+const multiply = (x: number, y: number): number => x * y;
+
+// Parameter opsional
+function greet(name: string, age?: number): void {
+  console.log(`Hello ${name}${age ? ` (${age})` : ''}`);
+}
+
+// Function overloading
+function padLeft(value: string, padding: number | string): string {
+  // Implementasi
+}
+```
+
+## Class
+
+```js
+class Animal {
+  // Menjabarkan tipe data untuk setiap parameter yang ada
+  constructor(public name: string, private age: number) {}
+
+  // Method
+  speak(): void {
+    console.log(`${this.name} makes a noise`);
+  }
+}
+
+class Dog extends Animal {
+  constructor(name: string, age: number, public breed: string) {
+    super(name, age);
+  }
+
+  // Override method
+  speak(): void {
+    console.log("Woof!");
+  }
+}
+
+// Penggunaan
+const myDog = new Dog("Rex", 3, "Husky");
+myDog.speak(); // "Woof!"
+```
+
+Note:
+- Mengenai parameter private, sederhananya parameter terssebut hanya bisa diakses dialam code class saja, oject instance yang tercipta tidak termasuk.
+
+contohnya begini:
+```js
+console.log(myDog.name) // Rex
+console.log(myDog.age) // Error javascript!
+```
+
 
 
 ## Reference
