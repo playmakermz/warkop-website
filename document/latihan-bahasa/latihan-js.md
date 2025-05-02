@@ -58,7 +58,7 @@ Tugas:
 - Tampilkan array buah.
 
 Output yang diharapkan:
-```html 
+```r
 [ 'Apel', 'Mangga', 'Pisang', 'Jeruk' ]
 Apel
 Pisang
@@ -67,3 +67,23 @@ Pisang
 
 ***
 ## Latihan ke 2
+
+Tujuan: Melatih pemahaman array loop
+
+Tugas:
+- gunakan Loop array buah pada latihan pertama dan tampilkan sertiap elemen yang ada.
+- Buat loop baru, gunakan `forEach` untuk menampilkan index elemen dan nilai elemen.
+
+Output yang diharapkan:
+```r
+Indeks 0: Apel
+Indeks 1: Mangga
+Indeks 2: Pisang
+Indeks 3: Jeruk
+Indeks 0: Apel
+Indeks 1: Mangga
+Indeks 2: Pisang
+Indeks 3: Jeruk
+
+```
+
