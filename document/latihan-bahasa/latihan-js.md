@@ -37,8 +37,9 @@ else if(stokBuah < 15){
 
 Ingat untuk pastikan hasil output dari terminal harus sesuai dengan "Output yang diharapkkan"
 
+***
 ## Latihan Pertama 
-
+***
 Adalah latihan untuk melakukan akses data dari array dan juga melakukan modifikasi pada data yang ada.
 
 Selesaikan setiap tahapan yang ada dibawah ini!
@@ -67,7 +68,7 @@ Pisang
 
 ***
 ## Latihan ke 2
-
+***
 Tujuan: Melatih pemahaman array loop
 
 Tugas:
