@@ -1697,6 +1697,9 @@ ref: https://www.w3schools.com/js/js_array_sort.asp
 - [Javascript synchronous](../document/project-react/async.md)
 - [AJAX](../document/ajax.md)
 
+## Latihan Javascript
+- [Latihan javascript](../document/latihan-bahasa/latihan-js.md)
+
 
 ***
 ## Reference:
