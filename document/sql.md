@@ -49,7 +49,8 @@ secara terus menerus mengembangkannya.
 1. [Baris NULL](#kolom-null)
 1. [ORDER BY](#order-by)
 1. [LIMIT](#limit)
-  2. [Wrap up rangkuman 2](#wrap-up-rangkuman)
+1. [Wrap up rangkuman 2](#wrap-up-rangkuman)
+1. [Latihan](#Latihan-SQL)
 ## Penjelasan Database
 
 secara umum database, adalah koleksi dari informasi yang terkait.
@@ -915,6 +916,11 @@ value mereka sama.
 
 ## Note kecil 
 Contoh data modeling adalah relational databases
+
+## Latihan SQL
+
+Panduan latihan :
+[Latihan SQL](../document/latihan-bahasa/latihan-sql.md)
 
 
 ## Pranala menarik
