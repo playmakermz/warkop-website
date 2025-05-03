@@ -702,6 +702,11 @@ Kita tidak bisa melakukan indexing pada set, dan data pada set tidak dapat dirub
 Kelebihan utama set adalah menghilangkan duplikasi pada data. Data yang terduplikasi akan ditampilkan satu pada set 
 
 SRC: https://www.programiz.com/python-programming/list
+
+# Latihan Python
+
+[Latihan Python](./latihan-bahasa/latihan-py.md)
+
 ## Source
 
 - [https://docs.python.org/3/tutorial/](https://docs.python.org/3/tutorial/)
