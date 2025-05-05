@@ -46,3 +46,27 @@ Output:
 2024 adalah tahun kabisat
 Jumlah hari : 29
 ```
+
+## Latihan ke 2
+
+Tujuan: Latihan mengunakan loop
+
+Tugas: 
+- Tampilkan bilangan genap dari 1-200, tampilkan jawaban melalui terminal
+
+## Latihan ke 3
+
+Tujuan: modifakasi data array 
+
+Tugas: 
+- Cari angka terbesar dari list [11,35,8,3,95,45,2,78], tampilkan jawaban melalui terminal
+- hapus nilai duplikat dari list berikut ini `[2,5,2,8,5,9,8]`
+
+  
+## Latihan ke 4
+
+Tujuan: Memahami array method 
+
+Tugas:
+- Gunakan method `filter()` untuk mengambil nilai genap saja dari list `[12,5,8,17,22]`
+- Gunakan method `map()` untuk mengubah list string angka `["1","2","3"]`
