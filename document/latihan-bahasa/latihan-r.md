@@ -50,3 +50,72 @@ contoh output:
 ```
 
 ## Latihan 2
+
+Mengunakan if statement 
+
+Tugas:
+- Cek apakah nilai `1234` merupakan genap/ganjil
+
+Input:
+```r
+1234
+```
+
+Output:
+```r
+"Genap"
+```
+
+## Latihan 3
+
+Tugas:
+- Cetak nilai 1-100 mengunakan fungsi `for` loop
+
+Input:
+```
+```
+
+Output:
+```r
+1
+2
+3
+4
+...
+```
+
+## Latihan 4
+
+Tugas:
+- Buat variabel untuk array dengan data dibawah ini
+- `c(12, 45, 23, 88, 5)`
+- Tampilkan data dengan nilai yang tertinggi
+
+input:
+```r
+c(12, 45, 23, 88, 5)
+```
+
+output:
+```r
+88
+```
+
+## Latihan 5
+
+Latihan array method
+
+Tugas:
+- Buat variabel untuk array dengan data dibawah ini
+- `c(45, 65, 30, 80, 55)`
+- Tampilkan nilai diatas 50 dengan method `subnet`
+
+input:
+```r
+c(45, 65, 30, 80, 55)
+```
+
+output:
+```r
+65 80 55
+```
