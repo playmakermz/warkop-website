@@ -80,7 +80,7 @@ Latihan dasar penggunaan array
 Tugas:
 - Cetak angka dari 1-100 dengan menggunakan fungsi `while`
 
-contoh input: Tidak ada contoh input
+contoh input: Tidak ada input terminal
 
 output:
 ```r
@@ -93,6 +93,33 @@ output:
 
 ## latihan 4
 
+Analisi data array 
+
+Tugas:
+- Cari elemen terbesar kedua dalam array [10,2,4,5,7]
+
+Contoh input: Tidak ada input terminal
+
+output: 
+```r
+7
+```
+
+## latihan 5
+
+Modifikasi data array 
+
+Tugas:
+- Gunakan method `map`
+- melakukan perubahan array string menjadi kapital
+- data array adalah `["apple", "banana"]`
+
+Contoh input: tidak ada input terminal 
+
+contoh output: 
+```r
+["APPLE", "BANANA"]
+```
 
 ## Referensi
 - https://ruby-doc.org/docs/Tutorial/part_02/user_input.html [Input data ruby ke terminal]
