@@ -462,5 +462,9 @@ print(paste("Koefisien keragaman untuk Bahasa Inggris:", cvInggris, "%"))
 # [1] "Koefisien keragaman untuk Bahasa Inggris: 11.4285714285714 %"
 ```
 
+## Latihan R
+
+[Latihan bahasa R](./latihan-bahasa/latihan-r.md)
+
 # Referensi:
 - https://www.geeksforgeeks.org/calculate-square-root-of-a-number-in-r-language-sqrt-function/
