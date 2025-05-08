@@ -39,3 +39,13 @@ Tugas:
 - buat program yang bisa menerima input dari terminal
 - buat algoritma menghitung luas persegi panjang
 
+input
+```r
+10 # Panjang
+5 # lebar
+```
+
+output
+```r
+Luas: 50
+```

@@ -178,6 +178,10 @@ Perintah `// javac start.Java` digunakan untuk mengkompilasi file `start.Java` d
         }; // Inisialisasi array dua dimensi "arrayDua" dengan nilai-nilai yang diberikan
 ```
 
+## Latihan java
+
+[latihan java](../latihan-bahasa/latihan-java.md)
+
 ## Topic lanjutan 
 
 - [Fundamental](./fundamental-java.md)
