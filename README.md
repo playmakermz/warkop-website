@@ -25,7 +25,7 @@ Website berisi halaman atau sekumpulan halaman yang saling terhubung berisi deng
 - [Mulai React Expo](document/expo/expo.md)
 - [TypeScript](document/typescript.md)
 - [Mulai R](document/R.md)
-- [Mulai Bahasa Jawa](document/javac/java.md)
+- [Mulai Bahasa Jawa(Java)](document/javac/java.md)
 - [Mulai Vue Js](document/vue.md)
 
 # Pengenalan Pembelajaran
