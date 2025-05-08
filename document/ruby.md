@@ -428,7 +428,9 @@ end
 fungsi('budi')
 ```
 
-
+## Latihan Ruby
+***
+[Latihan Ruby](./latihan-bahasa/latihan-ruby.md)
 
 ## Task 
 ### Devops tool chain 
