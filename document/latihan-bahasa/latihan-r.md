@@ -27,8 +27,8 @@ output:
 ```
 
 Tahapan pengerjaan:
-- Gunakan bahasa program python untuk menyelesaikan tugas tersebut
-- Buat algoritma dengan mengunakan bahasa python
+- Gunakan bahasa program R untuk menyelesaikan tugas tersebut
+- Buat algoritma dengan mengunakan bahasa R
 - Pastikan output yang dikeluarkan dari terminal sesuai dengan apa yang ada dibawah ini!
 
 ## Latihan 1
