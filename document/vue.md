@@ -753,6 +753,9 @@ button {
 Format ini adalah bentuk rekomendasi dari Author ( official Vue )
 
 
+## Latihan Vue
+[Latihan Halaman Quiz vue](./latihan-bahasa/latihan-vue.md)
+
 
 ***
 # Reference 
