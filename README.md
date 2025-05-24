@@ -27,6 +27,7 @@ Website berisi halaman atau sekumpulan halaman yang saling terhubung berisi deng
 - [Mulai R](document/R.md)
 - [Mulai Bahasa Jawa(Java)](document/javac/java.md)
 - [Mulai Vue Js](document/vue.md)
+- [Mulai LaTeX](document/latex.md)
 
 # Pengenalan Pembelajaran
 
