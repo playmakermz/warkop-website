@@ -43,7 +43,27 @@ Ini adalah paragraph
 breakdown:
 - 'maketitle' adalah fungsi yang harus ada dan berfungsi untuk mengikat informasi identitas diatasnya
 
-## 
+## Menulis comment pada Latex
+
+```
+% Ini adalah deklarasi untuk comment
+```
+Comment disini tidak akan dirender, hanya bisa dilihat dari sisi editor/penulis.
+
+## Text style
+
+```
+Some of the \textbf{greatest}
+discoveries in \underline{science} 
+were made by \textbf{\textit{accident}}.
+```
+
+Break:
+- Textbf | **Penulisan Bold**
+- Underline | <u>Menulis underline</u>
+- textit | *Italic style*
+
+
 
  <!-- ============ Table of content harus dibawah === -->
 ## Table of content
