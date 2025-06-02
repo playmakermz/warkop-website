@@ -4,7 +4,17 @@
 - 'Shiny' ini sangat membantu programmer. Dikarenakan pada halaman website segala kerpluan akan dipersiapkan oleh sinny. Contoh: Kita cukup upload dataset, maka mereka yang akan menyediakan protokol penggunaan pada data set spesifik anda(Kita hanya perlu memangil saja).
 -  Contoh seperti ` uiOutput("var_x")` disini akan ditampilkan semua kolom yang ada pada dataset
 
-```R
+
+## Referensi Utama yang digunakan
+https://mastering-shiny.org/ 
+
+
+
+
+
+
+```r
+
 # Persiapkan Install Library
 #install.packages(c("shiny", "ggplot2", "plotly", "DT"))
 
@@ -42,7 +52,7 @@ UI <- fluidPage( # Ini adalah fungsi untuk membuat fluid page layouts.
 
 
 # Protokol yang akan menjelaskan algortima yang akan digunakan oleh UI
-server <- function(input, output) { # Menyiapkan alur untuk algoritma website
+SERVER <- function(input, output) { # Menyiapkan alur untuk algoritma website
 
   data <- reactive({ # Persiapkan DataSet
     DataTugas <- "./weather.csv"
@@ -78,30 +88,40 @@ server <- function(input, output) { # Menyiapkan alur untuk algoritma website
     
     # Persiapkan variabel untuk ggpplot, yang dimana kita bisa berpindah-pindah plot nantinya.
     mainUi <- switch(input$plot_type,
+
                 "Scatter Plot" = {
+                  # data() = Dataframe
+                  # Lalu seuaikan kolom X dan Y, sesuai kebutuhan
                   ggplot(data(), aes_string(x = input$var_x, y = input$var_y)) +
                     geom_point(aes(color = if(is.numeric(data()[[input$var_x]])) data()[[input$var_x]] else NULL), 
                                size = 3, alpha = 0.7) +
-                    labs(title = "Scatter Plot Interaktif", color = input$var_x)
+                    labs(title = "Scatter Plot Grafik", color = input$var_x)
                 },
+
+
                 "Line Plot" = {
                   ggplot(data(), aes_string(x = input$var_x, y = input$var_y, group = 1)) +
                     geom_line(color = "steelblue", size = 1.5) +
                     geom_point(color = "darkblue", size = 3) +
-                    labs(title = "Line Plot Interaktif")
+                    labs(title = "Line Plot Grafik")
                 },
+
+
                 "Bar Plot" = {
                   if(is.numeric(data()[[input$var_x]])) {
                     ggplot(data(), aes_string(x = reorder(seq_along(data()[[input$var_x]])), 
                                               y = input$var_x)) +
                       geom_bar(stat = "identity", fill = "skyblue") +
-                      labs(x = "Index", y = input$var_x, title = "Bar Plot Numerik")
+                      labs(x = "Index", y = input$var_x, title = "Bar Plot Grafik")
                   } else {
                     ggplot(data(), aes_string(x = input$var_x)) +
                       geom_bar(fill = "salmon") +
                       labs(title = "Bar Plot Kategorikal") +
                       theme(axis.text.x = element_text(angle = 45))
                   }
+
+
+
                 })
     
     ggplotly(mainUi, tooltip = "text") %>% 
@@ -118,9 +138,5 @@ server <- function(input, output) { # Menyiapkan alur untuk algoritma website
 }
 
 # Jalankan Aplikasi
-shinyApp(ui = UI, server = server)
+shinyApp(ui = UI, server = SERVER)
 ```
-
-
-## Referensi Utama yang digunakan
-https://mastering-shiny.org/ 
