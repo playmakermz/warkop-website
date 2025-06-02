@@ -5,20 +5,19 @@
 -  Contoh seperti ` uiOutput("var_x")` disini akan ditampilkan semua kolom yang ada pada dataset
 
 ```R
+# Persiapkan Install Library
 #install.packages(c("shiny", "ggplot2", "plotly", "DT"))
+
 library(shiny) # Untuk membantu integrasi dengan HTTPS
 library(ggplot2) # Plot Grafik
 library(plotly) # Plot Grafik
-library(DT) # Data Tables | https://rstudio.github.io/DT/
+library(DT) # Integrasi Data Tables | https://rstudio.github.io/DT/
 
 
-# Protokol dasar yang akan mengatur User Interface(UI) pada website
-ui <- fluidPage( # Ini adalah fungsi untuk membuat fluid page layouts.
-  titlePanel("Aplikasi Visualisasi Data Interaktif Dengan Shiny"), # 
+UI <- fluidPage( # Ini adalah fungsi untuk membuat fluid page layouts.
+  titlePanel("Aplikasi Visualisasi Data Interaktif Dengan Shiny"), 
   sidebarLayout( # Persiapkan panel UI untuk bagian kiri
     sidebarPanel( # Jelaskan fitur-fitur yang akan tersedia
-      selectInput("dataset", "Pilih Dataset:", # Memilih list terpilih yang akan dipakai 
-                  choices = c("mtcars", "iris", "diamonds")), # List pilihan
       uiOutput("var_x"), # Pilih Variabel X (Kolom yang dituju)
       uiOutput("var_y"), # Pilih Variabel Y (Kolom Yang dituju)
       selectInput("plot_type", "Pilih Jenis Plot:", # Memilih jenis plot yang akan digunaka
@@ -37,11 +36,14 @@ ui <- fluidPage( # Ini adalah fungsi untuk membuat fluid page layouts.
   )
 )
 
+
 # Protokol yang akan menjelaskan algortima yang akan digunakan oleh UI
 server <- function(input, output) { # Menyiapkan alur untuk algoritma website
   # Reactive data
   data <- reactive({ # Persiapkan DataSet
-    get(input$dataset) # Dataset ini harus diubah
+    #get(input$dataset) # Dataset ini 
+    DataTugas <- "./weather.csv"
+    home_data <- read.csv(DataTugas, header = TRUE)
   })
   
   # Dynamic UI for variable selection
@@ -60,7 +62,7 @@ server <- function(input, output) { # Menyiapkan alur untuk algoritma website
       selectInput("var_y", "Pilih Variabel Y:", choices = names(data()))
     }
   })
-  
+
   #Bagian utama yang akan menampilkan hasil grafik
   output$plot <- renderPlotly({
     req(input$var_x) # ambil data dari kolom x
@@ -107,7 +109,7 @@ server <- function(input, output) { # Menyiapkan alur untuk algoritma website
 }
 
 # Run aplikasi
-shinyApp(ui = ui, server = server)
+shinyApp(ui = UI, server = server)
 ```
 
 
