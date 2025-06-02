@@ -4,7 +4,7 @@
 - 'Shiny' ini sangat membantu programmer. Dikarenakan pada halaman website segala kerpluan akan dipersiapkan oleh sinny. Contoh: Kita cukup upload dataset, maka mereka yang akan menyediakan protokol penggunaan pada data set spesifik anda(Kita hanya perlu memangil saja).
 -  Contoh seperti ` uiOutput("var_x")` disini akan ditampilkan semua kolom yang ada pada dataset
 
-```
+```R
 #install.packages(c("shiny", "ggplot2", "plotly", "DT"))
 library(shiny) # Untuk membantu integrasi dengan HTTPS
 library(ggplot2) # Plot Grafik
