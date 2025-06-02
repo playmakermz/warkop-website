@@ -18,20 +18,24 @@ UI <- fluidPage( # Ini adalah fungsi untuk membuat fluid page layouts.
   titlePanel("Aplikasi Visualisasi Data Interaktif Dengan Shiny"), 
   sidebarLayout( # Persiapkan panel UI untuk bagian kiri
     sidebarPanel( # Jelaskan fitur-fitur yang akan tersedia
+
       uiOutput("var_x"), # Pilih Variabel X (Kolom yang dituju)
       uiOutput("var_y"), # Pilih Variabel Y (Kolom Yang dituju)
       selectInput("plot_type", "Pilih Jenis Plot:", # Memilih jenis plot yang akan digunaka
                   choices = c("Scatter Plot", "Line Plot", "Bar Plot", "Tabel Data")) #List pilihan
+
     ),
     mainPanel(  # Panel UI untuk bagian kanan (Utama)
+
       conditionalPanel( 
-        condition = "input.plot_type != 'Tabel Data'",
+        condition = "input.plot_type != 'Tabel Data'", # Tampilkan PLot jika yang dipilih user bukan tipe tabel
         plotlyOutput("plot", height = "600px")
       ),
       conditionalPanel(
         condition = "input.plot_type == 'Tabel Data'",
         DTOutput("table")
       )
+
     )
   )
 )
@@ -39,21 +43,23 @@ UI <- fluidPage( # Ini adalah fungsi untuk membuat fluid page layouts.
 
 # Protokol yang akan menjelaskan algortima yang akan digunakan oleh UI
 server <- function(input, output) { # Menyiapkan alur untuk algoritma website
-  # Reactive data
+
   data <- reactive({ # Persiapkan DataSet
-    #get(input$dataset) # Dataset ini 
     DataTugas <- "./weather.csv"
     home_data <- read.csv(DataTugas, header = TRUE)
+
   })
   
-  # Dynamic UI for variable selection
+
   output$var_x <- renderUI({ 
     # Pada UI atur Form untuk pilihan X
     # Dan beri mereka pilihan dengan informasi kolom yang tersedia `names(data())`
     selectInput("var_x", "Pilih Variabel X:", choices = names(data()))
+
   })
   
   output$var_y <- renderUI({
+
     if(input$plot_type != "Bar Plot") {
       # Algoritma var_y hanya akan digunakan jika tipe plot yang dipilih bukan 'Bar Plot' 
        # Pada UI atur Form untuk pilihan Y
@@ -61,10 +67,12 @@ server <- function(input, output) { # Menyiapkan alur untuk algoritma website
       
       selectInput("var_y", "Pilih Variabel Y:", choices = names(data()))
     }
+
   })
 
   #Bagian utama yang akan menampilkan hasil grafik
   output$plot <- renderPlotly({
+
     req(input$var_x) # ambil data dari kolom x
     if(input$plot_type != "Bar Plot") req(input$var_y) # Pastikan sekali lagi, plot yang digunakan bukan bar plot
     
@@ -98,6 +106,7 @@ server <- function(input, output) { # Menyiapkan alur untuk algoritma website
     
     ggplotly(mainUi, tooltip = "text") %>% 
       layout(autosize = TRUE) # Ukuran akan selalu mengikuti perubahan lebar device.
+      
   })
   
   # Tampilkan Data pada Dataset Secara menyeluruh
@@ -108,7 +117,7 @@ server <- function(input, output) { # Menyiapkan alur untuk algoritma website
   })
 }
 
-# Run aplikasi
+# Jalankan Aplikasi
 shinyApp(ui = UI, server = server)
 ```
 
