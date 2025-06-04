@@ -5,6 +5,25 @@
 -  Contoh seperti ` uiOutput("var_x")` disini akan ditampilkan semua kolom yang ada pada dataset
 
 
+## Sctatter Plot
+![image](https://github.com/user-attachments/assets/7dc1d9b9-6f3b-4108-acbb-d7b8e2ae1f72)
+
+## Line Plot
+
+![image](https://github.com/user-attachments/assets/622ad7e8-84a9-41ca-9cf4-a50c37c393e9)
+
+## Bar Plot
+
+![image](https://github.com/user-attachments/assets/1197dbbd-5915-4cea-a30b-2469b6c9ca3c)
+
+## Table
+
+![image](https://github.com/user-attachments/assets/9fdf3290-6678-4d23-a79f-8695976d2a5e)
+
+
+
+
+
 ## Referensi Utama yang digunakan
 https://mastering-shiny.org/ 
 
@@ -14,7 +33,6 @@ https://mastering-shiny.org/
 
 
 ```r
-
 # Persiapkan Install Library
 #install.packages(c("shiny", "ggplot2", "plotly", "DT"))
 
@@ -42,7 +60,7 @@ UI <- fluidPage( # Ini adalah fungsi untuk membuat fluid page layouts.
         plotlyOutput("plot", height = "600px")
       ),
       conditionalPanel(
-        condition = "input.plot_type == 'Tabel Data'",
+        condition = "input.plot_type == 'Tabel Data'", # Langsung Tabel
         DTOutput("table")
       )
 
@@ -55,9 +73,8 @@ UI <- fluidPage( # Ini adalah fungsi untuk membuat fluid page layouts.
 SERVER <- function(input, output) { # Menyiapkan alur untuk algoritma website
 
   data <- reactive({ # Persiapkan DataSet
-    DataTugas <- "./weather.csv"
+    DataTugas <- "./weather.csv" # Dataset
     home_data <- read.csv(DataTugas, header = TRUE)
-
   })
   
 
@@ -70,13 +87,9 @@ SERVER <- function(input, output) { # Menyiapkan alur untuk algoritma website
   
   output$var_y <- renderUI({
 
-    if(input$plot_type != "Bar Plot") {
-      # Algoritma var_y hanya akan digunakan jika tipe plot yang dipilih bukan 'Bar Plot' 
        # Pada UI atur Form untuk pilihan Y
        # Dan beri mereka pilihan dengan informasi kolom yang tersedia `names(data())`
-      
-      selectInput("var_y", "Pilih Variabel Y:", choices = names(data()))
-    }
+       selectInput("var_y", "Pilih Variabel Y:", choices = names(data()))
 
   })
 
@@ -84,7 +97,7 @@ SERVER <- function(input, output) { # Menyiapkan alur untuk algoritma website
   output$plot <- renderPlotly({
 
     req(input$var_x) # ambil data dari kolom x
-    if(input$plot_type != "Bar Plot") req(input$var_y) # Pastikan sekali lagi, plot yang digunakan bukan bar plot
+    req(input$var_y) # ambil data dari kolom Y
     
     # Persiapkan variabel untuk ggpplot, yang dimana kita bisa berpindah-pindah plot nantinya.
     mainUi <- switch(input$plot_type,
@@ -92,35 +105,40 @@ SERVER <- function(input, output) { # Menyiapkan alur untuk algoritma website
                 "Scatter Plot" = {
                   # data() = Dataframe
                   # Lalu seuaikan kolom X dan Y, sesuai kebutuhan
-                  ggplot(data(), aes_string(x = input$var_x, y = input$var_y)) +
-                    geom_point(aes(color = if(is.numeric(data()[[input$var_x]])) data()[[input$var_x]] else NULL), 
-                               size = 3, alpha = 0.7) +
-                    labs(title = "Scatter Plot Grafik", color = input$var_x)
+                  # Input format x dan y
+                  # Atur Scatter plot
+                  # Title
+                ggplot(data(), aes_string(x = input$var_x, y = input$var_y)) + 
+                geom_point()+
+                geom_smooth(method=lm, se=FALSE, fullrange=TRUE)+
+                labs(title="Scatter Plot Grafik", color = input$var_x) + 
+                theme_classic()  
+  
                 },
 
 
                 "Line Plot" = {
+                  # data() = Dataframe
+                  # Lalu seuaikan kolom X dan Y, sesuai kebutuhan
+                  # Input format x dan y
+                  # Atur baris grafik
+                  # Atur point grafik
+                  # Title
                   ggplot(data(), aes_string(x = input$var_x, y = input$var_y, group = 1)) +
                     geom_line(color = "steelblue", size = 1.5) +
                     geom_point(color = "darkblue", size = 3) +
-                    labs(title = "Line Plot Grafik")
+                    labs(title = "Line Plot Grafik", color = input$var_x)
                 },
 
 
                 "Bar Plot" = {
-                  if(is.numeric(data()[[input$var_x]])) {
-                    ggplot(data(), aes_string(x = reorder(seq_along(data()[[input$var_x]])), 
-                                              y = input$var_x)) +
-                      geom_bar(stat = "identity", fill = "skyblue") +
-                      labs(x = "Index", y = input$var_x, title = "Bar Plot Grafik")
-                  } else {
-                    ggplot(data(), aes_string(x = input$var_x)) +
-                      geom_bar(fill = "salmon") +
-                      labs(title = "Bar Plot Kategorikal") +
-                      theme(axis.text.x = element_text(angle = 45))
-                  }
-
-
+                   # data() = Dataframe
+                  # Lalu seuaikan kolom X dan Y, sesuai kebutuhan
+                  # Input format x dan y
+                  # Title
+                  ggplot(data(), aes_string(x = input$var_x, y = input$var_y, group = 1)) +
+                  geom_bar(stat="identity", color="steelblue", fill="white") +
+                  labs(title = "Bar Plot Grafik", color = input$var_x) 
 
                 })
     
