@@ -132,7 +132,7 @@ SERVER <- function(input, output) { # Menyiapkan alur untuk algoritma website
   # Tampilkan Data pada Dataset Secara menyeluruh
   output$table <- renderDT({ # Jalankan Render Data table
     datatable(data(), 
-              options = list(scrollX = TRUE, pageLength = 10),
+              options = list(scrollX = TRUE, pageLength = 10), # Atur agar 10 baris
               rownames = FALSE)
   })
 }
