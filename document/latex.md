@@ -152,6 +152,7 @@ document. A brief introduction about the main subject.
 
 
 ## Ref
-- https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes 
+- https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes
+- https://devdocs.io/latex-fonts/ | Dokumentasi latex
 
 
