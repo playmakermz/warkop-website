@@ -57,6 +57,8 @@ itu artinya kita akan mengubah skala bentuk pengukuran data menjadi bentuk yang 
 
 ![image](https://github.com/user-attachments/assets/8c4ff6c9-79af-4fa5-a96b-a54b9587ffae)
 
+### g. Transformasi y* = ln(y)
+
 
 ## Referensi
 - BMP MSIM4310 Prinsip dasar penyajian data
