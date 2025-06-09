@@ -462,6 +462,9 @@ print(paste("Koefisien keragaman untuk Bahasa Inggris:", cvInggris, "%"))
 # [1] "Koefisien keragaman untuk Bahasa Inggris: 11.4285714285714 %"
 ```
 
+## R untuk data analisis
+[Latihan Bahasa R](../latihan/R-analisis.md)
+
 ## Latihan R
 
 [Latihan bahasa R](./latihan-bahasa/latihan-r.md)
