@@ -33,7 +33,8 @@ Ukuran penyebaran data disini berfungsi untuk membantu kita mengetahui penyebara
 3. Koefisien Keragaman, adalah menghitung nilai relatif standart deviasi terhadaap nilai rata-rata. 
 ![alt text](image-4.png)
 
-### Bentuk-bentuk Penyajian data
+
+### d. Bentuk-bentuk Penyajian data
 
 Ini adalah protokol untuk menyajikan data yang ada agar dapat dengan mudah dipahami oleh pembaca. Beberapa bentuk penyajian yang ada adalah:
 
@@ -41,10 +42,20 @@ Ini adalah protokol untuk menyajikan data yang ada agar dapat dengan mudah dipah
 2. Grafik, Model grafik ini akan sangat membantu dalam menyajikan informasi pada data dengan sangat effisien. Seperti Grafik line(untuk pasar saham), grafik peta, dll
 3. Peta, Model grafik ini tidak berfokus kepada unsur design layout menarik seperti tabel, melainkan fokus pada menjabarkan konsep pembagian. Contohnya seperti model flowchart, dan sebagainnya.
 
-### Membandingkan kelompok data
+### e. Membandingkan kelompok data
 
 Ukuran nilai untuk membandingkan kelompok data adalah "ukuran penyebaran data". Ukuran penyebaran data digunakan untuk mengetahui penyebaran nilai dari rata-rata. Semakin kecil "nilai penyebaran" maka dapat dipastikan populasi data juga kecil, dan ini berlaku sebalinnya. 
 
+
+### f. Transformasi data 
+itu artinya kita akan mengubah skala bentuk pengukuran data menjadi bentuk yang lain agar sebaran data menjadi normal. dimana pada *Heteroskedastisitas* itu berarti data tidak homogen.
+
+**1. ciri-ciri distribusi normal**
+![image](https://github.com/user-attachments/assets/9765457c-14d9-447c-9e63-56be75d5508d)
+
+**Contoh:**
+
+![image](https://github.com/user-attachments/assets/8c4ff6c9-79af-4fa5-a96b-a54b9587ffae)
 
 
 ## Referensi
