@@ -57,7 +57,85 @@ itu artinya kita akan mengubah skala bentuk pengukuran data menjadi bentuk yang 
 
 ![image](https://github.com/user-attachments/assets/8c4ff6c9-79af-4fa5-a96b-a54b9587ffae)
 
-### g. Transformasi y* = ln(y)
+### g. Transformasi y* = ln(y) dan x* = ln(y)
+
+Transformasi ini ada untuk melakukan stabilitas pada varians dan mengurangi grafik penceng ke kanan.
+
+**Contoh hasil transformasi y**
+![image](https://github.com/user-attachments/assets/5e3cef16-3448-4b83-a33c-31c4d0bfd0b7)
+
+![image](https://github.com/user-attachments/assets/1c585e59-3ab6-45dc-8084-5a771ed40fee)
+
+Rumus Transformasi pada R:
+```R
+# Rumus Transformasi pada R
+log(y)
+
+# atau
+# log(x)
+# untuk nilai x
+```
+
+### h. Standart deviasi(SD)
+
+adalah nilai yang akan menjadi representasi dari pesebaran data pada sampel. SD juga bisa menjadi acuan untuk melihat seberapa dekat data dengan nilai mean. Semakin banyak variasi data, semakin tinggi pula SD.
+
+### i Membuat scatter plot dan regresi linear
+
+Pada R, untuk melakukan regresi linear cukup dengan `lm(namaKolomA ~ namaKolomB, data= datasetName)`
+
+```R
+# Data Kecepatan dan jarak pada tabel
+jarak <- c(2,10,4,20,17,13,18,28,33,18,26,12,24,22,28,24,32,34,43,24,30,58,80,20,24,55,35,40,30,44,50,46,53,70,80,36,46,68,34,48,50,56,60,64,56,72,90,92,110,85)
+banyak2 <- length(jarak)
+
+kecepatan <- c(4,4,7,7,8,8,9,10,10,11,11,12,12,12,13,13,13,13,114,14,14,14,15,15,15,16,16,17,17,17,17,17,18,18,18,19,19,20,20,20,20,20,21,22,23,24,24,24,25,25)
+banyak1 <- length(kecepatan)
+
+# Membuat scatter plot
+plot(jarak, kecepatan, 
+     main = "Scatter Plot : Kecepatan vs Jarak",  # Judul
+     xlab = "Kecepatan (km/h)", # sumbu x
+     ylab = "Jarak (meter)",  # sumbu y
+     pch = 19, # Bentuk titik 
+     col = "blue") # warna titik
+
+
+# Garis tren merah (regresi linear)
+model <- lm(kecepatan ~ jarak)
+abline(model, col = "red", lwd = 2)
+
+```
+
+### j
+
+### k
+
+### l
+
+### m
+
+### n
+
+### o
+
+### p
+
+### q
+
+### r
+
+### s
+
+### t
+
+### u
+
+### v
+
+### w
+
+
 
 
 ## Referensi
