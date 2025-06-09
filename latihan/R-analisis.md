@@ -107,9 +107,19 @@ abline(model, col = "red", lwd = 2)
 
 ```
 
-### j
+### j. Mekanisme data hilang
+1. Missing Completelty at random(MCAR). Adalah kejadian data hilang secara acak.
+2. Missing at random (MAR ). Data hilang memiliki pattern yang jelas, dan dapat dicari tau dan di tanggulangi dengan baik.
+3. Missing not at random (MNAR ). data hilang disebabkan kejadian atau materi yang tidak diukur.
 
-### k
+Tabel mengenai ringkasan kelebihan dan kelemahan setiap metode untuk penanngan data hilang.
+No | Metode | Kelebihan | Kelemahan
+--- | --- | --- | ---
+1 |Listwise or case deletion | Metode sederhana. Cukup hapus baris yang memiliki kehilangan data | Mengurangi detail informasi pada data
+2 | Pairwise deletion(penghapusan berpasangan) | Informasi pada data analisis lebih banyak daripada yang dihapus | Variabel akan menhasilkan statistik yang berbeda
+3 | Mean Substitution | Dapat membantu pada mekanisme hilang seperti: MAR dan MCAR | metode ini dapat menghasilkan bias, jika nilai hilang tidak acak.
+4 | Regression imputation | Dapat membantu pada mekanisme hilang seperti: MAR | 
+### k. 
 
 ### l
 
