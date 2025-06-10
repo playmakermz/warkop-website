@@ -203,7 +203,125 @@ textplot_wordcloud(
 title("Kata Kunci dalam Tweet tentang Kopi", col.main = "brown", font.main = 2)
 ```
 
-### n
+### n. Shinny 
+
+adalah library untuk menampilkan visual interaktif terhadap analisa data kita. Merka akan mengerjakan plot dan menampilkan secara langsung, kita tidak perlu lagi menggunakan pdf untuk membaca grafik plot.
+
+```r
+# KONSEP APLIKASI SHINY:
+# 1. STRUKTUR DASAR: 
+#    - ui: Mendefinisikan antarmuka pengguna (input/output)
+#    - server: Berisi logika pemrosesan data dan pembuatan plot/tabel
+#    - shinyApp(ui, server): Menjalankan aplikasi
+
+# 2. REACTIVE PROGRAMMING:
+#    - reactive({}): Membuat data reaktif yang otomatis diperbarui saat input berubah
+#    - renderPlot/renderDT: Fungsi output yang bereaksi terhadap perubahan data
+
+# 3. KOMPONEN INTERAKTIF:
+#    - selectInput: Dropdown untuk memilih variabel
+#    - sliderInput: Slider untuk filter rentang nilai
+#    - checkboxGroupInput: Pilihan checkbox multiple
+#    - DTOutput: Tabel interaktif dengan fitur sorting/paging
+
+# 4. MEKANISME KERJA:
+#    a. User berinteraksi dengan komponen input di sidebar
+#    b. Server membaca perubahan input
+#    c. Data difilter ulang berdasarkan input baru
+#    d. Plot dan tabel diperbarui secara otomatis
+#    e. Perubahan langsung terlihat di main panel
+
+# 5. KEUNGGULAN SHINY:
+#    - Real-time update tanpa reload halaman
+#    - Integrasi R code dengan web interface
+#    - Mudah dikembangkan untuk analisis kompleks
+
+library(shiny)
+library(ggplot2)
+library(dplyr)
+
+# UI (User Interface) - Mendefinisikan tampilan aplikasi
+ui <- fluidPage(
+  titlePanel("Analisis Data Mobil Interaktif"),  # Judul aplikasi
+  
+  sidebarLayout(
+    sidebarPanel(
+      # Input 1: Pilih variabel untuk sumbu X
+      selectInput("x_var", "Variabel Sumbu X:", 
+                  choices = c("Jarak Tempuh (mpg)" = "mpg", 
+                              "Tenaga Mesin (hp)" = "hp",
+                              "Berat (wt)" = "wt"),
+                  selected = "mpg"),
+      
+      # Input 2: Pilih variabel untuk sumbu Y
+      selectInput("y_var", "Variabel Sumbu Y:", 
+                  choices = c("Percepatan (qsec)" = "qsec", 
+                              "Konsumsi Bensin (disp)" = "disp",
+                              "Rasio Gardan (drat)" = "drat"),
+                  selected = "qsec"),
+      
+      # Input 3: Filter berdasarkan silinder
+      sliderInput("cyl", "Jumlah Silinder:",
+                  min = 4, max = 8, value = c(4, 8), step = 2),
+      
+      # Input 4: Pilih jenis transmisi
+      checkboxGroupInput("am", "Tipe Transmisi:",
+                         choices = c("Manual" = 1, "Otomatis" = 0),
+                         selected = c(0, 1)),
+      
+      # Input 5: Ukuran titik
+      sliderInput("size", "Ukuran Titik:",
+                  min = 1, max = 10, value = 5)
+    ),
+    
+    mainPanel(
+      plotOutput("scatter_plot"),  # Output plot
+      DTOutput("data_table")       # Output tabel data
+    )
+  )
+)
+
+# Server - Logika pemrosesan data dan pembuatan plot
+server <- function(input, output) {
+  
+  # Filter data berdasarkan input user
+  filtered_data <- reactive({
+    mtcars %>%
+      filter(cyl >= input$cyl[1] & cyl <= input$cyl[2],
+             am %in% as.numeric(input$am))  # Konversi ke numerik
+  })
+  
+  # Buat plot interaktif
+  output$scatter_plot <- renderPlot({
+    ggplot(filtered_data(), aes_string(x = input$x_var, y = input$y_var)) +
+      geom_point(aes(color = factor(cyl)), size = input$size) +  # Ukuran titik berdasarkan input
+      geom_smooth(method = "lm", se = FALSE, color = "darkred") +  # Garis regresi
+      labs(title = "Hubungan Antar Variabel Mobil",
+           x = names(choices_x)[choices_x == input$x_var],  # Label sumbu X sesuai pilihan
+           y = names(choices_y)[choices_y == input$y_var]) + # Label sumbu Y sesuai pilihan
+      theme_minimal()
+  })
+  
+  # Buat tabel data interaktif
+  output$data_table <- renderDT({
+    datatable(filtered_data()[, c("model", input$x_var, input$y_var, "cyl", "am")], 
+              options = list(pageLength = 5),  # Tampilkan 5 baris per halaman
+              rownames = FALSE) %>%
+      formatStyle(input$x_var, backgroundColor = "lightblue") %>%  # Highlight kolom X
+      formatStyle(input$y_var, backgroundColor = "lightgreen")   # Highlight kolom Y
+  })
+}
+
+# Tambahkan nama model mobil untuk tampilan tabel
+mtcars$model <- rownames(mtcars)
+choices_x <- c("Jarak Tempuh (mpg)" = "mpg", "Tenaga Mesin (hp)" = "hp", "Berat (wt)" = "wt")
+choices_y <- c("Percepatan (qsec)" = "qsec", "Konsumsi Bensin (disp)" = "disp", "Rasio Gardan (drat)" = "drat")
+
+# Jalankan aplikasi
+shinyApp(ui = ui, server = server)
+```
+
+**Contoh lain penggunaan shinny :** https://github.com/playmakermz/warkop-website/blob/main/latihan/lt-shiny-R.md
 
 ### o
 
