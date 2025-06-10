@@ -1,6 +1,6 @@
 # R untukk Analisis Data
 
-## kajian Pustaka sederhana
+## catatan pustaka
 
 ### a. Metode Statistika
 
@@ -129,9 +129,79 @@ Dibawah ini adalah formula untuk mendapatkan nilai a dan b yang meminimumkkan ju
 ![image](https://github.com/user-attachments/assets/2cb87e80-72d2-45e1-b833-965b9c34719c)
 ![image](https://github.com/user-attachments/assets/0dcf0281-fca5-4687-8d2b-443cb75d67cc)
 
-### l
+### l. text analisis
 
-### m
+Disini akan diberi contoh untuk analisis sederhana, mencari kata-kata yang paling sering muncul
+
+```r
+
+# Install package jika belum ada
+install.packages("quanteda")
+
+# Load package
+library(quanteda)
+
+documents <- c(
+  "Produk ini bagus dan berkualitas tinggi!",
+  "Saya kecewa, produk cacat dan tidak bekerja.",
+  "Pengiriman cepat, harga terjangkau.",
+  "Kualitas biasa saja, tidak spesial."
+)
+
+# Langkah pipeline:
+dfm_result <- documents %>%
+  tokens(remove_punct = TRUE) %>%        # Tokenisasi & hapus tanda baca
+  tokens_tolower() %>%                   # Ubah ke huruf kecil
+  tokens_remove(stopwords("id")) %>%     # Hapus stopwords (bahasa Indonesia)
+  dfm()                                  # Konversi ke DFM
+
+# Tampilkan ringkasan DFM
+print(dfm_result)
+
+# Document-feature matrix of: 4 documents, 10 features (62.5% sparse).
+# Features:
+#                 produk bagus berkualitas tinggi kecewa cacat bekerja pengiriman cepat harga
+#       text1        1     1          1      1      0     0       0          0     0     0
+#       text2        1     0          0      0      1     1       1          0     0     0
+#       text3        0     0          0      0      0     0       0          1     1     1
+#       text4        0     0          0      0      0     0       0          0     0     0
+```
+
+### m. Visualisasi data teks
+```r
+# Load package quanteda (pastikan sudah terinstall)
+library(quanteda)
+
+# 1. Siapkan data teks contoh (tweet tentang kopi)
+tweets <- c(
+  "Kopi susu gula aren enak banget! Recomended untuk pecinta kopi manis",
+  "Ngopi pagi pakai kopi tubruk asli, aroma dan rasanya nikmat",
+  "Cafe baru buka menyajikan berbagai varian kopi kekinian dengan harga terjangkau",
+  "Kopi hitam tanpa gula tetap menjadi favorit saya untuk menemani kerja",
+  "Promo kopi cold brew hari ini, gratis oat milk untuk pengunjung pertama"
+)
+
+# 2. Buat Document-Feature Matrix (DFM)
+dfm_kopi <- dfm(
+  tokens(tweets, remove_punct = TRUE) %>%  # Tokenisasi & hapus tanda baca
+  tokens_tolower() %>%                     # Konversi ke huruf kecil
+  tokens_remove(stopwords("id"))           # Hapus stopwords bahasa Indonesia
+
+# 3. Generate word cloud dari DFM
+textplot_wordcloud(
+  dfm_kopi,            # DFM yang digunakan
+  min_count = 1,        # Minimal kemunculan kata (1 = semua kata)
+  max_words = 50,       # Maksimal jumlah kata yang ditampilkan
+  random_order = FALSE, # Tampilkan kata dari terbesar ke terkecil
+  rotation = 0.25,      # Persentase kata yang di-rotate (25%)
+  color = RColorBrewer::brewer.pal(8, "Dark2"),  # Skema warna
+  font = "Arial",       # Jenis font
+  bg_color = "white"    # Warna background
+)
+
+# 4. Tambahkan judul plot
+title("Kata Kunci dalam Tweet tentang Kopi", col.main = "brown", font.main = 2)
+```
 
 ### n
 
