@@ -119,8 +119,9 @@ No | Metode | Kelebihan | Kelemahan
 2 | Pairwise deletion(penghapusan berpasangan) | Informasi pada data analisis lebih banyak daripada yang dihapus | Variabel akan menhasilkan statistik yang berbeda
 3 | Mean Substitution | Dapat membantu pada mekanisme hilang seperti: MAR dan MCAR | metode ini dapat menghasilkan bias, jika nilai hilang tidak acak.
 4 | Regression imputation | Dapat membantu pada mekanisme hilang seperti: MAR | 
-### k. 
+### k. Analisis Regresi
 
+adalah metode untuk menjabarkan hubungan sebab akibat dari "relations" antara variabel. 
 ### l
 
 ### m
