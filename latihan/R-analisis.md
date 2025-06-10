@@ -121,7 +121,14 @@ No | Metode | Kelebihan | Kelemahan
 4 | Regression imputation | Dapat membantu pada mekanisme hilang seperti: MAR | 
 ### k. Analisis Regresi
 
-adalah metode untuk menjabarkan hubungan sebab akibat dari "relations" antara variabel. 
+adalah metode untuk menjabarkan hubungan sebab akibat dari "relations" antara variabel.  
+
+Dibawah ini adalah formula untuk mendapatkan nilai a dan b yang meminimumkkan jumlah kuadrat kesalahan.
+![image](https://github.com/user-attachments/assets/c283fd3c-8809-4029-907b-b5d6206d948f)
+
+![image](https://github.com/user-attachments/assets/2cb87e80-72d2-45e1-b833-965b9c34719c)
+![image](https://github.com/user-attachments/assets/0dcf0281-fca5-4687-8d2b-443cb75d67cc)
+
 ### l
 
 ### m
