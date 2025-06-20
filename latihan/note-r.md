@@ -85,6 +85,79 @@ ggplot(mtcars, aes(x = wt, y = mpg)) +                 # 1. Set data dan mapping
   )
 ```
 
+## note 3
+
+```r
+# Load library yang diperlukan
+library(lmtest)  # Untuk uji Breusch-Pagan (bptest)
+
+# Gunakan dataset built-in R: mtcars
+data(mtcars)
+
+### 1. Uji Normalitas Shapiro-Wilk ###
+# Uji normalitas pada variabel mpg
+shapiro_test <- shapiro.test(mtcars$mpg)
+
+# Cetak hasil
+print(shapiro_test)
+# Interpretasi:
+# - p-value > 0.05: data normal (gagal tolak H0)
+# - p-value < 0.05: data tidak normal (tolak H0)
+
+### 2. Uji Korelasi Pearson ###
+cor_test <- cor.test(mtcars$mpg, mtcars$wt, method = "pearson")
+print(cor_test)
+# Interpretasi:
+# - p-value: signifikansi hubungan
+# - cor: koefisien korelasi (-1 sampai 1)
+
+### 3. Regresi Linear Sederhana ###
+# Buat model regresi: mpg sebagai respon, wt sebagai prediktor
+model <- lm(mpg ~ wt, data = mtcars)
+
+# Tampilkan ringkasan model
+summary(model)
+# Interpretasi:
+# - Coefficients: intercept (b0) dan slope (b1)
+# - R-squared: proporsi variasi yang dijelaskan model
+# - p-value: signifikansi koefisien
+
+### 4. Uji Heteroskedastisitas (Breusch-Pagan) ###
+bp_test <- bptest(model)
+print(bp_test)
+# Interpretasi:
+# - p-value > 0.05: homoskedastisitas (variansi error konstan)
+# - p-value < 0.05: heteroskedastisitas (masalah heteroskedastisitas)
+
+### 5. Plot Data dan Garis Regresi ###
+# Scatter plot hubungan mpg dan wt
+plot(mtcars$wt, mtcars$mpg, 
+     main = "Hubungan Berat Mobil dan Konsumsi BBM",
+     xlab = "Berat Mobil (1000 lbs)",
+     ylab = "Miles per Gallon (MPG)",
+     pch = 19,         # Bentuk titik: bulat padat
+     col = "darkblue")  # Warna titik
+
+# Tambahkan garis regresi
+abline(model, 
+       col = "red",    # Warna garis
+       lwd = 2)        # Lebar garis
+
+# Tambahkan teks koefisien di plot
+text(3.5, 30, 
+     paste("Persamaan: mpg =", 
+           round(coef(model)[1], 1),   # Intercept
+           round(coef(model)[2], 1),   # Slope
+           "* wt"),
+     col = "red")
+
+# Tambahkan R-squared
+text(3.5, 28, 
+     paste("R-squared =", 
+           round(summary(model)$r.squared, 2)),
+     col = "red")
+```
+
 ## Note 4 
 
 ```r
