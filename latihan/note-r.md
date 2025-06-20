@@ -84,3 +84,93 @@ ggplot(mtcars, aes(x = wt, y = mpg)) +                 # 1. Set data dan mapping
     color = "Silinder"                                 # 4. Ubah judul legend color
   )
 ```
+
+## Note 4 
+
+```r
+# Load library yang diperlukan
+library(shiny)
+library(ggplot2)
+
+# UI (User Interface) - Mendefinisikan tampilan aplikasi
+ui <- fluidPage(
+  titlePanel("Visualisasi Data mtcars"),  # Judul aplikasi
+  
+  sidebarLayout(
+    sidebarPanel(
+      # Input 1: Pilih jenis plot
+      selectInput("plot_type", "Pilih Jenis Plot:",
+                  choices = c("Scatter Plot", "Line Plot", "Bar Plot"),
+                  selected = "Scatter Plot"),
+      
+      # Input 2: Pilih variabel sumbu X
+      selectInput("x_var", "Pilih Variabel X:",
+                  choices = names(mtcars),
+                  selected = "wt"),
+      
+      # Input 3: Pilih variabel sumbu Y (hanya untuk scatter dan line plot)
+      conditionalPanel(
+        condition = "input.plot_type != 'Bar Plot'",
+        selectInput("y_var", "Pilih Variabel Y:",
+                    choices = names(mtcars),
+                    selected = "mpg")
+      ),
+      
+      # Input 4: Pilih warna plot
+      selectInput("color", "Pilih Warna:",
+                  choices = c("Biru" = "blue", "Merah" = "red", "Hijau" = "green"),
+                  selected = "blue"),
+      
+      # Input 5: Slider untuk ukuran titik (scatter plot saja)
+      conditionalPanel(
+        condition = "input.plot_type == 'Scatter Plot'",
+        sliderInput("point_size", "Ukuran Titik:",
+                    min = 1, max = 10, value = 5)
+      )
+    ),
+    
+    mainPanel(
+      plotOutput("plot_output")  # Output: Area untuk menampilkan plot
+    )
+  )
+)
+
+# Server - Logika pemrosesan data dan pembuatan plot
+server <- function(input, output) {
+  
+  output$plot_output <- renderPlot({
+    # Membuat plot berdasarkan pilihan pengguna
+    if (input$plot_type == "Scatter Plot") {
+      # SCATTER PLOT: Hubungan antara dua variabel numerik
+      ggplot(mtcars, aes_string(x = input$x_var, y = input$y_var)) +
+        geom_point(size = input$point_size, color = input$color) +  # Titik dengan ukuran dan warna
+        labs(title = "Scatter Plot mtcars",
+             x = input$x_var,
+             y = input$y_var) +
+        theme_minimal()
+      
+    } else if (input$plot_type == "Line Plot") {
+      # LINE PLOT: Tren perubahan nilai Y terhadap X
+      ggplot(mtcars, aes_string(x = input$x_var, y = input$y_var)) +
+        geom_line(color = input$color, linewidth = 1.5) +  # Garis berkelanjutan
+        geom_point(color = "black", size = 2) +  # Titik sebagai penanda
+        labs(title = "Line Plot mtcars",
+             x = input$x_var,
+             y = input$y_var) +
+        theme_minimal()
+      
+    } else if (input$plot_type == "Bar Plot") {
+      # BAR PLOT: Perbandingan nilai satu variabel
+      ggplot(mtcars, aes_string(x = input$x_var)) +
+        geom_bar(fill = input$color, alpha = 0.8) +  # Batang dengan warna dan transparansi
+        labs(title = "Bar Plot mtcars",
+             x = input$x_var,
+             y = "Frekuensi") +
+        theme_minimal()
+    }
+  })
+}
+
+# Jalankan aplikasi Shiny
+shinyApp(ui = ui, server = server)
+```
