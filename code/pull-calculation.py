@@ -43,7 +43,7 @@ def pull_once():
         print("====>  jackpot  <====")
         total_jackpot_terakhir = jarak_jackpot
         jarak_jackpot = 0
-        
+
     else:
         print(f"kamu tidak beruntung: {jarak_jackpot}")
 
@@ -59,7 +59,7 @@ def pull_20():
         print(f"Total pull jackkpot terakhir  : {total_jackpot_terakhir}") 
         total_jackpot_terakhir = jarak_jackpot
         jarak_jackpot = 0
-        
+
 
 def pull_ten():
     """Sepuluh kali pull"""
@@ -73,11 +73,11 @@ def jackpot_20():
         pull_20()
 
 def automatic_pull():
-    "Lakukkan pull otomatis setiap detik, hingga mendekati jackpot"
-    while jarak_jackpot < 34:
-        time.sleep(0.2)
+    """Lakukkan pull otomatis setiap detik, hingga mendekati jackpot."""
+    while jarak_jackpot < 264: # Ubah angka ini sesuai dengan jarak jackpot tertinggi yang didapatkan
+        time.sleep(0.1)
         pull_once()
-        if jarak_jackpot == 30:
+        if jarak_jackpot == 260: # Ubah angka ini sesuai dengan jarak jackpot tertinggi yang didapatkan
             print("====================> Real Word Pull Now <=================")
             break
 
