@@ -35,7 +35,7 @@ total_jackpot_terakhir = 0
 jackpot_list = []
 
 # Variabel sampai mendekati jackpot
-nilai_N = 2000 #12423
+nilai_N = 12423
 
 def pull_once():
     """Satu kali pull"""
