@@ -19,7 +19,7 @@ Aturan penggunaan:
 
 
 Laporan pull Ak:
-tertinggi adalah 252
+tertinggi adalah 264
 """
 
 
@@ -68,7 +68,6 @@ def pull_ten():
 
 def jackpot_20():
     """Dapatkan 15 jackpot"""
-    total_jackpot = 0
     while total_jackpot <= 20:
         pull_20()
 
@@ -85,6 +84,7 @@ def show_stats():
         print(f"Peluang empiris: {prob_empiris:.3f}% (teoritis {p*100:.3f}%)")
 
 def main():
+    global total_jackpot
     while True:
         print("\n=== Simulasi Gacha ===")
         print(f"Jarak jackpot ke titik sekarang : {jarak_jackpot}") 
@@ -104,6 +104,7 @@ def main():
             show_stats()
         elif choice == "4":
             jackpot_20()
+            total_jackpot = 0
         elif choice == "5":
             print("Terima kasih sudah mencoba simulasi!")
             break
