@@ -34,6 +34,7 @@ kita bisa ketahui bentuk persen dengan cara
 
 > Laporan pull HSR (0.6% atau 0.0006):
 Streak tertinggi adalah 12423, 10191
+Modus Jackpot adalah 3986
 
 Record Pull HSR 19/08/2025:
 Total pull: 233461
