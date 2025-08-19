@@ -1,7 +1,30 @@
 import random
 import time
 """
+# Teori dibalik ini 
+
+1. Memberikan kita jeda waktu untuk melakukan pull. Pull yang akan kita lakukan tidak akan ngawur, melainkan sesuai timing.
+2. Memberikan chace kasar yang lebih tinggi untuk mendapatkan jackpot. Karena pull virtual ini, akan memberikan kita chace diluar dari game.
+> Perempumaan nomor 2 adalah seperti ini: kita ingin mendapatkan dua dadu dengan angka 6. jika kita hanya melakukan 1 kali percobaan, maka chace kita adalah 1/36. jika kita melakukan 10 kali percobaan, maka chace kita adalah 10/36, lebih baik daripada 1/36.
+3. intinya dengan simulasi ini, intinya "Strike when iron is hot".
+
+# Mengenai waktu kapan pull
+
+Pada teori probabilitas, kapan dilakukan pull tidak akan berpengaruh, karena semua total pull yang akan kita lakkukan dihitunga jadi satu.
+Semisal kita melempar dua dadu pada hari senin, dan hari selasa, maka total percobaan yang kita lakukan adalah 2 kali.
+
 # Catatan Pull
+
+Aturan penggunaan:
+0. Pastikan pull rate kamu sesuaikan dengan gamenya. simulasi inin hanya cocok jika pull rate sama dengan yang ada pada game.
+1. Cari tau dengan "go 20 jackpot" dua kali. untuk mengetahui Streak tertinggi
+2. lakukan pull 10 secara manual dan berjalan ke nilai mendekati yang tertinggi
+3. jika sudah dekat, semisal nilai tertinggi adalah 700, maka Real world pull harus mendekati 700.
+
+
+> Laporan pull Ak (2% atau 0.0020):
+tertinggi adalah 362
+
 
 Ini adalah Testing Ground untuk HSR. dimana probabilitas milik mereka adalah 0.6%.
 
@@ -9,17 +32,13 @@ Ini adalah Testing Ground untuk HSR. dimana probabilitas milik mereka adalah 0.6
 kita bisa ketahui bentuk persen dengan cara 
 0.006 x 100
 
-Aturan penggunaan:
-1. Cari tau dengan "go 20 jackpot" dua kali. untuk mengetahui Streak tertinggi
-2. lakukan pull 10 secara manual dan berjalan ke nilai mendekati yang tertinggi
-3. jika sudah dekat, semisal nilai tertinggi adalah 700, maka Real world pull harus mendekati 700.
-
-
-Laporan pull Ak (2% atau 0.0020):
-tertinggi adalah 362
-
-Laporan pull HSR (0.6% atau 0.0006):
+> Laporan pull HSR (0.6% atau 0.0006):
 Streak tertinggi adalah 12423, 10191
+
+Record Pull HSR 19/08/2025:
+Total pull: 233461
+Total jackpot: 112
+
 
 
 """
