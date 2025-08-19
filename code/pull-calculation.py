@@ -5,6 +5,10 @@ import random
 
 Ini adalah Testing Ground untuk HSR. dimana probabilitas milik mereka adalah 0.6%.
 
+0.006 adalah angka desimal.
+kita bisa ketahui bentuk persen dengan cara 
+0.006 x 100
+
 Laporan:
 Streak tertinggi adalah 953 percobaan
 
