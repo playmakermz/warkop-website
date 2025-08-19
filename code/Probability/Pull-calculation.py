@@ -56,10 +56,10 @@ total_pulls = 0
 total_jackpot = 0
 jarak_jackpot = 0
 total_jackpot_terakhir = 0
-jackpot_list = []
+jackpot_list = [0]
 
 # Variabel sampai mendekati jackpot
-nilai_N =  2589 #15520
+nilai_N =  10000 #15520
 
 def clear_screen():
     # For Windows
@@ -109,13 +109,14 @@ def pull_ten():
 
 def pull_auto():
     """Satu kali pull"""
-    global total_pulls, total_jackpot, jarak_jackpot, total_jackpot_terakhir
+    global total_pulls, total_jackpot, jarak_jackpot, total_jackpot_terakhir,jackpot_list
     total_pulls += 1
     jarak_jackpot += 1
     if random.random() < p:
         total_jackpot += 1
         print(f"====>  jackpot || Total Jackpot: {total_jackpot}  <====")
         total_jackpot_terakhir = jarak_jackpot
+        jackpot_list.append(jarak_jackpot)
         jarak_jackpot = 0
     else:
         print(f"kamu tidak beruntung: {jarak_jackpot}")
@@ -134,8 +135,9 @@ def jackpot_20():
 def automatic_pull():
     """Lakukkan pull otomatis setiap detik, hingga mendekati jackpot."""
     while jarak_jackpot < nilai_N:  # Ubah angka ini sesuai dengan jarak jackpot tertinggi yang didapatkan
-        time.sleep(0.0001)
+        #time.sleep(0.0001)
         pull_auto()
+        print(max(jackpot_list))
         clear_screen()
         if jarak_jackpot == (nilai_N - 10):  # Ubah angka ini sesuai dengan jarak jackpot tertinggi yang didapatkan
             print("====================> Real Word Pull Now! <=================")
