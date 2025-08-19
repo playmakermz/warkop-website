@@ -16,11 +16,15 @@ Aturan penggunaan:
 1. Cari tau dengan "go 20 jackpot" dua kali. untuk mengetahui Streak tertinggi
 2. lakukan pull 10 secara manual dan berjalan ke nilai mendekati yang tertinggi
 3. jika sudah dekat, semisal nilai tertinggi adalah 700, maka Real world pull harus mendekati 700.
+
+
+Laporan pull Ak:
+tertinggi adalah 252
 """
 
 
 # probabilitas jackpot
-p = 0.006  
+p = 0.020
 
 # variabel statistik global
 total_pulls = 0
@@ -62,8 +66,9 @@ def pull_ten():
         print(f"Pull {i+1}: ", end="")
         pull_once()
 
-def jackpot_15():
+def jackpot_20():
     """Dapatkan 15 jackpot"""
+    total_jackpot = 0
     while total_jackpot <= 20:
         pull_20()
 
@@ -98,7 +103,7 @@ def main():
         elif choice == "3":
             show_stats()
         elif choice == "4":
-            jackpot_15()
+            jackpot_20()
         elif choice == "5":
             print("Terima kasih sudah mencoba simulasi!")
             break
