@@ -87,7 +87,7 @@ def automatic_pull():
     while jarak_jackpot < nilai_N:  # Ubah angka ini sesuai dengan jarak jackpot tertinggi yang didapatkan
         time.sleep(0.003)
         pull_once()
-        if jarak_jackpot == (nilai_N - 20):  # Ubah angka ini sesuai dengan jarak jackpot tertinggi yang didapatkan
+        if jarak_jackpot == (nilai_N - 10):  # Ubah angka ini sesuai dengan jarak jackpot tertinggi yang didapatkan
             print("====================> Real Word Pull Now! <=================")
             print(f"Total pull: {total_pulls}")
             print(f"Total jackpot: {total_jackpot}")
