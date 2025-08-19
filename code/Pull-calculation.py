@@ -10,17 +10,17 @@ Ini adalah Testing Ground untuk HSR. dimana probabilitas milik mereka adalah 0.6
 kita bisa ketahui bentuk persen dengan cara 
 0.006 x 100
 
-Laporan:
-Streak tertinggi adalah 953 percobaan
-
 Aturan penggunaan:
 1. Cari tau dengan "go 20 jackpot" dua kali. untuk mengetahui Streak tertinggi
 2. lakukan pull 10 secara manual dan berjalan ke nilai mendekati yang tertinggi
 3. jika sudah dekat, semisal nilai tertinggi adalah 700, maka Real world pull harus mendekati 700.
 
 
-Laporan pull Ak:
-tertinggi adalah 264
+Laporan pull Ak (2% atau 0.0020):
+tertinggi adalah 362
+
+Laporan pull HSR (0.6% atau 0.0006):
+Streak tertinggi adalah 953 
 """
 
 
@@ -32,6 +32,7 @@ total_pulls = 0
 total_jackpot = 0
 jarak_jackpot = 0
 total_jackpot_terakhir = 0
+jackpot_list = []
 
 def pull_once():
     """Satu kali pull"""
@@ -49,7 +50,7 @@ def pull_once():
 
 def pull_20():
     """Satu kali pull"""
-    global total_pulls, total_jackpot, jarak_jackpot, total_jackpot_terakhir
+    global total_pulls, total_jackpot, jarak_jackpot, total_jackpot_terakhir,jackpot_list
     total_pulls += 1
     jarak_jackpot += 1
     if random.random() < p:
@@ -57,6 +58,7 @@ def pull_20():
         print("=====================>  jackpot  <====================\n")
         print(f"Jarak jackpot ke titik sekarang : {jarak_jackpot}") 
         print(f"Total pull jackkpot terakhir  : {total_jackpot_terakhir}") 
+        jackpot_list.append(jarak_jackpot)
         total_jackpot_terakhir = jarak_jackpot
         jarak_jackpot = 0
 
@@ -71,13 +73,15 @@ def jackpot_20():
     """Dapatkan 15 jackpot"""
     while total_jackpot <= 20:
         pull_20()
+    jackpot_list.sort(reverse=True)
+    print(jackpot_list)
 
 def automatic_pull():
     """Lakukkan pull otomatis setiap detik, hingga mendekati jackpot."""
-    while jarak_jackpot < 264: # Ubah angka ini sesuai dengan jarak jackpot tertinggi yang didapatkan
-        time.sleep(0.1)
+    while jarak_jackpot < 362: # Ubah angka ini sesuai dengan jarak jackpot tertinggi yang didapatkan
+        time.sleep(0.01)
         pull_once()
-        if jarak_jackpot == 260: # Ubah angka ini sesuai dengan jarak jackpot tertinggi yang didapatkan
+        if jarak_jackpot == 360: # Ubah angka ini sesuai dengan jarak jackpot tertinggi yang didapatkan
             print("====================> Real Word Pull Now <=================")
             break
 
