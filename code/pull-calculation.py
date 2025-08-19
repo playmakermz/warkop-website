@@ -1,4 +1,5 @@
 import random
+import time
 
 """
 # Catatan Pull
@@ -39,12 +40,12 @@ def pull_once():
     jarak_jackpot += 1
     if random.random() < p:
         total_jackpot += 1
-        print("=====================>  jackpot  <====================\n")
+        print("====>  jackpot  <====")
         total_jackpot_terakhir = jarak_jackpot
         jarak_jackpot = 0
         
     else:
-        print("kamu tidak beruntung")
+        print(f"kamu tidak beruntung: {jarak_jackpot}")
 
 def pull_20():
     """Satu kali pull"""
@@ -71,6 +72,15 @@ def jackpot_20():
     while total_jackpot <= 20:
         pull_20()
 
+def automatic_pull():
+    "Lakukkan pull otomatis setiap detik, hingga mendekati jackpot"
+    while jarak_jackpot < 34:
+        time.sleep(0.2)
+        pull_once()
+        if jarak_jackpot == 30:
+            print("====================> Real Word Pull Now <=================")
+            break
+
 def show_stats():
     """Tampilkan statistik"""
     if total_pulls == 0:
@@ -93,7 +103,8 @@ def main():
         print("2. Pull 10 kali")
         print("3. Lihat statistik")
         print("4. Go 20 Jackpot")
-        print("5. Keluar")
+        print("5. Automatic pull")
+        print("6. Keluar")
         choice = input("Pilih opsi: ")
 
         if choice == "1":
@@ -106,6 +117,8 @@ def main():
             jackpot_20()
             total_jackpot = 0
         elif choice == "5":
+            automatic_pull()
+        elif choice == "6":
             print("Terima kasih sudah mencoba simulasi!")
             break
         else:
