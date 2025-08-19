@@ -40,7 +40,7 @@ def pull_once():
     jarak_jackpot += 1
     if random.random() < p:
         total_jackpot += 1
-        print("====>  jackpot  <====")
+        print(f"====>  jackpot || Total Jackpot: {total_jackpot}  <====")
         total_jackpot_terakhir = jarak_jackpot
         jarak_jackpot = 0
 
