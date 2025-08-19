@@ -1,6 +1,5 @@
 import random
 import time
-
 """
 # Catatan Pull
 
@@ -20,12 +19,13 @@ Laporan pull Ak (2% atau 0.0020):
 tertinggi adalah 362
 
 Laporan pull HSR (0.6% atau 0.0006):
-Streak tertinggi adalah 953 
+Streak tertinggi adalah 12423, 10191
+
+
 """
 
-
 # probabilitas jackpot
-p = 0.020
+p = 0.0006
 
 # variabel statistik global
 total_pulls = 0
@@ -33,6 +33,9 @@ total_jackpot = 0
 jarak_jackpot = 0
 total_jackpot_terakhir = 0
 jackpot_list = []
+
+# Variabel sampai mendekati jackpot
+nilai_N = 12423
 
 def pull_once():
     """Satu kali pull"""
@@ -48,16 +51,17 @@ def pull_once():
     else:
         print(f"kamu tidak beruntung: {jarak_jackpot}")
 
+
 def pull_20():
     """Satu kali pull"""
-    global total_pulls, total_jackpot, jarak_jackpot, total_jackpot_terakhir,jackpot_list
+    global total_pulls, total_jackpot, jarak_jackpot, total_jackpot_terakhir, jackpot_list
     total_pulls += 1
     jarak_jackpot += 1
     if random.random() < p:
         total_jackpot += 1
         print("=====================>  jackpot  <====================\n")
-        print(f"Jarak jackpot ke titik sekarang : {jarak_jackpot}") 
-        print(f"Total pull jackkpot terakhir  : {total_jackpot_terakhir}") 
+        print(f"Jarak jackpot ke titik sekarang : {jarak_jackpot}")
+        print(f"Total pull jackkpot terakhir  : {total_jackpot_terakhir}")
         jackpot_list.append(jarak_jackpot)
         total_jackpot_terakhir = jarak_jackpot
         jarak_jackpot = 0
@@ -69,6 +73,7 @@ def pull_ten():
         print(f"Pull {i+1}: ", end="")
         pull_once()
 
+
 def jackpot_20():
     """Dapatkan 15 jackpot"""
     while total_jackpot <= 20:
@@ -76,14 +81,17 @@ def jackpot_20():
     jackpot_list.sort(reverse=True)
     print(jackpot_list)
 
+
 def automatic_pull():
     """Lakukkan pull otomatis setiap detik, hingga mendekati jackpot."""
-    while jarak_jackpot < 362: # Ubah angka ini sesuai dengan jarak jackpot tertinggi yang didapatkan
-        time.sleep(0.01)
+    while jarak_jackpot < nilai_N:  # Ubah angka ini sesuai dengan jarak jackpot tertinggi yang didapatkan
+        time.sleep(0.003)
         pull_once()
-        if jarak_jackpot == 360: # Ubah angka ini sesuai dengan jarak jackpot tertinggi yang didapatkan
-            print("====================> Real Word Pull Now <=================")
+        if jarak_jackpot == nilai_N:  # Ubah angka ini sesuai dengan jarak jackpot tertinggi yang didapatkan
+            print(
+                "====================> Real Word Pull Now! <=================")
             break
+
 
 def show_stats():
     """Tampilkan statistik"""
@@ -97,12 +105,13 @@ def show_stats():
         print(f"Total jackpot  : {total_jackpot}")
         print(f"Peluang empiris: {prob_empiris:.3f}% (teoritis {p*100:.3f}%)")
 
+
 def main():
     global total_jackpot
     while True:
         print("\n=== Simulasi Gacha ===")
-        print(f"Jarak jackpot ke titik sekarang : {jarak_jackpot}") 
-        print(f"Total pull jackkpot terakhir  : {total_jackpot_terakhir}") 
+        print(f"Jarak jackpot ke titik sekarang : {jarak_jackpot}")
+        print(f"Total pull jackkpot terakhir  : {total_jackpot_terakhir}")
         print("1. Pull 1 kali")
         print("2. Pull 10 kali")
         print("3. Lihat statistik")
@@ -127,6 +136,7 @@ def main():
             break
         else:
             print("Opsi tidak valid, coba lagi.")
+
 
 if __name__ == "__main__":
     main()
