@@ -35,7 +35,7 @@ total_jackpot_terakhir = 0
 jackpot_list = []
 
 # Variabel sampai mendekati jackpot
-nilai_N = 12423
+nilai_N = 2000 #12423
 
 def pull_once():
     """Satu kali pull"""
@@ -87,9 +87,10 @@ def automatic_pull():
     while jarak_jackpot < nilai_N:  # Ubah angka ini sesuai dengan jarak jackpot tertinggi yang didapatkan
         time.sleep(0.003)
         pull_once()
-        if jarak_jackpot == nilai_N:  # Ubah angka ini sesuai dengan jarak jackpot tertinggi yang didapatkan
-            print(
-                "====================> Real Word Pull Now! <=================")
+        if jarak_jackpot == (nilai_N - 20):  # Ubah angka ini sesuai dengan jarak jackpot tertinggi yang didapatkan
+            print("====================> Real Word Pull Now! <=================")
+            print(f"Total pull: {total_pulls}")
+            print(f"Total jackpot: {total_jackpot}")
             break
 
 
