@@ -10,6 +10,23 @@ import os
 > Perempumaan nomor 2 adalah seperti ini: kita ingin mendapatkan dua dadu dengan angka 6. jika kita hanya melakukan 1 kali percobaan, maka chace kita adalah 1/36. jika kita melakukan 10 kali percobaan, maka chace kita adalah 10/36, lebih baik daripada 1/36.
 3. intinya dengan simulasi ini, intinya "Strike when iron is hot".
 
+# Teori dalam bentuk matematika
+
+Jawabannya: Tono jauh lebih mungkin dapat “dua angka enam”.
+
+Budi (1 percobaan melempar 2 dadu):
+Peluang dua-enam = .
+
+Tono (10 percobaan, masing-masing melempar 2 dadu):
+Peluang gagal terus dalam 10 percobaan = .
+Jadi peluang minimal sekali dapat dua-enam =
+
+
+1-\left(\frac{35}{36}\right)^{10}\approx 1-0{,}7545=0{,}2455 \;=\; \mathbf{24{,}55\%}.
+
+Intuisi sederhana: satu percobaan peluangnya kecil (≈2,78%). Dengan 10 percobaan independen, kesempatan “minimal sekali berhasil” naik jadi ≈24,6%. Per percobaan tetap sama sulitnya, tapi banyak percobaan meningkatkan peluang kumulatif.
+
+
 # Mengenai waktu kapan pull
 
 Pada teori probabilitas, kapan dilakukan pull tidak akan berpengaruh, karena semua total pull yang akan kita lakkukan dihitunga jadi satu.
@@ -48,8 +65,10 @@ Total jackpot: 112
 """
 
 # probabilitas jackpot
-#p = 0.0006
-p = 0.0020
+p = 0.0006
+
+# Arknight Chane
+#p = 0.0020
 
 # variabel statistik global
 total_pulls = 0
@@ -59,7 +78,7 @@ total_jackpot_terakhir = 0
 jackpot_list = [0]
 
 # Variabel sampai mendekati jackpot
-nilai_N =  3507 #15520
+nilai_N =  15520
 
 def clear_screen():
     # For Windows
@@ -118,8 +137,7 @@ def pull_auto():
         total_jackpot_terakhir = jarak_jackpot
         jackpot_list.append(jarak_jackpot)
         jarak_jackpot = 0
-    else:
-        print(f"kamu tidak beruntung: {jarak_jackpot}")
+   
 
 
 def jackpot_20():
@@ -137,10 +155,12 @@ def automatic_pull():
     while jarak_jackpot < nilai_N:  # Ubah angka ini sesuai dengan jarak jackpot tertinggi yang didapatkan
         #time.sleep(0.0001)
         pull_auto()
+        print(f"kamu tidak beruntung, Pull sebelum jackpot: {jarak_jackpot}")
         print(f"Jackpot tertinggi adalah: {max(jackpot_list)}")
+        print(f"Total pull     : {total_pulls}")
         clear_screen()
-        if max(jackpot_list) >= 2900:
-            print("2900 tercapai")
+        #if max(jackpot_list) >= 2900:
+        #    print("2900 tercapai")
         if jarak_jackpot == (nilai_N - 10):  # Ubah angka ini sesuai dengan jarak jackpot tertinggi yang didapatkan
             print("====================> Real Word Pull Now! <=================")
             print(f"Total pull: {total_pulls}")
