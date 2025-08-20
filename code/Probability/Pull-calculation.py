@@ -25,7 +25,7 @@ Aturan penggunaan:
 
 -------------------------------------------------------------------------
 > Laporan pull Ak (2% atau 0.0020):
-tertinggi adalah : 3422
+tertinggi adalah : 5065
 
 
 -------------------------------------------------------------------------
@@ -59,7 +59,7 @@ total_jackpot_terakhir = 0
 jackpot_list = [0]
 
 # Variabel sampai mendekati jackpot
-nilai_N =  10000 #15520
+nilai_N =  3507 #15520
 
 def clear_screen():
     # For Windows
@@ -137,8 +137,10 @@ def automatic_pull():
     while jarak_jackpot < nilai_N:  # Ubah angka ini sesuai dengan jarak jackpot tertinggi yang didapatkan
         #time.sleep(0.0001)
         pull_auto()
-        print(max(jackpot_list))
+        print(f"Jackpot tertinggi adalah: {max(jackpot_list)}")
         clear_screen()
+        if max(jackpot_list) >= 2900:
+            print("2900 tercapai")
         if jarak_jackpot == (nilai_N - 10):  # Ubah angka ini sesuai dengan jarak jackpot tertinggi yang didapatkan
             print("====================> Real Word Pull Now! <=================")
             print(f"Total pull: {total_pulls}")
