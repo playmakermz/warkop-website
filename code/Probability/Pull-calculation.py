@@ -53,7 +53,7 @@ kita bisa ketahui bentuk persen dengan cara
 0.006 x 100
 
 > Laporan pull HSR (0.6% atau 0.0006):
-Streak tertinggi adalah 15520, 10191
+Streak tertinggi adalah 15895, 10191
 Modus Jackpot adalah 3986
 
 Record Pull HSR 19/08/2025:
