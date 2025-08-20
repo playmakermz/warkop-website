@@ -34,12 +34,10 @@ Semisal kita melempar dua dadu pada hari senin, dan hari selasa, maka total perc
 
 # Catatan Pull
 
-Aturan penggunaan:
-0. Pastikan pull rate kamu sesuaikan dengan gamenya. simulasi inin hanya cocok jika pull rate sama dengan yang ada pada game.
-1. Cari tau dengan "go 20 jackpot" dua kali. untuk mengetahui Streak tertinggi
-2. lakukan pull 10 secara manual dan berjalan ke nilai mendekati yang tertinggi
-3. jika sudah dekat, semisal nilai tertinggi adalah 700, 
-4. lakukan beberapa 10 kali pull simulasi, usahakan jangan terlalu banyak, lalu lakukan 10 pull real world.
+Cara penggunaan:
+1. Lakukan analisa untuk mengetahui kemungkinan jackpot tertinggi.
+2. lakukan auto pull untuk mendekati jackpot tertinggi.
+3. jika sudah, maka lakukan simulasi beberapa 10 kali pull(bisa 4-5 kali), lalu real world pull.
 
 -------------------------------------------------------------------------
 > Laporan pull Ak (2% atau 0.0020):
@@ -63,13 +61,21 @@ Total jackpot: 112
 
 
 
+====================== CAtatan tidak terpakai ==================================================
+
+Aturan penggunaan:
+0. Pastikan pull rate kamu sesuaikan dengan gamenya. simulasi inin hanya cocok jika pull rate sama dengan yang ada pada game.
+1. Cari tau dengan "go 20 jackpot" dua kali. untuk mengetahui Streak tertinggi
+2. lakukan pull 10 secara manual dan berjalan ke nilai mendekati yang tertinggi
+3. jika sudah dekat, semisal nilai tertinggi adalah 700, 
+4. lakukan beberapa 10 kali pull simulasi, usahakan jangan terlalu banyak, lalu lakukan 10 pull real world.
 """
 
 # probabilitas jackpot
-p = 0.0006
+#p = 0.0006
 
 # Arknight Chane
-#p = 0.0020
+p = 0.0020
 
 # variabel statistik global
 total_pulls = 0
@@ -78,8 +84,8 @@ jarak_jackpot = 0
 total_jackpot_terakhir = 0
 jackpot_list = [0]
 
-# Variabel sampai mendekati jackpot
-nilai_N =  15520
+# Variabel sampai mendekati jackpot. Ubah Nilai N sesuai dengan Streak tertinggi yang didapatkan sesuai dengan pull game.
+nilai_N =  5065 
 
 def clear_screen():
     # For Windows
@@ -157,8 +163,9 @@ def automatic_pull():
         #time.sleep(0.0001)
         pull_auto()
         print(f"kamu tidak beruntung, Pull sebelum jackpot: {jarak_jackpot}")
-        print(f"Jackpot tertinggi adalah: {max(jackpot_list)}")
-        print(f"Total pull     : {total_pulls}")
+        print(f"Jackpot tertinggi adalah       : {max(jackpot_list)}")
+        print(f"Total pull                     : {total_pulls}")
+        print(f"Total jackpot                  : {total_jackpot}")
         clear_screen()
         #if max(jackpot_list) >= 2900:
         #    print("2900 tercapai")
