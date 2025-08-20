@@ -38,7 +38,8 @@ Aturan penggunaan:
 0. Pastikan pull rate kamu sesuaikan dengan gamenya. simulasi inin hanya cocok jika pull rate sama dengan yang ada pada game.
 1. Cari tau dengan "go 20 jackpot" dua kali. untuk mengetahui Streak tertinggi
 2. lakukan pull 10 secara manual dan berjalan ke nilai mendekati yang tertinggi
-3. jika sudah dekat, semisal nilai tertinggi adalah 700, maka Real world pull harus mendekati 700.
+3. jika sudah dekat, semisal nilai tertinggi adalah 700, 
+4. lakukan beberapa 10 kali pull simulasi, usahakan jangan terlalu banyak, lalu lakukan 10 pull real world.
 
 -------------------------------------------------------------------------
 > Laporan pull Ak (2% atau 0.0020):
