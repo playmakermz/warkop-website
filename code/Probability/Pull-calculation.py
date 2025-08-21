@@ -61,7 +61,7 @@ tertinggi adalah :     7036
 
 -------------------------------------------------------------------------
 > Laporan pull HSR (0.6% atau 0.0006):
-Streak tertinggi adalah :    20845
+Streak tertinggi adalah :    20845 / 30690
 Modus Jackpot adalah 3986
 
 Ini adalah Testing Ground untuk HSR. dimana probabilitas milik mereka adalah 0.6%.
