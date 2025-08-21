@@ -216,7 +216,7 @@ def automatic_pull_fast(batch_size=sSize):
     last_log = time.time()
     while True:
         # Jika sudah mencapai target, hentikan
-        if total_jackpot_terakhir >= (nilai_N - 10):
+        if jarak_jackpot >= (nilai_N - 10):
             break  
 
         # Simulasikan beberapa pull sekaligus (batch)
@@ -252,7 +252,7 @@ def automatic_pull_fast(batch_size=sSize):
         if time.time() - last_log >= log_interval:
             clear_screen()
             print("=====================>  Fast Pull System  <====================\n")
-            print(f"kamu tidak beruntung, Pull sebelum jackpot: {total_jackpot_terakhir}")
+            print(f"kamu tidak beruntung, Pull sebelum jackpot: {jarak_jackpot}")
             print(f"Target jarak adalah            : {(nilai_N - 10)}")
             print(f"Jackpot tertinggi adalah       : {max(jackpot_list)}")
             print(f"Total pull                     : {total_pulls}")
