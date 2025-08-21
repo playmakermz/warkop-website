@@ -4,7 +4,6 @@ import statistics
 import os
 import numpy as np
 import pandas as pd
-import psutil
 
 """
 # Teori dibalik ini 
@@ -110,30 +109,9 @@ nilai_N =  20_883
 # Berapa detik sekali melakukan print
 log_interval=10
 
-
-def best_batch_size(ratio=0.20):
-    """
-    Hitung batch_size terbaik berdasarkan RAM.
-
-    ratio: proporsi RAM yang boleh dipakai (default 0.20 = 40%)
-    """
-    # total RAM (bytes)
-    total_ram = psutil.virtual_memory().total
-
-    # ambil sebagian kecil RAM untuk batch
-    safe_ram = int(total_ram * ratio)
-
-    # hitung jumlah elemen float64 yang muat
-    batch_size = safe_ram // 8
-
-    print(f"Total RAM      : {total_ram / (1024**3):.2f} GB")
-    print(f"RAM untuk batch: {safe_ram / (1024**2):.2f} MB ({ratio*100:.1f}% dari total)")
-    print(f"Batch size     : {batch_size:,d} elemen (≈ {batch_size*8/1024**2:.2f} MB)")
-
-    return batch_size
-
 # Ukuran batch size 
-sSize = 10_000_000
+#sSize = 10_000_000
+sSize = 5_000_000
 print(sSize)
 
 def clear_screen():
