@@ -102,9 +102,10 @@ total_jackpot = 0
 jarak_jackpot = 0
 total_jackpot_terakhir = 0
 jackpot_list = [0]
+new_pull = 0 # variabel untuk menyimpan pull baru
 
 # Variabel sampai mendekati jackpot. Ubah Nilai N sesuai dengan Streak tertinggi yang didapatkan sesuai dengan pull game.
-nilai_N =  30_000 #20_883
+nilai_N =  24_000 #20_883
 
 # Berapa detik sekali melakukan print
 log_interval=10
@@ -113,6 +114,31 @@ log_interval=10
 #sSize = 10_000_000
 #sSize = 2_000_000
 sSize = 500
+
+def predict_next_jackpot(trials=100000):
+    """
+    Prediksi berapa pull sampai jackpot berikutnya.
+    Gunakan distribusi Geometrik dengan parameter p.
+
+    trials : jumlah simulasi untuk estimasi distribusi
+    """
+    # Simulasi waktu tunggu jackpot berikutnya
+    samples = np.random.geometric(p, size=trials)
+
+    # Buat DataFrame untuk analisis
+    df = pd.DataFrame(samples, columns=["Pulls Sampai Jackpot"])
+
+    # Statistik utama
+    mean_val = df["Pulls Sampai Jackpot"].mean()
+    median_val = df["Pulls Sampai Jackpot"].median()
+    p90 = df["Pulls Sampai Jackpot"].quantile(0.9)
+
+    print("\n🎯 Prediksi Jackpot Berikutnya:")
+    print(f"Rata-rata (ekspektasi): {mean_val:,.0f} pull")
+    print(f"Median (50% kasus):    {median_val:,.0f} pull")
+    print(f"90% kemungkinan <= :   {p90:,.0f} pull")
+
+    return df
 
 
 def clear_screen():
@@ -126,7 +152,8 @@ def clear_screen():
 
 def pull_once():
     """Satu kali pull"""
-    global total_pulls, total_jackpot, jarak_jackpot, total_jackpot_terakhir
+    global total_pulls, total_jackpot, jarak_jackpot, total_jackpot_terakhir, new_pull
+    new_pull += 1
     total_pulls += 1
     jarak_jackpot += 1
     if random.random() < p:
@@ -137,6 +164,7 @@ def pull_once():
 
     else:
         print(f"kamu tidak beruntung: {jarak_jackpot}")
+        
 
 
 def pull_20():
@@ -269,7 +297,7 @@ def automatic_pull_fast(batch_size=sSize):
         print(f"\nModus Jackpot: {modus}")
     except:
         print("\nModus tidak dapat dihitung (data terlalu unik).")
-
+    predict_next_jackpot()
    
 
 # ========================== fast 
@@ -291,6 +319,7 @@ def main():
     global total_jackpot
     while True:
         print("\n=== Simulasi Gacha ===")
+        print(f"Nilai Pull baru                : {new_pull}")
         print(f"Jarak jackpot ke titik sekarang : {jarak_jackpot}")
         print(f"Total pull jackkpot terakhir  : {total_jackpot_terakhir}")
         print("1. Pull 1 kali")
