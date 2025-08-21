@@ -111,7 +111,7 @@ log_interval=10
 
 # Ukuran batch size 
 #sSize = 10_000_000
-sSize = 5_000_000
+sSize = 3_000_000
 print(sSize)
 
 def clear_screen():
@@ -226,12 +226,12 @@ def automatic_pull_fast(batch_size=sSize):
            # Jackpot pertama dalam batch
            #clear_screen()
            first_hit = hits[0] + 1
-           jarak_jackpot += first_hit
+           total_jackpot_terakhir += first_hit
            total_pulls += first_hit
            total_jackpot += 1
-           total_jackpot_terakhir = jarak_jackpot
+           jarak_jackpot = total_jackpot_terakhir
            jackpot_list.append(jarak_jackpot)
-           jarak_jackpot = 0
+           total_jackpot_terakhir = 0
 
            """
             print("=====================>  Fast Pull System  <====================\n")
