@@ -104,7 +104,7 @@ total_jackpot_terakhir = 0
 jackpot_list = [0]
 
 # Variabel sampai mendekati jackpot. Ubah Nilai N sesuai dengan Streak tertinggi yang didapatkan sesuai dengan pull game.
-nilai_N =  1_000_00 #20_883
+nilai_N =  30_000 #20_883
 
 # Berapa detik sekali melakukan print
 log_interval=10
@@ -112,7 +112,7 @@ log_interval=10
 # Ukuran batch size 
 #sSize = 10_000_000
 #sSize = 2_000_000
-sSize = 7_000
+sSize = 500
 
 
 def clear_screen():
@@ -235,41 +235,23 @@ def automatic_pull_fast(batch_size=sSize):
             # Tidak ada jackpot dalam batch
             jarak_jackpot += batch_size
             total_pulls += batch_size
-
-        """
-        if len(hits) > 0:
-           # Jackpot pertama dalam batch
-           #clear_screen()
-           first_hit = hits[0] + 1
-           total_jackpot_terakhir += first_hit
-           total_pulls += first_hit
-           total_jackpot += 1
-           jarak_jackpot = total_jackpot_terakhir
-           jackpot_list.append(jarak_jackpot)
-           total_jackpot_terakhir = 0
-           
-        else:
-           # Tidak ada jackpot dalam batch
-           jarak_jackpot += batch_size
-           total_pulls += batch_size
-           #print(f"Tidak ada jackpot setelah {batch_size} pull (jarak sekarang: {jarak_jackpot})")
-        """
             
         # Cek apakah waktunya log progress
         if time.time() - last_log >= log_interval:
             clear_screen()
             print("=====================>  Fast Pull System  <====================\n")
-            print(f"kamu tidak beruntung, Pull sebelum jackpot: {total_jackpot_terakhir}")
+            print(f"kamu tidak beruntung, Pull sebelum jackpot: {total_jackpot_terakhir:,}")
             print(f"Target jarak adalah            : {(nilai_N - 10)}")
-            print(f"Jackpot tertinggi adalah       : {max(jackpot_list)}")
-            print(f"Total pull                     : {total_pulls}")
-            print(f"Total jackpot                  : {total_jackpot}")
+            print(f"Jackpot tertinggi adalah       : {max(jackpot_list):,}")
+            print(f"Total pull                     : {total_pulls:,}")
+            print(f"Total jackpot                  : {total_jackpot:,}")
             last_log = time.time()
             print(f"Array List JackPot       : {sorted(jackpot_list, reverse=True)[:5]}")
             
             
 
     # Setelah selesai, lakukan pull real world
+    jarak_jackpot = total_jackpot_terakhir
     print("\033[32m ====================> Real World Pull Now! <================= \033[0m")
     print(f"Total pull       : {total_pulls}")
     print(f"Total jackpot    : {total_jackpot}")
