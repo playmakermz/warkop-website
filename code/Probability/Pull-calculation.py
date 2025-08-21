@@ -104,15 +104,16 @@ total_jackpot_terakhir = 0
 jackpot_list = [0]
 
 # Variabel sampai mendekati jackpot. Ubah Nilai N sesuai dengan Streak tertinggi yang didapatkan sesuai dengan pull game.
-nilai_N =  20_883
+nilai_N =  1_000_00 #20_883
 
 # Berapa detik sekali melakukan print
 log_interval=10
 
 # Ukuran batch size 
 #sSize = 10_000_000
-sSize = 3_000_000
-print(sSize)
+#sSize = 2_000_000
+sSize = 10_000
+
 
 def clear_screen():
     # For Windows
@@ -145,9 +146,6 @@ def pull_20():
     jarak_jackpot += 1
     if random.random() < p:
         total_jackpot += 1
-        #print("=====================>  jackpot  <====================\n")
-        #print(f"Jarak jackpot ke titik sekarang : {jarak_jackpot}")
-        #print(f"Total pull jackkpot terakhir  : {total_jackpot_terakhir}")
         jackpot_list.append(jarak_jackpot)
         total_jackpot_terakhir = jarak_jackpot
         jarak_jackpot = 0
@@ -193,6 +191,7 @@ def automatic_pull():
         print(f"Jackpot tertinggi adalah       : {max(jackpot_list)}")
         print(f"Total pull                     : {total_pulls}")
         print(f"Total jackpot                  : {total_jackpot}")
+        
         clear_screen()
         #if max(jackpot_list) >= 2900:
         #    print("2900 tercapai")
@@ -216,12 +215,28 @@ def automatic_pull_fast(batch_size=sSize):
     last_log = time.time()
     while True:
         # Jika sudah mencapai target, hentikan
-        if jarak_jackpot >= (nilai_N - 10):
+        if total_jackpot_terakhir >= (nilai_N - 10):
             break  
 
         # Simulasikan beberapa pull sekaligus (batch)
         pulls = np.random.random(size=batch_size)
         hits = np.where(pulls < p)[0]  # index jackpot. Informasi array dimana saja jackpot ditemukan.
+
+        if len(hits) > 0:
+            # Jackpot pertama dalam batch
+            first_hit = hits[0] + 1
+            jarak_jackpot += first_hit
+            total_pulls += first_hit
+            total_jackpot += 1
+            total_jackpot_terakhir = jarak_jackpot
+            jackpot_list.append(jarak_jackpot)
+            jarak_jackpot = 0
+        else:
+            # Tidak ada jackpot dalam batch
+            jarak_jackpot += batch_size
+            total_pulls += batch_size
+
+        """
         if len(hits) > 0:
            # Jackpot pertama dalam batch
            #clear_screen()
@@ -232,32 +247,26 @@ def automatic_pull_fast(batch_size=sSize):
            jarak_jackpot = total_jackpot_terakhir
            jackpot_list.append(jarak_jackpot)
            total_jackpot_terakhir = 0
-
-           """
-            print("=====================>  Fast Pull System  <====================\n")
-           print(f"kamu tidak beruntung, Pull sebelum jackpot: {total_jackpot_terakhir}")
-           print(f"Target jarak adalah            : {(nilai_N - 10)}")
-           print(f"Jackpot tertinggi adalah       : {max(jackpot_list)}")
-           print(f"Total pull                     : {total_pulls}")
-           print(f"Total jackpot                  : {total_jackpot}")
-           """
            
         else:
            # Tidak ada jackpot dalam batch
            jarak_jackpot += batch_size
            total_pulls += batch_size
-           print(f"Tidak ada jackpot setelah {batch_size} pull (jarak sekarang: {jarak_jackpot})")
+           #print(f"Tidak ada jackpot setelah {batch_size} pull (jarak sekarang: {jarak_jackpot})")
+        """
             
         # Cek apakah waktunya log progress
         if time.time() - last_log >= log_interval:
             clear_screen()
             print("=====================>  Fast Pull System  <====================\n")
-            print(f"kamu tidak beruntung, Pull sebelum jackpot: {jarak_jackpot}")
+            print(f"kamu tidak beruntung, Pull sebelum jackpot: {total_jackpot_terakhir}")
             print(f"Target jarak adalah            : {(nilai_N - 10)}")
             print(f"Jackpot tertinggi adalah       : {max(jackpot_list)}")
             print(f"Total pull                     : {total_pulls}")
             print(f"Total jackpot                  : {total_jackpot}")
             last_log = time.time()
+            print(f"Array List JackPot       : {sorted(jackpot_list, reverse=True)[:5]}")
+            
             
 
     # Setelah selesai, lakukan pull real world
