@@ -40,11 +40,23 @@ Semisal kita melempar dua dadu pada hari senin, dan hari selasa, maka total perc
 Cara penggunaan:
 1. Lakukan analisa untuk mengetahui kemungkinan jackpot tertinggi.
 2. lakukan auto pull untuk mendekati jackpot tertinggi.
-3. jika sudah, maka lakukan simulasi beberapa 10 kali pull(bisa 4-5 kali), lalu real world pull.
+3. jika sudah, maka lakukan simulasi beberapa 10 kali pull, berdasarkan informasi "Frekuensi Jarak Jackpot".
+4. kalau misalnya disana rata-rata adalah 300, maka lakukan 300 simulasi pull.
+5. setelah itu lakukan pull real world.
+
+## Informasi Fast Pull
+
+Fast pull ini adalah simulasi pull yang dilakukan dalam satu kali perulangan. Semisal kita melakukan 100 pull dalam satu kali perulangan, maka kita tidak perlu melakukan 100 kali perulangan.
+
+intinya pull dilakukan dalam bentuk batch, bukan satu per satu.
+jadi atur batch size sesuai dengan kebutuhan.
+semisal untuk AK batch size 100, untuk HSR batch size 600.
+
+jangan terlalu besar ukuran batch size, karena akan membuat simulasi kurang detail. semisal nilai jackpot adalah 5000, dengan setiap batch loop adalah 1000, maka simulasi akan kurang detail.
 
 -------------------------------------------------------------------------
 > Laporan pull Ak (2% atau 0.0020):
-tertinggi adalah : 5065
+tertinggi adalah : 6206
 
 
 -------------------------------------------------------------------------
@@ -61,6 +73,8 @@ Modus Jackpot adalah 3986
 Record Pull HSR 19/08/2025:
 Total pull: 233461
 Total jackpot: 112
+
+
 
 
 
