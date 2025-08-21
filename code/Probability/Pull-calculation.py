@@ -4,6 +4,7 @@ import statistics
 import os
 import numpy as np
 import pandas as pd
+import psutil
 
 """
 # Teori dibalik ini 
@@ -56,19 +57,21 @@ jangan terlalu besar ukuran batch size, karena akan membuat simulasi kurang deta
 
 -------------------------------------------------------------------------
 > Laporan pull Ak (2% atau 0.0020):
-tertinggi adalah : 6206
+tertinggi adalah : 7036
 
 
 -------------------------------------------------------------------------
+> Laporan pull HSR (0.6% atau 0.0006):
+Streak tertinggi adalah 22649
+Modus Jackpot adalah 3986
+
 Ini adalah Testing Ground untuk HSR. dimana probabilitas milik mereka adalah 0.6%.
 
 0.006 adalah angka desimal.
 kita bisa ketahui bentuk persen dengan cara 
 0.006 x 100
 
-> Laporan pull HSR (0.6% atau 0.0006):
-Streak tertinggi adalah 15895, 10191
-Modus Jackpot adalah 3986
+
 
 Record Pull HSR 19/08/2025:
 Total pull: 233461
@@ -88,11 +91,11 @@ Aturan penggunaan:
 4. lakukan beberapa 10 kali pull simulasi, usahakan jangan terlalu banyak, lalu lakukan 10 pull real world.
 """
 
-# probabilitas jackpot
-#p = 0.0006
+# probabilitas jackpot HSR
+p = 0.0006
 
 # Arknight Chane
-p = 0.0020
+#p = 0.0020
 
 # variabel statistik global
 total_pulls = 0
@@ -102,8 +105,36 @@ total_jackpot_terakhir = 0
 jackpot_list = [0]
 
 # Variabel sampai mendekati jackpot. Ubah Nilai N sesuai dengan Streak tertinggi yang didapatkan sesuai dengan pull game.
-nilai_N =  5626
+nilai_N =  20_883
 
+# Berapa detik sekali melakukan print
+log_interval=10
+
+
+def best_batch_size(ratio=0.20):
+    """
+    Hitung batch_size terbaik berdasarkan RAM.
+
+    ratio: proporsi RAM yang boleh dipakai (default 0.20 = 40%)
+    """
+    # total RAM (bytes)
+    total_ram = psutil.virtual_memory().total
+
+    # ambil sebagian kecil RAM untuk batch
+    safe_ram = int(total_ram * ratio)
+
+    # hitung jumlah elemen float64 yang muat
+    batch_size = safe_ram // 8
+
+    print(f"Total RAM      : {total_ram / (1024**3):.2f} GB")
+    print(f"RAM untuk batch: {safe_ram / (1024**2):.2f} MB ({ratio*100:.1f}% dari total)")
+    print(f"Batch size     : {batch_size:,d} elemen (≈ {batch_size*8/1024**2:.2f} MB)")
+
+    return batch_size
+
+# Ukuran batch size 
+sSize = 10_000_000
+print(sSize)
 
 def clear_screen():
     # For Windows
@@ -180,6 +211,7 @@ def automatic_pull():
     while jarak_jackpot < nilai_N:  # Ubah angka ini sesuai dengan jarak jackpot tertinggi yang didapatkan
         pull_auto()
         print(f"kamu tidak beruntung, Pull sebelum jackpot: {jarak_jackpot}")
+        print(f"Target jarak adalah            : {total_jackpot_terakhir}")
         print(f"Jackpot tertinggi adalah       : {max(jackpot_list)}")
         print(f"Total pull                     : {total_pulls}")
         print(f"Total jackpot                  : {total_jackpot}")
@@ -196,17 +228,17 @@ def automatic_pull():
 
 # ======================= Fasst 
 
-def automatic_pull_fast(batch_size=100):
+def automatic_pull_fast(batch_size=sSize):
     """
     Optimized automatic pull.
     Tujuan: hentikan simulasi jika jarak_jackpot >= (nilai_N - 10).
     Gunakan numpy untuk percepat simulasi, pandas untuk analisis distribusi.
     """
     global total_pulls, total_jackpot, jarak_jackpot, total_jackpot_terakhir, jackpot_list
-    clear_screen()
+    last_log = time.time()
     while True:
         # Jika sudah mencapai target, hentikan
-        if jarak_jackpot >= (nilai_N - 10):
+        if total_jackpot_terakhir >= (nilai_N - 10):
             break  
 
         # Simulasikan beberapa pull sekaligus (batch)
@@ -214,7 +246,7 @@ def automatic_pull_fast(batch_size=100):
         hits = np.where(pulls < p)[0]  # index jackpot. Informasi array dimana saja jackpot ditemukan.
         if len(hits) > 0:
            # Jackpot pertama dalam batch
-           clear_screen()
+           #clear_screen()
            first_hit = hits[0] + 1
            jarak_jackpot += first_hit
            total_pulls += first_hit
@@ -222,13 +254,33 @@ def automatic_pull_fast(batch_size=100):
            total_jackpot_terakhir = jarak_jackpot
            jackpot_list.append(jarak_jackpot)
            jarak_jackpot = 0
-           print(f"====> Jackpot! Total Jackpot: {total_jackpot}, Jarak: {total_jackpot_terakhir}")
+
+           """
+            print("=====================>  Fast Pull System  <====================\n")
+           print(f"kamu tidak beruntung, Pull sebelum jackpot: {total_jackpot_terakhir}")
+           print(f"Target jarak adalah            : {(nilai_N - 10)}")
+           print(f"Jackpot tertinggi adalah       : {max(jackpot_list)}")
+           print(f"Total pull                     : {total_pulls}")
+           print(f"Total jackpot                  : {total_jackpot}")
+           """
            
         else:
            # Tidak ada jackpot dalam batch
            jarak_jackpot += batch_size
            total_pulls += batch_size
            print(f"Tidak ada jackpot setelah {batch_size} pull (jarak sekarang: {jarak_jackpot})")
+            
+        # Cek apakah waktunya log progress
+        if time.time() - last_log >= log_interval:
+            clear_screen()
+            print("=====================>  Fast Pull System  <====================\n")
+            print(f"kamu tidak beruntung, Pull sebelum jackpot: {total_jackpot_terakhir}")
+            print(f"Target jarak adalah            : {(nilai_N - 10)}")
+            print(f"Jackpot tertinggi adalah       : {max(jackpot_list)}")
+            print(f"Total pull                     : {total_pulls}")
+            print(f"Total jackpot                  : {total_jackpot}")
+            last_log = time.time()
+            
 
     # Setelah selesai, lakukan pull real world
     print("\033[32m ====================> Real World Pull Now! <================= \033[0m")
