@@ -56,12 +56,12 @@ jangan terlalu besar ukuran batch size, karena akan membuat simulasi kurang deta
 
 -------------------------------------------------------------------------
 > Laporan pull Ak (2% atau 0.0020):
-tertinggi adalah : 7036
+tertinggi adalah :     7036
 
 
 -------------------------------------------------------------------------
 > Laporan pull HSR (0.6% atau 0.0006):
-Streak tertinggi adalah 22649
+Streak tertinggi adalah :    20845
 Modus Jackpot adalah 3986
 
 Ini adalah Testing Ground untuk HSR. dimana probabilitas milik mereka adalah 0.6%.
@@ -112,7 +112,7 @@ log_interval=10
 # Ukuran batch size 
 #sSize = 10_000_000
 #sSize = 2_000_000
-sSize = 10_000
+sSize = 7_000
 
 
 def clear_screen():
