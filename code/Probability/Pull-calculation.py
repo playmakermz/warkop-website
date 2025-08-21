@@ -2,6 +2,9 @@ import random
 import time
 import statistics
 import os
+import numpy as np
+import pandas as pd
+
 """
 # Teori dibalik ini 
 
@@ -85,7 +88,8 @@ total_jackpot_terakhir = 0
 jackpot_list = [0]
 
 # Variabel sampai mendekati jackpot. Ubah Nilai N sesuai dengan Streak tertinggi yang didapatkan sesuai dengan pull game.
-nilai_N =  5065 
+nilai_N =  5626
+
 
 def clear_screen():
     # For Windows
@@ -160,7 +164,6 @@ def jackpot_20():
 def automatic_pull():
     """Lakukkan pull otomatis setiap detik, hingga mendekati jackpot."""
     while jarak_jackpot < nilai_N:  # Ubah angka ini sesuai dengan jarak jackpot tertinggi yang didapatkan
-        #time.sleep(0.0001)
         pull_auto()
         print(f"kamu tidak beruntung, Pull sebelum jackpot: {jarak_jackpot}")
         print(f"Jackpot tertinggi adalah       : {max(jackpot_list)}")
@@ -169,12 +172,72 @@ def automatic_pull():
         clear_screen()
         #if max(jackpot_list) >= 2900:
         #    print("2900 tercapai")
-        if jarak_jackpot == (nilai_N - 10):  # Ubah angka ini sesuai dengan jarak jackpot tertinggi yang didapatkan
+        if jarak_jackpot >= (nilai_N - 10):  # Ubah angka ini sesuai dengan jarak jackpot tertinggi yang didapatkan
             print("====================> Real Word Pull Now! <=================")
             print(f"Total pull: {total_pulls}")
             print(f"Total jackpot: {total_jackpot}")
             break
 
+
+
+# ======================= Fasst 
+
+def automatic_pull_fast(batch_size=100):
+    """
+    Optimized automatic pull.
+    Tujuan: hentikan simulasi jika jarak_jackpot >= (nilai_N - 10).
+    Gunakan numpy untuk percepat simulasi, pandas untuk analisis distribusi.
+    """
+    global total_pulls, total_jackpot, jarak_jackpot, total_jackpot_terakhir, jackpot_list
+    clear_screen()
+    while True:
+        # Jika sudah mencapai target, hentikan
+        if jarak_jackpot >= (nilai_N - 10):
+            break  
+
+        # Simulasikan beberapa pull sekaligus (batch)
+        pulls = np.random.random(size=batch_size)
+        hits = np.where(pulls < p)[0]  # index jackpot. Informasi array dimana saja jackpot ditemukan.
+        if len(hits) > 0:
+           # Jackpot pertama dalam batch
+           clear_screen()
+           first_hit = hits[0] + 1
+           jarak_jackpot += first_hit
+           total_pulls += first_hit
+           total_jackpot += 1
+           total_jackpot_terakhir = jarak_jackpot
+           jackpot_list.append(jarak_jackpot)
+           jarak_jackpot = 0
+           print(f"====> Jackpot! Total Jackpot: {total_jackpot}, Jarak: {total_jackpot_terakhir}")
+           
+        else:
+           # Tidak ada jackpot dalam batch
+           jarak_jackpot += batch_size
+           total_pulls += batch_size
+           print(f"Tidak ada jackpot setelah {batch_size} pull (jarak sekarang: {jarak_jackpot})")
+
+    # Setelah selesai, lakukan pull real world
+    print("\033[32m ====================> Real World Pull Now! <================= \033[0m")
+    print(f"Total pull       : {total_pulls}")
+    print(f"Total jackpot    : {total_jackpot}")
+    print(f"Jackpot tertinggi: {max(jackpot_list)}")
+    print(f"jarak jackpot terakhir: {total_jackpot_terakhir}")
+
+    # Setelah selesai, tampilkan analisis distribusi jackpot
+    df = pd.DataFrame(jackpot_list, columns=["Jarak Jackpot"])
+    print("\n📊 Distribusi Jackpot:")
+    print(df.describe())  # statistik ringkas
+    print("\n📊 Frekuensi Jarak Jackpot:")
+    print(df["Jarak Jackpot"].value_counts().head(10))  # 10 nilai paling sering muncul
+    try:
+        modus = df["Jarak Jackpot"].mode()[0]
+        print(f"\nModus Jackpot: {modus}")
+    except:
+        print("\nModus tidak dapat dihitung (data terlalu unik).")
+
+   
+
+# ========================== fast 
 
 def show_stats():
     """Tampilkan statistik"""
@@ -200,7 +263,8 @@ def main():
         print("3. Lihat statistik")
         print("4. Go 20 Jackpot")
         print("5. Automatic pull")
-        print("6. Keluar")
+        print("6. Automatic pull fast")
+        print("7. Keluar")
         choice = input("Pilih opsi: ")
 
         if choice == "1":
@@ -215,6 +279,8 @@ def main():
         elif choice == "5":
             automatic_pull()
         elif choice == "6":
+            automatic_pull_fast()
+        elif choice == "7":
             print("Terima kasih sudah mencoba simulasi!")
             break
         else:
