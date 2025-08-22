@@ -103,9 +103,10 @@ jarak_jackpot = 0
 total_jackpot_terakhir = 0
 jackpot_list = [0]
 new_pull = 0 # variabel untuk menyimpan pull baru
+loop_test = True # untuk point loop 7
 
 # Variabel sampai mendekati jackpot. Ubah Nilai N sesuai dengan Streak tertinggi yang didapatkan sesuai dengan pull game.
-nilai_N =  24_000 #20_883
+nilai_N =  20_400 #20_883
 
 # Berapa detik sekali melakukan print
 log_interval=10
@@ -115,7 +116,8 @@ log_interval=10
 #sSize = 2_000_000
 sSize = 500
 
-def predict_next_jackpot(trials=100000):
+def predict_next_jackpot(trials=10000):
+    global p90, df
     """
     Prediksi berapa pull sampai jackpot berikutnya.
     Gunakan distribusi Geometrik dengan parameter p.
@@ -141,6 +143,7 @@ def predict_next_jackpot(trials=100000):
     return df
 
 
+
 def clear_screen():
     # For Windows
     if os.name == 'nt':
@@ -152,7 +155,7 @@ def clear_screen():
 
 def pull_once():
     """Satu kali pull"""
-    global total_pulls, total_jackpot, jarak_jackpot, total_jackpot_terakhir, new_pull
+    global total_pulls, total_jackpot, jarak_jackpot, total_jackpot_terakhir, new_pull, loop_test
     new_pull += 1
     total_pulls += 1
     jarak_jackpot += 1
@@ -161,10 +164,34 @@ def pull_once():
         print(f"====>  jackpot || Total Jackpot: {total_jackpot}  <====")
         total_jackpot_terakhir = jarak_jackpot
         jarak_jackpot = 0
+        print(f"================== END ===================")
+        loop_test = False
+        return "END"
 
     else:
         print(f"kamu tidak beruntung: {jarak_jackpot}")
+        return "CONTINUE"
         
+# Ini untuk langsung mengambil nilai mendekati p90
+def close_prediction():
+    global p90
+    ii = 0
+    print(f"===================== Close Prediction    : {p90} =======================")
+    print(f"Nilai mendekati p90 adalah: {ii}")
+
+    while loop_test:
+        ii += 1
+        print(f"Pull {ii}: ", end="")
+        if ii >= (p90-10):
+            print(f"\033[34m ===================== Belum Jackpot ======================= \033[0m")
+            break
+        if pull_once() == "END":
+            print(f"\033[31m ========== END karena jackpot ========== \033[0m")
+            break
+        else:
+            pull_once()
+            clear_screen()
+
 
 
 def pull_20():
@@ -185,6 +212,21 @@ def pull_ten():
         print(f"Pull {i+1}: ", end="")
         pull_once()
 
+def pull_manual(inp):
+    "Pull sebanyak yang diinginkan user CLI"
+    ii = 0
+    while loop_test:
+        ii += 1
+        print(f"Pull {ii}: ", end="")
+        if ii >= inp:
+            print(f"===================== Belum Jackpot =======================")
+            break
+        if pull_once() == "END":
+            print(f"========== END karena jackpot ==========")
+            break
+        else:
+            pull_once()
+        
 
 def pull_auto():
     """Satu kali pull"""
@@ -328,7 +370,9 @@ def main():
         print("4. Go 20 Jackpot")
         print("5. Automatic pull")
         print("6. Automatic pull fast")
-        print("7. Keluar")
+        print("7. Close prediction pull")
+        print("8. Pull manual insert")
+        print("9. Keluar")
         choice = input("Pilih opsi: ")
 
         if choice == "1":
@@ -345,6 +389,11 @@ def main():
         elif choice == "6":
             automatic_pull_fast()
         elif choice == "7":
+            close_prediction()
+        elif choice == "8":
+            user_input = int(input("Masukkan jumlah pull: "))
+            pull_manual(user_input)
+        elif choice == "9":
             print("Terima kasih sudah mencoba simulasi!")
             break
         else:
