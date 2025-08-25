@@ -196,7 +196,7 @@ def predict_next_jackpot_mle(jackpot_distances):
   Prediksi (frekuentis) jarak pull sampai jackpot berikutnya
   berdasarkan data jarak jackpot sebelumnya.
   """
-  global data, mean_k, p_hat, mean_pred, median_pred, p90_pred, p95_pred, p99_pred
+  global data, mean_k, p_hat, mean_pred, median_pred, p90_pred, p95_pred, p99_pred, p98_pred, p100_pred
   data = [int(k) for k in jackpot_distances if isinstance(k, (int, np.integer)) and k > 0]
   if len(data) == 0:
       print("❌ Data jackpot kosong, tidak bisa prediksi.")
@@ -209,7 +209,9 @@ def predict_next_jackpot_mle(jackpot_distances):
   median_pred = ceil(log(0.5) / log(1 - p_hat))
   p90_pred = ceil(log(1 - 0.90) / log(1 - p_hat))
   p95_pred = ceil(log(1 - 0.95) / log(1 - p_hat))
+  p98_pred = ceil(log(1 - 0.95) / log(1 - p_hat))
   p99_pred = ceil(log(1 - 0.99) / log(1 - p_hat))
+  p100_pred = ceil(log(1 - 0.999) / log(1 - p_hat))
 
   print("\n🎯 Prediksi Jackpot Berikutnya (MLE):")
   print(f"- p̂ (peluang jackpot per pull): {p_hat:.6f} ({p_hat*100:.4f}%)")
@@ -217,7 +219,9 @@ def predict_next_jackpot_mle(jackpot_distances):
   print(f"- Median pulls (50% kasus)                : {median_pred:,}")
   print(f"- 90% kemungkinan ≤                        : {p90_pred:,}")
   print(f"- 95% kemungkinan ≤                        : {p95_pred:,}")
+  print(f"- 98% kemungkinan ≤                        : {p98_pred:,}")
   print(f"- 99% kemungkinan ≤                        : {p99_pred:,}")
+  print(f"- 99.09% kemungkinan ≤                       : {p100_pred:,}")
 
   return {
       "p_hat": p_hat,
@@ -225,7 +229,9 @@ def predict_next_jackpot_mle(jackpot_distances):
       "median_pred": int(median_pred),
       "p90_pred": int(p90_pred),
       "p95_pred": int(p95_pred),
+      "p98_pred": int(p98_pred),
       "p99_pred": int(p99_pred),
+      "p99.09_pred": int(p100_pred),
   }
 
 
@@ -305,7 +311,7 @@ def automatic_pull():
   
   while loop_terakhir:
     # tujuan adalah jika off chance pull lebih dari prediksi 95% maka akhiri loop
-    if ii_terakhir >= (p95_pred - 10 ): # <============== Atur nilai ini sesuai dengan prediksi 95% jackpot
+    if ii_terakhir >= (p100_pred - 10 ): # <============== Atur nilai ini sesuai dengan prediksi 95% jackpot
       print(f"\033[34m ===================== Belum Jackpot ======================= \033[0m")
       print("loop berakhir")
       print(f"\033[34m ===================== Semua loop selesai  ======================= \033[0m")
@@ -321,7 +327,7 @@ def automatic_pull():
       ii_terakhir += 1
       print(f"Pull ke {ii_terakhir}: ")
       print(f"Bukti pull ke {bukti}: ")
-      print(f"menuju kemungkinan 95%: {p95_pred}") # <================ Atur nilai ini sesuai dengan prediksi 95% jackpot
+      print(f"menuju kemungkinan 100%: {p100_pred}") # <================ Atur nilai ini sesuai dengan prediksi 95% jackpot
       
       
   
