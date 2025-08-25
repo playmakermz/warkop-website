@@ -142,7 +142,7 @@ def clear_screen():
 # ============================== Opsi 01 
 def satu_pull():
   """Satu kali pull"""
-  global jarak_jackpot, total_jackpot, total_jackpot_terakhir, total_pulls,new_pull, loop_test
+  global jarak_jackpot, total_jackpot, total_jackpot_terakhir, total_pulls,new_pull, loop_test, loop_terakhir
 
   # ini adalah berapa banyak batch nilai random yang akan digenerate
   pulls = np.random.random(size=little_batch_size)
@@ -168,7 +168,7 @@ def satu_pull():
       # informai percobaan di reset ke nol
       jarak_jackpot = 0
       print(f"====>  jackpot jackpot didapatkan {total_pulls}  <====")
-      print(f"=================== Jackpot didapatkan =====================")
+      print(f"\033[31m =================== Jackpot didapatkan ===================== \033[0m")
       loop_terakhir = False
   else:
       # Tidak ada jackpot dalam batch
@@ -231,7 +231,7 @@ def automatic_pull():
   Tujuan adalah melakukan pull otomatis untuk mendapatkan nilai N.
   dan melakukan pull tambahan sesuai dengan perkiraan 90% menuju jackpot.
   """
-  global jarak_jackpot, total_jackpot, total_jackpot_terakhir, total_pulls, new_pull, loop_test, loop_terakhir
+  global jarak_jackpot, total_jackpot, total_jackpot_terakhir, total_pulls, new_pull, loop_test, loop_terakhir, ii_terakhir, bukti
   last_log = time.time()
   while True:
       # Jika sudah mencapai target, hentikan
@@ -318,7 +318,7 @@ def automatic_pull():
 # opsi 4
 def reset_button():
   """Reset semua variabel"""
-  global total_pulls, total_jackpot, jarak_jackpot, total_jackpot_terakhir, jackpot_list, new_pull
+  global total_pulls, total_jackpot, jarak_jackpot, total_jackpot_terakhir, jackpot_list, new_pull, ii_terakhir, bukti
   # ======================== Variabel Modification on process =======================================================
   # keseluruhan pull yang dilakukan 
   total_pulls = 0
@@ -332,6 +332,10 @@ def reset_button():
   jackpot_list = [0]
   # nilai total pull baru untuk simulasi selain automatic
   new_pull = 0 
+  # loop untuk mendekati 95% jackpot
+  ii_terakhir = 0
+  # bukti loop tambahan
+  bukti = 0
   # ======================== Variabel Modification on process =======================================================
   clear_screen()
   print("Semua variabel telah direset.")
