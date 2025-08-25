@@ -62,7 +62,7 @@ tertinggi adalah :     7036
 
 -------------------------------------------------------------------------
 > Laporan pull HSR (0.6% atau 0.0006):
-Streak tertinggi adalah :    24_400
+Streak tertinggi adalah :    24_400 | gunakan 24_000 
 Modus Jackpot adalah 3986
 
 Ini adalah Testing Ground untuk HSR. dimana probabilitas milik mereka adalah 0.6%.
@@ -99,7 +99,7 @@ p = 0.0006
 
 # ======================== Variabel penentu =======================================================
 # Variabel sampai mendekati jackpot. Ubah Nilai N sesuai dengan Streak tertinggi yang didapatkan sesuai dengan pull game.
-nilai_N =  20_000
+nilai_N =  24_000
 
 # Berapa detik sekali melakukan print
 log_interval=10
@@ -235,7 +235,7 @@ def automatic_pull():
   Tujuan adalah melakukan pull otomatis untuk mendapatkan nilai N.
   dan melakukan pull tambahan sesuai dengan perkiraan 95% menuju jackpot.
 
-  intinya kita akan terus melakukan loop hingga total pull mendekati kemungkinan 95% jackpot.
+  intinya kita akan terus melakukan loop hingga total pull mendekati kemungkinan 99% jackpot.
   """
   global jarak_jackpot, total_jackpot, total_jackpot_terakhir, total_pulls, new_pull, loop_test, loop_terakhir, ii_terakhir, bukti, loop_bagian_dua
     
@@ -305,7 +305,7 @@ def automatic_pull():
   
   while loop_terakhir:
     # tujuan adalah jika off chance pull lebih dari prediksi 95% maka akhiri loop
-    if ii_terakhir >= (p95_pred - 10 ):
+    if ii_terakhir >= (p99_pred - 10 ):
       print(f"\033[34m ===================== Belum Jackpot ======================= \033[0m")
       print("loop berakhir")
       print(f"\033[34m ===================== Semua loop selesai  ======================= \033[0m")
@@ -321,7 +321,7 @@ def automatic_pull():
       ii_terakhir += 1
       print(f"Pull ke {ii_terakhir}: ")
       print(f"Bukti pull ke {bukti}: ")
-      print(f"menuju kemungkinan 95%: {p95_pred}")
+      print(f"menuju kemungkinan 99%: {p99_pred}")
       
       
   
