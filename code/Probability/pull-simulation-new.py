@@ -62,7 +62,7 @@ tertinggi adalah :     7036
 
 -------------------------------------------------------------------------
 > Laporan pull HSR (0.6% atau 0.0006):
-Streak tertinggi adalah :    20845 / 30690
+Streak tertinggi adalah :    24_400
 Modus Jackpot adalah 3986
 
 Ini adalah Testing Ground untuk HSR. dimana probabilitas milik mereka adalah 0.6%.
@@ -99,7 +99,7 @@ p = 0.0006
 
 # ======================== Variabel penentu =======================================================
 # Variabel sampai mendekati jackpot. Ubah Nilai N sesuai dengan Streak tertinggi yang didapatkan sesuai dengan pull game.
-nilai_N =  24_400
+nilai_N =  24_000
 
 # Berapa detik sekali melakukan print
 log_interval=10
