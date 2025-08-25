@@ -318,7 +318,7 @@ def automatic_pull():
 # opsi 4
 def reset_button():
   """Reset semua variabel"""
-  global total_pulls, total_jackpot, jarak_jackpot, total_jackpot_terakhir, jackpot_list, new_pull, ii_terakhir, bukti
+  global total_pulls, total_jackpot, jarak_jackpot, total_jackpot_terakhir, jackpot_list, new_pull, ii_terakhir, bukti, loop_terakhir
   # ======================== Variabel Modification on process =======================================================
   # keseluruhan pull yang dilakukan 
   total_pulls = 0
@@ -336,6 +336,8 @@ def reset_button():
   ii_terakhir = 0
   # bukti loop tambahan
   bukti = 0
+  # jalankan loop tambahan 
+  loop_terakhir = True
   # ======================== Variabel Modification on process =======================================================
   clear_screen()
   print("Semua variabel telah direset.")
