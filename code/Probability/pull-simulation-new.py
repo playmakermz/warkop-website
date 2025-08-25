@@ -233,7 +233,9 @@ def predict_next_jackpot_mle(jackpot_distances):
 def automatic_pull():
   """
   Tujuan adalah melakukan pull otomatis untuk mendapatkan nilai N.
-  dan melakukan pull tambahan sesuai dengan perkiraan 90% menuju jackpot.
+  dan melakukan pull tambahan sesuai dengan perkiraan 95% menuju jackpot.
+
+  intinya kita akan terus melakukan loop hingga total pull mendekati kemungkinan 95% jackpot.
   """
   global jarak_jackpot, total_jackpot, total_jackpot_terakhir, total_pulls, new_pull, loop_test, loop_terakhir, ii_terakhir, bukti, loop_bagian_dua
     
