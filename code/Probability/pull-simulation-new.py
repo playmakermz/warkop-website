@@ -99,7 +99,7 @@ p = 0.0006
 
 # ======================== Variabel penentu =======================================================
 # Variabel sampai mendekati jackpot. Ubah Nilai N sesuai dengan Streak tertinggi yang didapatkan sesuai dengan pull game.
-nilai_N =  24_000
+nilai_N =  20_000
 
 # Berapa detik sekali melakukan print
 log_interval=10
@@ -124,6 +124,8 @@ jackpot_list = [0]
 new_pull = 0 
 # loop untuk mendekati 95% jackpot
 loop_terakhir = True
+# loop bagian dua akan memaksa opsi 3 dilakukan kembali hingga 95% jackpot
+loop_bagian_dua = True
 # ======================== Variabel Modification on process =======================================================
 
 
@@ -142,7 +144,7 @@ def clear_screen():
 # ============================== Opsi 01 
 def satu_pull():
   """Satu kali pull"""
-  global jarak_jackpot, total_jackpot, total_jackpot_terakhir, total_pulls,new_pull, loop_test, loop_terakhir
+  global jarak_jackpot, total_jackpot, total_jackpot_terakhir, total_pulls,new_pull, loop_test, loop_terakhir, loop_bagian_dua
 
   # ini adalah berapa banyak batch nilai random yang akan digenerate
   pulls = np.random.random(size=little_batch_size)
@@ -169,7 +171,9 @@ def satu_pull():
       jarak_jackpot = 0
       print(f"====>  jackpot jackpot didapatkan {total_pulls}  <====")
       print(f"\033[31m =================== Jackpot didapatkan ===================== \033[0m")
+      # akhiri loop ke 95%
       loop_terakhir = False
+      
   else:
       # Tidak ada jackpot dalam batch
       jarak_jackpot += little_batch_size 
@@ -231,7 +235,8 @@ def automatic_pull():
   Tujuan adalah melakukan pull otomatis untuk mendapatkan nilai N.
   dan melakukan pull tambahan sesuai dengan perkiraan 90% menuju jackpot.
   """
-  global jarak_jackpot, total_jackpot, total_jackpot_terakhir, total_pulls, new_pull, loop_test, loop_terakhir, ii_terakhir, bukti
+  global jarak_jackpot, total_jackpot, total_jackpot_terakhir, total_pulls, new_pull, loop_test, loop_terakhir, ii_terakhir, bukti, loop_bagian_dua
+    
   last_log = time.time()
   while True:
       # Jika sudah mencapai target, hentikan
@@ -301,15 +306,20 @@ def automatic_pull():
     if ii_terakhir >= (p95_pred - 10 ):
       print(f"\033[34m ===================== Belum Jackpot ======================= \033[0m")
       print("loop berakhir")
+      print(f"\033[34m ===================== Semua loop selesai  ======================= \033[0m")
+      # Akhiri loop ini
       loop_terakhir = False 
-    # tujuan jika belum jackpot, lakukan pull normal
+      # akhiri semua loop, ini untuk mastikan bagian kedua berakhir
+      loop_bagian_dua = False 
+      break
+    # tujuan jika belum jackpot, lakukan pull normal secara loop ke 95%
     else:
       satu_pull()
       bukti += 1
       ii_terakhir += 1
       print(f"Pull ke {ii_terakhir}: ")
       print(f"Bukti pull ke {bukti}: ")
-      print(f"menuju kemungkinan 95%: {p95_pred - 10}")
+      print(f"menuju kemungkinan 95%: {p95_pred}")
       
       
   
@@ -363,7 +373,9 @@ def main():
       elif choice == "2":
         sepuluh_pull()
       elif choice == "3":
-        automatic_pull()
+        while loop_bagian_dua:
+            reset_button()
+            automatic_pull()
       elif choice == "4":
         reset_button()
       else:
