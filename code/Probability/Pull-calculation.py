@@ -235,7 +235,7 @@ def automatic_pull():
   Tujuan adalah melakukan pull otomatis untuk mendapatkan nilai N.
   dan melakukan pull tambahan sesuai dengan perkiraan 95% menuju jackpot.
 
-  intinya kita akan terus melakukan loop hingga total pull mendekati kemungkinan 99% jackpot.
+  intinya kita akan terus melakukan loop hingga total pull mendekati kemungkinan 99%/95% jackpot.
   """
   global jarak_jackpot, total_jackpot, total_jackpot_terakhir, total_pulls, new_pull, loop_test, loop_terakhir, ii_terakhir, bukti, loop_bagian_dua
     
@@ -305,7 +305,7 @@ def automatic_pull():
   
   while loop_terakhir:
     # tujuan adalah jika off chance pull lebih dari prediksi 95% maka akhiri loop
-    if ii_terakhir >= (p99_pred - 10 ):
+    if ii_terakhir >= (p95_pred - 10 ): # <============== Atur nilai ini sesuai dengan prediksi 95% jackpot
       print(f"\033[34m ===================== Belum Jackpot ======================= \033[0m")
       print("loop berakhir")
       print(f"\033[34m ===================== Semua loop selesai  ======================= \033[0m")
@@ -321,7 +321,7 @@ def automatic_pull():
       ii_terakhir += 1
       print(f"Pull ke {ii_terakhir}: ")
       print(f"Bukti pull ke {bukti}: ")
-      print(f"menuju kemungkinan 99%: {p99_pred}")
+      print(f"menuju kemungkinan 95%: {p95_pred}") # <================ Atur nilai ini sesuai dengan prediksi 95% jackpot
       
       
   
