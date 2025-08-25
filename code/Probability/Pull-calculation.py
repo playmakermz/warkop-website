@@ -1,9 +1,9 @@
-import random
+# Script Awal pembuatan : 25-08-2025
 import time
-import statistics
 import os
 import numpy as np
 import pandas as pd
+from math import log, ceil
 
 """
 # Teori dibalik ini 
@@ -61,7 +61,7 @@ tertinggi adalah :     7036
 
 -------------------------------------------------------------------------
 > Laporan pull HSR (0.6% atau 0.0006):
-Streak tertinggi adalah :    20845 / 30690
+Streak tertinggi adalah :    24_400 | gunakan 24_000 
 Modus Jackpot adalah 3986
 
 Ini adalah Testing Ground untuk HSR. dimana probabilitas milik mereka adalah 0.6%.
@@ -96,309 +96,294 @@ p = 0.0006
 # Arknight Chane
 #p = 0.0020
 
-# variabel statistik global
-total_pulls = 0
-total_jackpot = 0
-jarak_jackpot = 0
-total_jackpot_terakhir = 0
-jackpot_list = [0]
-new_pull = 0 # variabel untuk menyimpan pull baru
-loop_test = True # untuk point loop 7
-
+# ======================== Variabel penentu =======================================================
 # Variabel sampai mendekati jackpot. Ubah Nilai N sesuai dengan Streak tertinggi yang didapatkan sesuai dengan pull game.
-nilai_N =  20_400 #20_883
+nilai_N =  24_000
 
 # Berapa detik sekali melakukan print
 log_interval=10
 
-# Ukuran batch size 
-#sSize = 10_000_000
-#sSize = 2_000_000
-sSize = 500
+#Ukuran batch size one pull
+little_batch_size = 1
+#Ukuran batch size automatic pull fast
+batch_size = 700
 
-def predict_next_jackpot(trials=10000):
-    global p90, df
-    """
-    Prediksi berapa pull sampai jackpot berikutnya.
-    Gunakan distribusi Geometrik dengan parameter p.
-
-    trials : jumlah simulasi untuk estimasi distribusi
-    """
-    # Simulasi waktu tunggu jackpot berikutnya
-    samples = np.random.geometric(p, size=trials)
-
-    # Buat DataFrame untuk analisis
-    df = pd.DataFrame(samples, columns=["Pulls Sampai Jackpot"])
-
-    # Statistik utama
-    mean_val = df["Pulls Sampai Jackpot"].mean()
-    median_val = df["Pulls Sampai Jackpot"].median()
-    p90 = df["Pulls Sampai Jackpot"].quantile(0.9)
-
-    print("\n🎯 Prediksi Jackpot Berikutnya:")
-    print(f"Rata-rata (ekspektasi): {mean_val:,.0f} pull")
-    print(f"Median (50% kasus):    {median_val:,.0f} pull")
-    print(f"90% kemungkinan <= :   {p90:,.0f} pull")
-
-    return df
+# ======================== Variabel Modification on process =======================================================
+# keseluruhan pull yang dilakukan 
+total_pulls = 0
+# Banyak jackpot yang didapatkan
+total_jackpot = 0
+# Banyak percobaan yang dilakukan sekarang untuk menuju jackpot
+jarak_jackpot = 0
+# banyak percobaan untukk jackpot sebelumnya
+total_jackpot_terakhir = 0
+# list jackpot
+jackpot_list = [0]
+# nilai total pull baru untuk simulasi selain automatic
+new_pull = 0 
+# loop untuk mendekati 95% jackpot
+loop_terakhir = True
+# loop bagian dua akan memaksa opsi 3 dilakukan kembali hingga 95% jackpot
+loop_bagian_dua = True
+# ======================== Variabel Modification on process =======================================================
 
 
+# untuk automatic pull
+loop_test = True 
 
+# ================================== Clear screen untuk melakukan refresh screen
 def clear_screen():
-    # For Windows
-    if os.name == 'nt':
-        _ = os.system('cls')
-    # For macOS and Linux
-    else:
-        _ = os.system('clear')
+  # For Windows
+  if os.name == 'nt':
+      _ = os.system('cls')
+  # For macOS and Linux
+  else:
+      _ = os.system('clear')
+
+# ============================== Opsi 01 
+def satu_pull():
+  """Satu kali pull"""
+  global jarak_jackpot, total_jackpot, total_jackpot_terakhir, total_pulls,new_pull, loop_test, loop_terakhir, loop_bagian_dua
+
+  # ini adalah berapa banyak batch nilai random yang akan digenerate
+  pulls = np.random.random(size=little_batch_size)
+  # ini akan mencari tau kalau ada nilai random yang lebih kecil dari p(probabilitas jackpot))
+  hits = np.where(pulls < p)[0]  # index jackpot. Informasi array dimana saja jackpot ditemukan.
+
+  # ini adalah mencari tau kalau ada nilai random yang lebih kecil dari p(probabilitas jackpot))
+  if len(hits) > 0:
+      # Jackpot pertama dalam batch 'hits'
+      first_hit = hits[0] + 1
+      # Jackpot pertama dalam batch 'hits'
+      jarak_jackpot += first_hit
+      # Jackpot pertama dalam batch 'hits'
+      total_pulls += first_hit
+      # Informasi jackpot didapatkan +1
+      total_jackpot += 1
+      # Tambahkan informasi pull baru (spesial untuk fungsi ini saja   )
+      new_pull += 1
+      # Informasi jackpot yang sebelumnya didapatkanberapa pull
+      total_jackpot_terakhir = jarak_jackpot
+      # informasi banyak pull menuju jackpot disimpan ke list jackpot
+      jackpot_list.append(jarak_jackpot)
+      # informai percobaan di reset ke nol
+      jarak_jackpot = 0
+      print(f"====>  jackpot jackpot didapatkan {total_pulls}  <====")
+      print(f"\033[31m =================== Jackpot didapatkan ===================== \033[0m")
+      # akhiri loop ke 95%
+      loop_terakhir = False
+      
+  else:
+      # Tidak ada jackpot dalam batch
+      jarak_jackpot += little_batch_size 
+      total_pulls += little_batch_size 
+      # Tambahkan informasi pull baru (spesial untuk fungsi ini saja   )
+      new_pull += little_batch_size
+      print(f"kamu tidak beruntung, total pull: {total_pulls}")
+
+# ====================================================== Opsi 02
+def sepuluh_pull():
+  """Sepuluh kali pull"""
+  # dimulai dari 0 sampai 9(hitungannya adalah 10 kali))
+  for i in range(10):
+      print(f"Pull ke : {i+1}: ", end="")
+      satu_pull()
+
+# ========================================================= Prediksi untuk opsi 03
+def predict_next_jackpot_mle(jackpot_distances):
+  """
+  Prediksi (frekuentis) jarak pull sampai jackpot berikutnya
+  berdasarkan data jarak jackpot sebelumnya.
+  """
+  global data, mean_k, p_hat, mean_pred, median_pred, p90_pred, p95_pred, p99_pred
+  data = [int(k) for k in jackpot_distances if isinstance(k, (int, np.integer)) and k > 0]
+  if len(data) == 0:
+      print("❌ Data jackpot kosong, tidak bisa prediksi.")
+      return None
+
+  mean_k = float(np.mean(data))
+  p_hat = 1.0 / mean_k
+
+  mean_pred = mean_k
+  median_pred = ceil(log(0.5) / log(1 - p_hat))
+  p90_pred = ceil(log(1 - 0.90) / log(1 - p_hat))
+  p95_pred = ceil(log(1 - 0.95) / log(1 - p_hat))
+  p99_pred = ceil(log(1 - 0.99) / log(1 - p_hat))
+
+  print("\n🎯 Prediksi Jackpot Berikutnya (MLE):")
+  print(f"- p̂ (peluang jackpot per pull): {p_hat:.6f} ({p_hat*100:.4f}%)")
+  print(f"- Rata-rata pulls sampai jackpot berikutnya : {int(round(mean_pred)):,}")
+  print(f"- Median pulls (50% kasus)                : {median_pred:,}")
+  print(f"- 90% kemungkinan ≤                        : {p90_pred:,}")
+  print(f"- 95% kemungkinan ≤                        : {p95_pred:,}")
+  print(f"- 99% kemungkinan ≤                        : {p99_pred:,}")
+
+  return {
+      "p_hat": p_hat,
+      "mean_pred": int(round(mean_pred)),
+      "median_pred": int(median_pred),
+      "p90_pred": int(p90_pred),
+      "p95_pred": int(p95_pred),
+      "p99_pred": int(p99_pred),
+  }
 
 
-def pull_once():
-    """Satu kali pull"""
-    global total_pulls, total_jackpot, jarak_jackpot, total_jackpot_terakhir, new_pull, loop_test
-    new_pull += 1
-    total_pulls += 1
-    jarak_jackpot += 1
-    if random.random() < p:
-        total_jackpot += 1
-        print(f"====>  jackpot || Total Jackpot: {total_jackpot}  <====")
-        total_jackpot_terakhir = jarak_jackpot
-        jarak_jackpot = 0
-        print(f"================== END ===================")
-        loop_test = False
-        return "END"
-
-    else:
-        print(f"kamu tidak beruntung: {jarak_jackpot}")
-        return "CONTINUE"
-        
-# Ini untuk langsung mengambil nilai mendekati p90
-def close_prediction():
-    global p90
-    ii = 0
-    print(f"===================== Close Prediction    : {p90} =======================")
-    print(f"Nilai mendekati p90 adalah: {ii}")
-
-    while loop_test:
-        ii += 1
-        print(f"Pull {ii}: ", end="")
-        if ii >= (p90-10):
-            print(f"\033[34m ===================== Belum Jackpot ======================= \033[0m")
-            break
-        if pull_once() == "END":
-            print(f"\033[31m ========== END karena jackpot ========== \033[0m")
-            break
-        else:
-            pull_once()
-            clear_screen()
-
-
-
-def pull_20():
-    """Satu kali pull"""
-    global total_pulls, total_jackpot, jarak_jackpot, total_jackpot_terakhir, jackpot_list
-    total_pulls += 1
-    jarak_jackpot += 1
-    if random.random() < p:
-        total_jackpot += 1
-        jackpot_list.append(jarak_jackpot)
-        total_jackpot_terakhir = jarak_jackpot
-        jarak_jackpot = 0
-
-
-def pull_ten():
-    """Sepuluh kali pull"""
-    for i in range(10):
-        print(f"Pull {i+1}: ", end="")
-        pull_once()
-
-def pull_manual(inp):
-    "Pull sebanyak yang diinginkan user CLI"
-    ii = 0
-    while loop_test:
-        ii += 1
-        print(f"Pull {ii}: ", end="")
-        if ii >= inp:
-            print(f"===================== Belum Jackpot =======================")
-            break
-        if pull_once() == "END":
-            print(f"========== END karena jackpot ==========")
-            break
-        else:
-            pull_once()
-        
-
-def pull_auto():
-    """Satu kali pull"""
-    global total_pulls, total_jackpot, jarak_jackpot, total_jackpot_terakhir,jackpot_list
-    total_pulls += 1
-    jarak_jackpot += 1
-    if random.random() < p:
-        total_jackpot += 1
-        print(f"====>  jackpot || Total Jackpot: {total_jackpot}  <====")
-        total_jackpot_terakhir = jarak_jackpot
-        jackpot_list.append(jarak_jackpot)
-        jarak_jackpot = 0
-   
-
-
-def jackpot_20():
-    """Dapatkan 15 jackpot"""
-    while total_jackpot <= 20:
-        pull_20()
-    jackpot_list.sort(reverse=True)
-    print(jackpot_list)
-    modus = statistics.mode(jackpot_list)
-    print(f"Modus dari data adalah: {modus}")
-
-
+# ========================================================= Opsi 03
 def automatic_pull():
-    """Lakukkan pull otomatis setiap detik, hingga mendekati jackpot."""
-    while jarak_jackpot < nilai_N:  # Ubah angka ini sesuai dengan jarak jackpot tertinggi yang didapatkan
-        pull_auto()
-        print(f"kamu tidak beruntung, Pull sebelum jackpot: {jarak_jackpot}")
-        print(f"Target jarak adalah            : {total_jackpot_terakhir}")
-        print(f"Jackpot tertinggi adalah       : {max(jackpot_list)}")
-        print(f"Total pull                     : {total_pulls}")
-        print(f"Total jackpot                  : {total_jackpot}")
-        
-        clear_screen()
-        #if max(jackpot_list) >= 2900:
-        #    print("2900 tercapai")
-        if jarak_jackpot >= (nilai_N - 10):  # Ubah angka ini sesuai dengan jarak jackpot tertinggi yang didapatkan
-            print("====================> Real Word Pull Now! <=================")
-            print(f"Total pull: {total_pulls}")
-            print(f"Total jackpot: {total_jackpot}")
-            break
+  """
+  Tujuan adalah melakukan pull otomatis untuk mendapatkan nilai N.
+  dan melakukan pull tambahan sesuai dengan perkiraan 95% menuju jackpot.
+
+  intinya kita akan terus melakukan loop hingga total pull mendekati kemungkinan 99% jackpot.
+  """
+  global jarak_jackpot, total_jackpot, total_jackpot_terakhir, total_pulls, new_pull, loop_test, loop_terakhir, ii_terakhir, bukti, loop_bagian_dua
+    
+  last_log = time.time()
+  while True:
+      # Jika sudah mencapai target, hentikan
+      if total_jackpot_terakhir >= (nilai_N - 10):
+          break  
+
+      # Simulasikan beberapa pull sekaligus (batch)
+      pulls = np.random.random(size=batch_size)
+      hits = np.where(pulls < p)[0]  # index jackpot. Informasi array dimana saja jackpot ditemukan.
+
+      if len(hits) > 0:
+          # Jackpot pertama dalam batch
+          first_hit = hits[0] + 1
+          jarak_jackpot += first_hit
+          total_pulls += first_hit
+          total_jackpot += 1
+          total_jackpot_terakhir = jarak_jackpot
+          jackpot_list.append(jarak_jackpot)
+          jarak_jackpot = 0
+      else:
+          # Tidak ada jackpot dalam batch
+          jarak_jackpot += batch_size
+          total_pulls += batch_size
+
+      # Cek apakah waktunya log progress
+      if time.time() - last_log >= log_interval:
+          clear_screen()
+          print("=====================>  Fast Pull System  <====================\n")
+          print(f"kamu tidak beruntung, Pull sebelum jackpot: {total_jackpot_terakhir:,}")
+          print(f"Target jarak adalah            : {(nilai_N - 10)}")
+          print(f"Jackpot tertinggi adalah       : {max(jackpot_list):,}")
+          print(f"Total pull                     : {total_pulls:,}")
+          print(f"Total jackpot                  : {total_jackpot:,}")
+          last_log = time.time()
+          print(f"Array List JackPot       : {sorted(jackpot_list, reverse=True)[:5]}")
 
 
 
-# ======================= Fasst 
+  # Setelah selesai, lakukan pull real world
+  jarak_jackpot = total_jackpot_terakhir
+  print("\033[32m ====================> Real World Pull Now! <================= \033[0m")
+  print(f"Total pull       : {total_pulls}")
+  print(f"Total jackpot    : {total_jackpot}")
+  print(f"Jackpot tertinggi: {max(jackpot_list)}")
+  print(f"jarak jackpot terakhir: {total_jackpot_terakhir}")
 
-def automatic_pull_fast(batch_size=sSize):
-    """
-    Optimized automatic pull.
-    Tujuan: hentikan simulasi jika jarak_jackpot >= (nilai_N - 10).
-    Gunakan numpy untuk percepat simulasi, pandas untuk analisis distribusi.
-    """
-    global total_pulls, total_jackpot, jarak_jackpot, total_jackpot_terakhir, jackpot_list
-    last_log = time.time()
-    while True:
-        # Jika sudah mencapai target, hentikan
-        if total_jackpot_terakhir >= (nilai_N - 10):
-            break  
+  # Setelah selesai, tampilkan analisis distribusi jackpot
+  df = pd.DataFrame(jackpot_list, columns=["Jarak Jackpot"])
+  print("\n📊 Distribusi Jackpot:")
+  print(df.describe())  # statistik ringkas
+  print("\n📊 Frekuensi Jarak Jackpot:")
+  print(df["Jarak Jackpot"].value_counts().head(10))  # 10 nilai paling sering muncul
+  try:
+      modus = df["Jarak Jackpot"].mode()[0]
+      print(f"\nModus Jackpot: {modus}")
+  except:
+      print("\nModus tidak dapat dihitung (data terlalu unik).")
+  predict_next_jackpot_mle(jackpot_list)
 
-        # Simulasikan beberapa pull sekaligus (batch)
-        pulls = np.random.random(size=batch_size)
-        hits = np.where(pulls < p)[0]  # index jackpot. Informasi array dimana saja jackpot ditemukan.
-
-        if len(hits) > 0:
-            # Jackpot pertama dalam batch
-            first_hit = hits[0] + 1
-            jarak_jackpot += first_hit
-            total_pulls += first_hit
-            total_jackpot += 1
-            total_jackpot_terakhir = jarak_jackpot
-            jackpot_list.append(jarak_jackpot)
-            jarak_jackpot = 0
-        else:
-            # Tidak ada jackpot dalam batch
-            jarak_jackpot += batch_size
-            total_pulls += batch_size
-            
-        # Cek apakah waktunya log progress
-        if time.time() - last_log >= log_interval:
-            clear_screen()
-            print("=====================>  Fast Pull System  <====================\n")
-            print(f"kamu tidak beruntung, Pull sebelum jackpot: {total_jackpot_terakhir:,}")
-            print(f"Target jarak adalah            : {(nilai_N - 10)}")
-            print(f"Jackpot tertinggi adalah       : {max(jackpot_list):,}")
-            print(f"Total pull                     : {total_pulls:,}")
-            print(f"Total jackpot                  : {total_jackpot:,}")
-            last_log = time.time()
-            print(f"Array List JackPot       : {sorted(jackpot_list, reverse=True)[:5]}")
-            
-            
-
-    # Setelah selesai, lakukan pull real world
-    jarak_jackpot = total_jackpot_terakhir
-    print("\033[32m ====================> Real World Pull Now! <================= \033[0m")
-    print(f"Total pull       : {total_pulls}")
-    print(f"Total jackpot    : {total_jackpot}")
-    print(f"Jackpot tertinggi: {max(jackpot_list)}")
-    print(f"jarak jackpot terakhir: {total_jackpot_terakhir}")
-
-    # Setelah selesai, tampilkan analisis distribusi jackpot
-    df = pd.DataFrame(jackpot_list, columns=["Jarak Jackpot"])
-    print("\n📊 Distribusi Jackpot:")
-    print(df.describe())  # statistik ringkas
-    print("\n📊 Frekuensi Jarak Jackpot:")
-    print(df["Jarak Jackpot"].value_counts().head(10))  # 10 nilai paling sering muncul
-    try:
-        modus = df["Jarak Jackpot"].mode()[0]
-        print(f"\nModus Jackpot: {modus}")
-    except:
-        print("\nModus tidak dapat dihitung (data terlalu unik).")
-    predict_next_jackpot()
-   
-
-# ========================== fast 
-
-def show_stats():
-    """Tampilkan statistik"""
-    if total_pulls == 0:
-        print("Belum ada percobaan dilakukan.")
+  # iteration untuk loop terakhir
+  ii_terakhir = 0
+  # bukti loop tambahan 
+  bukti = 0
+  
+  while loop_terakhir:
+    # tujuan adalah jika off chance pull lebih dari prediksi 95% maka akhiri loop
+    if ii_terakhir >= (p99_pred - 10 ):
+      print(f"\033[34m ===================== Belum Jackpot ======================= \033[0m")
+      print("loop berakhir")
+      print(f"\033[34m ===================== Semua loop selesai  ======================= \033[0m")
+      # Akhiri loop ini
+      loop_terakhir = False 
+      # akhiri semua loop, ini untuk mastikan bagian kedua berakhir
+      loop_bagian_dua = False 
+      break
+    # tujuan jika belum jackpot, lakukan pull normal secara loop ke 95%
     else:
-        prob_empiris = total_jackpot / total_pulls * 100
-        print("\n=== Statistik ===")
-        print(f"Total pull     : {total_pulls}")
-        print(f"Jarak jackpot  : {jarak_jackpot}")
-        print(f"Total jackpot  : {total_jackpot}")
-        print(f"Peluang empiris: {prob_empiris:.3f}% (teoritis {p*100:.3f}%)")
+      satu_pull()
+      bukti += 1
+      ii_terakhir += 1
+      print(f"Pull ke {ii_terakhir}: ")
+      print(f"Bukti pull ke {bukti}: ")
+      print(f"menuju kemungkinan 99%: {p99_pred}")
+      
+      
+  
+  
 
+# opsi 4
+def reset_button():
+  """Reset semua variabel"""
+  global total_pulls, total_jackpot, jarak_jackpot, total_jackpot_terakhir, jackpot_list, new_pull, ii_terakhir, bukti, loop_terakhir
+  # ======================== Variabel Modification on process =======================================================
+  # keseluruhan pull yang dilakukan 
+  total_pulls = 0
+  # Banyak jackpot yang didapatkan
+  total_jackpot = 0
+  # Banyak percobaan yang dilakukan sekarang untuk menuju jackpot
+  jarak_jackpot = 0
+  # banyak percobaan untukk jackpot sebelumnya
+  total_jackpot_terakhir = 0
+  # list jackpot
+  jackpot_list = [0]
+  # nilai total pull baru untuk simulasi selain automatic
+  new_pull = 0 
+  # loop untuk mendekati 95% jackpot
+  ii_terakhir = 0
+  # bukti loop tambahan
+  bukti = 0
+  # jalankan loop tambahan 
+  loop_terakhir = True
+  # ======================== Variabel Modification on process =======================================================
+  clear_screen()
+  print("Semua variabel telah direset.")
+
+
+# ========================= Starter =======================================================
 
 def main():
-    global total_jackpot
-    while True:
-        print("\n=== Simulasi Gacha ===")
-        print(f"Nilai Pull baru                : {new_pull}")
-        print(f"Jarak jackpot ke titik sekarang : {jarak_jackpot}")
-        print(f"Total pull jackkpot terakhir  : {total_jackpot_terakhir}")
-        print("1. Pull 1 kali")
-        print("2. Pull 10 kali")
-        print("3. Lihat statistik")
-        print("4. Go 20 Jackpot")
-        print("5. Automatic pull")
-        print("6. Automatic pull fast")
-        print("7. Close prediction pull")
-        print("8. Pull manual insert")
-        print("9. Keluar")
-        choice = input("Pilih opsi: ")
+  global total_jackpot
+  while True:
+      print("\n================= Simulasi Gacha V2 =====================")
+      print(f"Nilai Pull baru                : {new_pull}")
+      print(f"Banyak percobaan yang dilakukan sekarang untuk menuju jackpot : {jarak_jackpot}")
+      print(f"banyak percobaan untukk jackpot sebelumnya  : {total_jackpot_terakhir}")
+      print("1. Pull 1 kali")
+      print("2. Pull 10 kali")
+      print("3. Automatic pull fast")
+      print("4. Reset")
+      choice = input("Pilih opsi: ")
 
-        if choice == "1":
-            pull_once()
-        elif choice == "2":
-            pull_ten()
-        elif choice == "3":
-            show_stats()
-        elif choice == "4":
-            jackpot_20()
-            total_jackpot = 0
-        elif choice == "5":
+      if choice == "1":
+        satu_pull()
+      elif choice == "2":
+        sepuluh_pull()
+      elif choice == "3":
+        while loop_bagian_dua:
+            reset_button()
             automatic_pull()
-        elif choice == "6":
-            automatic_pull_fast()
-        elif choice == "7":
-            close_prediction()
-        elif choice == "8":
-            user_input = int(input("Masukkan jumlah pull: "))
-            pull_manual(user_input)
-        elif choice == "9":
-            print("Terima kasih sudah mencoba simulasi!")
-            break
-        else:
-            print("Opsi tidak valid, coba lagi.")
+        print("\033[93m =============================== Semua loop selesai ===================================== \033[0m")
+        print("\033[93m =============================== Realword Pull      ===================================== \033[0m")
+      elif choice == "4":
+        reset_button()
+      else:
+          print("Opsi tidak valid, coba lagi.")
 
 
 if __name__ == "__main__":
-    main()
+  main()
