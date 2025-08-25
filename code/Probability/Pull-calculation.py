@@ -68,8 +68,11 @@ Modus Jackpot adalah 3986
 Ini adalah Testing Ground untuk HSR. dimana probabilitas milik mereka adalah 0.6%.
 
 0.006 adalah angka desimal.
-kita bisa ketahui bentuk persen dengan cara 
-0.006 x 100
+kita bisa ketahui bentuk persen dengan cara.
+
+Untuk mendapatkan character 5 Star : 0.006 x 100
+
+Untuk mendapatkan character 4 Star : 5.100 / 100 = 0.051
 
 
 
@@ -92,7 +95,10 @@ Aturan penggunaan:
 """
 
 # probabilitas jackpot HSR
-p = 0.0006
+# karakter probabilitas 5 Star
+#p = 0.0006
+# 4 Star probabilitas
+p = 0.051
 
 # Arknight Chane
 #p = 0.0020
