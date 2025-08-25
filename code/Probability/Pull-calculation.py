@@ -1,5 +1,6 @@
 # Script Awal pembuatan : 25-08-2025
 import time
+import statistics
 import os
 import numpy as np
 import pandas as pd
