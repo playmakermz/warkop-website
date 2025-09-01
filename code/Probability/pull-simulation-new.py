@@ -7,7 +7,7 @@ import pandas as pd
 from math import log, ceil
 
 """
-# Teori dibalik ini 
+# Teori dibalik ini
 
 1. Memberikan kita jeda waktu untuk melakukan pull. Pull yang akan kita lakukan tidak akan ngawur, melainkan sesuai timing.
 2. Memberikan chace kasar yang lebih tinggi untuk mendapatkan jackpot. Karena pull virtual ini, akan memberikan kita chace diluar dari game.
@@ -36,14 +36,13 @@ Intuisi sederhana: satu percobaan peluangnya kecil (≈2,78%). Dengan 10 percoba
 Pada teori probabilitas, kapan dilakukan pull tidak akan berpengaruh, karena semua total pull yang akan kita lakkukan dihitunga jadi satu.
 Semisal kita melempar dua dadu pada hari senin, dan hari selasa, maka total percobaan yang kita lakukan adalah 2 kali.
 
-# Catatan Pull
+# ======================================== Catatan Pull ==============================================================
 
 Cara penggunaan:
-1. Lakukan analisa untuk mengetahui kemungkinan jackpot tertinggi.
-2. lakukan auto pull untuk mendekati jackpot tertinggi.
-3. jika sudah, maka lakukan simulasi beberapa 10 kali pull, berdasarkan informasi "Frekuensi Jarak Jackpot".
-4. kalau misalnya disana rata-rata adalah 300, maka lakukan 300 simulasi pull.
-5. setelah itu lakukan pull real world.
+1. modif Probability dan variabel lainnya.
+2. lakukan auto pull
+3. lakukan manual pull 10-15
+4. lakukan real world pull
 
 ## Informasi Fast Pull
 
@@ -62,14 +61,19 @@ tertinggi adalah :     7036
 
 -------------------------------------------------------------------------
 > Laporan pull HSR (0.6% atau 0.0006):
-Streak tertinggi adalah :    24_400 | gunakan 24_000 
+Streak tertinggi adalah :    24_400 | gunakan 22_000
 Modus Jackpot adalah 3986
 
 Ini adalah Testing Ground untuk HSR. dimana probabilitas milik mereka adalah 0.6%.
 
 0.006 adalah angka desimal.
-kita bisa ketahui bentuk persen dengan cara 
-0.006 x 100
+kita bisa ketahui bentuk persen dengan cara.
+
+Untuk mendapatkan character 5 Star : 0.006 x 100
+gunakan 24_300 untuk mengatur jarak jackpot
+
+Untuk mendapatkan character 4 Star : 5.100 / 100 = 0.051
+gunakan 18_000 untuk mengatur jarak jackpot
 
 
 
@@ -87,19 +91,22 @@ Aturan penggunaan:
 0. Pastikan pull rate kamu sesuaikan dengan gamenya. simulasi inin hanya cocok jika pull rate sama dengan yang ada pada game.
 1. Cari tau dengan "go 20 jackpot" dua kali. untuk mengetahui Streak tertinggi
 2. lakukan pull 10 secara manual dan berjalan ke nilai mendekati yang tertinggi
-3. jika sudah dekat, semisal nilai tertinggi adalah 700, 
+3. jika sudah dekat, semisal nilai tertinggi adalah 700,
 4. lakukan beberapa 10 kali pull simulasi, usahakan jangan terlalu banyak, lalu lakukan 10 pull real world.
 """
 
 # probabilitas jackpot HSR
+# karakter probabilitas 5 Star
 p = 0.0006
+# 4 Star probabilitas
+#p = 0.051
 
 # Arknight Chane
 #p = 0.0020
 
 # ======================== Variabel penentu =======================================================
 # Variabel sampai mendekati jackpot. Ubah Nilai N sesuai dengan Streak tertinggi yang didapatkan sesuai dengan pull game.
-nilai_N =  24_000
+nilai_N =  22_000
 
 # Berapa detik sekali melakukan print
 log_interval=10
@@ -107,10 +114,10 @@ log_interval=10
 #Ukuran batch size one pull
 little_batch_size = 1
 #Ukuran batch size automatic pull fast
-batch_size = 700
+batch_size = 5000
 
 # ======================== Variabel Modification on process =======================================================
-# keseluruhan pull yang dilakukan 
+# keseluruhan pull yang dilakukan
 total_pulls = 0
 # Banyak jackpot yang didapatkan
 total_jackpot = 0
@@ -121,7 +128,7 @@ total_jackpot_terakhir = 0
 # list jackpot
 jackpot_list = [0]
 # nilai total pull baru untuk simulasi selain automatic
-new_pull = 0 
+new_pull = 0
 # loop untuk mendekati 95% jackpot
 loop_terakhir = True
 # loop bagian dua akan memaksa opsi 3 dilakukan kembali hingga 95% jackpot
@@ -130,7 +137,7 @@ loop_bagian_dua = True
 
 
 # untuk automatic pull
-loop_test = True 
+loop_test = True
 
 # ================================== Clear screen untuk melakukan refresh screen
 def clear_screen():
@@ -141,7 +148,7 @@ def clear_screen():
   else:
       _ = os.system('clear')
 
-# ============================== Opsi 01 
+# ============================== Opsi 01
 def satu_pull():
   """Satu kali pull"""
   global jarak_jackpot, total_jackpot, total_jackpot_terakhir, total_pulls,new_pull, loop_test, loop_terakhir, loop_bagian_dua
@@ -173,11 +180,11 @@ def satu_pull():
       print(f"\033[31m =================== Jackpot didapatkan ===================== \033[0m")
       # akhiri loop ke 95%
       loop_terakhir = False
-      
+
   else:
       # Tidak ada jackpot dalam batch
-      jarak_jackpot += little_batch_size 
-      total_pulls += little_batch_size 
+      jarak_jackpot += little_batch_size
+      total_pulls += little_batch_size
       # Tambahkan informasi pull baru (spesial untuk fungsi ini saja   )
       new_pull += little_batch_size
       print(f"kamu tidak beruntung, total pull: {total_pulls}")
@@ -196,7 +203,7 @@ def predict_next_jackpot_mle(jackpot_distances):
   Prediksi (frekuentis) jarak pull sampai jackpot berikutnya
   berdasarkan data jarak jackpot sebelumnya.
   """
-  global data, mean_k, p_hat, mean_pred, median_pred, p90_pred, p95_pred, p99_pred
+  global data, mean_k, p_hat, mean_pred, median_pred, p90_pred, p95_pred, p99_pred, p98_pred, p100_pred
   data = [int(k) for k in jackpot_distances if isinstance(k, (int, np.integer)) and k > 0]
   if len(data) == 0:
       print("❌ Data jackpot kosong, tidak bisa prediksi.")
@@ -209,7 +216,9 @@ def predict_next_jackpot_mle(jackpot_distances):
   median_pred = ceil(log(0.5) / log(1 - p_hat))
   p90_pred = ceil(log(1 - 0.90) / log(1 - p_hat))
   p95_pred = ceil(log(1 - 0.95) / log(1 - p_hat))
+  p98_pred = ceil(log(1 - 0.95) / log(1 - p_hat))
   p99_pred = ceil(log(1 - 0.99) / log(1 - p_hat))
+  p100_pred = ceil(log(1 - 0.999) / log(1 - p_hat))
 
   print("\n🎯 Prediksi Jackpot Berikutnya (MLE):")
   print(f"- p̂ (peluang jackpot per pull): {p_hat:.6f} ({p_hat*100:.4f}%)")
@@ -217,7 +226,9 @@ def predict_next_jackpot_mle(jackpot_distances):
   print(f"- Median pulls (50% kasus)                : {median_pred:,}")
   print(f"- 90% kemungkinan ≤                        : {p90_pred:,}")
   print(f"- 95% kemungkinan ≤                        : {p95_pred:,}")
+  print(f"- 98% kemungkinan ≤                        : {p98_pred:,}")
   print(f"- 99% kemungkinan ≤                        : {p99_pred:,}")
+  print(f"- 99.09% kemungkinan ≤                       : {p100_pred:,}")
 
   return {
       "p_hat": p_hat,
@@ -225,7 +236,9 @@ def predict_next_jackpot_mle(jackpot_distances):
       "median_pred": int(median_pred),
       "p90_pred": int(p90_pred),
       "p95_pred": int(p95_pred),
+      "p98_pred": int(p98_pred),
       "p99_pred": int(p99_pred),
+      "p99.09_pred": int(p100_pred),
   }
 
 
@@ -235,15 +248,15 @@ def automatic_pull():
   Tujuan adalah melakukan pull otomatis untuk mendapatkan nilai N.
   dan melakukan pull tambahan sesuai dengan perkiraan 95% menuju jackpot.
 
-  intinya kita akan terus melakukan loop hingga total pull mendekati kemungkinan 99% jackpot.
+  intinya kita akan terus melakukan loop hingga total pull mendekati kemungkinan 99%/95% jackpot.
   """
   global jarak_jackpot, total_jackpot, total_jackpot_terakhir, total_pulls, new_pull, loop_test, loop_terakhir, ii_terakhir, bukti, loop_bagian_dua
-    
+
   last_log = time.time()
   while True:
       # Jika sudah mencapai target, hentikan
       if total_jackpot_terakhir >= (nilai_N - 10):
-          break  
+          break
 
       # Simulasikan beberapa pull sekaligus (batch)
       pulls = np.random.random(size=batch_size)
@@ -300,19 +313,19 @@ def automatic_pull():
 
   # iteration untuk loop terakhir
   ii_terakhir = 0
-  # bukti loop tambahan 
+  # bukti loop tambahan
   bukti = 0
-  
+
   while loop_terakhir:
     # tujuan adalah jika off chance pull lebih dari prediksi 95% maka akhiri loop
-    if ii_terakhir >= (p99_pred - 10 ):
+    if ii_terakhir >= (p99_pred - 10 ): # <============== Atur nilai ini sesuai dengan prediksi 95% jackpot
       print(f"\033[34m ===================== Belum Jackpot ======================= \033[0m")
       print("loop berakhir")
       print(f"\033[34m ===================== Semua loop selesai  ======================= \033[0m")
       # Akhiri loop ini
-      loop_terakhir = False 
+      loop_terakhir = False
       # akhiri semua loop, ini untuk mastikan bagian kedua berakhir
-      loop_bagian_dua = False 
+      loop_bagian_dua = False
       break
     # tujuan jika belum jackpot, lakukan pull normal secara loop ke 95%
     else:
@@ -321,18 +334,18 @@ def automatic_pull():
       ii_terakhir += 1
       print(f"Pull ke {ii_terakhir}: ")
       print(f"Bukti pull ke {bukti}: ")
-      print(f"menuju kemungkinan 99%: {p99_pred}")
-      
-      
-  
-  
+      print(f"menuju kemungkinan 99%: {p99_pred}") # <================ Atur nilai ini sesuai dengan prediksi 95% jackpot
+
+
+
+
 
 # opsi 4
 def reset_button():
   """Reset semua variabel"""
   global total_pulls, total_jackpot, jarak_jackpot, total_jackpot_terakhir, jackpot_list, new_pull, ii_terakhir, bukti, loop_terakhir
   # ======================== Variabel Modification on process =======================================================
-  # keseluruhan pull yang dilakukan 
+  # keseluruhan pull yang dilakukan
   total_pulls = 0
   # Banyak jackpot yang didapatkan
   total_jackpot = 0
@@ -343,12 +356,12 @@ def reset_button():
   # list jackpot
   jackpot_list = [0]
   # nilai total pull baru untuk simulasi selain automatic
-  new_pull = 0 
+  new_pull = 0
   # loop untuk mendekati 95% jackpot
   ii_terakhir = 0
   # bukti loop tambahan
   bukti = 0
-  # jalankan loop tambahan 
+  # jalankan loop tambahan
   loop_terakhir = True
   # ======================== Variabel Modification on process =======================================================
   clear_screen()
@@ -378,6 +391,8 @@ def main():
         while loop_bagian_dua:
             reset_button()
             automatic_pull()
+        print("\033[93m =============================== Semua loop selesai ===================================== \033[0m")
+        print("\033[93m =============================== Realword Pull      ===================================== \033[0m")
       elif choice == "4":
         reset_button()
       else:
