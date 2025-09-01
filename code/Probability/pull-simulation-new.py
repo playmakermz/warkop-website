@@ -114,7 +114,7 @@ log_interval=10
 #Ukuran batch size one pull
 little_batch_size = 1
 #Ukuran batch size automatic pull fast
-batch_size = 5000
+batch_size = 1000
 
 # ======================== Variabel Modification on process =======================================================
 # keseluruhan pull yang dilakukan
@@ -318,7 +318,7 @@ def automatic_pull():
 
   while loop_terakhir:
     # tujuan adalah jika off chance pull lebih dari prediksi 95% maka akhiri loop
-    if ii_terakhir >= (p99_pred - 10 ): # <============== Atur nilai ini sesuai dengan prediksi 95% jackpot
+    if ii_terakhir >= (p100_pred - 100 ): # <============== Atur nilai ini sesuai dengan prediksi 95% jackpot
       print(f"\033[34m ===================== Belum Jackpot ======================= \033[0m")
       print("loop berakhir")
       print(f"\033[34m ===================== Semua loop selesai  ======================= \033[0m")
@@ -334,7 +334,7 @@ def automatic_pull():
       ii_terakhir += 1
       print(f"Pull ke {ii_terakhir}: ")
       print(f"Bukti pull ke {bukti}: ")
-      print(f"menuju kemungkinan 99%: {p99_pred}") # <================ Atur nilai ini sesuai dengan prediksi 95% jackpot
+      print(f"menuju kemungkinan 99.99%: {p100_pred}") # <================ Atur nilai ini sesuai dengan prediksi 95% jackpot
 
 
 
