@@ -95,18 +95,26 @@ Aturan penggunaan:
 4. lakukan beberapa 10 kali pull simulasi, usahakan jangan terlalu banyak, lalu lakukan 10 pull real world.
 """
 
+# ============================================================= Cukup Modifikasi bagian sini! ===================================================================
+
+# Kemungkinan beruntung!
+a_probability = 0.0006
+# Berapa banyak minimum percobaan
+a_percobaan = 22_000
+# Batch  size terkecil mau berapa
+a_batchSize = 1000
+
+
+# ============================================================= Cukup Modifikasi bagian sini! ===================================================================
+
 # probabilitas jackpot HSR
 # karakter probabilitas 5 Star
-p = 0.0006
-# 4 Star probabilitas
-#p = 0.051
+p = a_probability
 
-# Arknight Chane
-#p = 0.0020
 
 # ======================== Variabel penentu =======================================================
 # Variabel sampai mendekati jackpot. Ubah Nilai N sesuai dengan Streak tertinggi yang didapatkan sesuai dengan pull game.
-nilai_N =  22_000
+nilai_N =  a_percobaan
 
 # Berapa detik sekali melakukan print
 log_interval=10
@@ -114,7 +122,7 @@ log_interval=10
 #Ukuran batch size one pull
 little_batch_size = 1
 #Ukuran batch size automatic pull fast
-batch_size = 1000
+batch_size = a_batchSize
 
 # ======================== Variabel Modification on process =======================================================
 # keseluruhan pull yang dilakukan
@@ -318,7 +326,7 @@ def automatic_pull():
 
   while loop_terakhir:
     # tujuan adalah jika off chance pull lebih dari prediksi 95% maka akhiri loop
-    if ii_terakhir >= (p100_pred - 100 ): # <============== Atur nilai ini sesuai dengan prediksi 95% jackpot
+    if ii_terakhir >= (p100_pred - 10 ): # <============== Atur nilai ini sesuai dengan prediksi 95% jackpot
       print(f"\033[34m ===================== Belum Jackpot ======================= \033[0m")
       print("loop berakhir")
       print(f"\033[34m ===================== Semua loop selesai  ======================= \033[0m")
