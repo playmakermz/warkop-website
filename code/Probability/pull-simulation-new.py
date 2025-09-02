@@ -41,8 +41,11 @@ Semisal kita melempar dua dadu pada hari senin, dan hari selasa, maka total perc
 Cara penggunaan:
 1. modif Probability dan variabel lainnya.
 2. lakukan auto pull
-3. lakukan manual pull 25 (250) kali
+3. lakukan manual pull berkali-kali, ikuti note disetiap game. (HSR, untuk setiap 250 pull simulasi == 1 realword)
 4. lakukan real world pull
+
+
+*Hati-hati terkadang ampas itu menyertai simulasi. Untuk HSR gunakan simulasi satu hari satu kali
 
 ## Informasi Fast Pull
 
@@ -61,7 +64,7 @@ tertinggi adalah :     7036
 
 -------------------------------------------------------------------------
 > Laporan pull HSR (0.6% atau 0.0006):
-Streak tertinggi adalah :    24_400 | gunakan 21_000
+Streak tertinggi adalah :    34_487 | gunakan 20_000
 Modus Jackpot adalah 3986
 
 Ini adalah Testing Ground untuk HSR. dimana probabilitas milik mereka adalah 0.6%.
