@@ -41,7 +41,7 @@ Semisal kita melempar dua dadu pada hari senin, dan hari selasa, maka total perc
 Cara penggunaan:
 1. modif Probability dan variabel lainnya.
 2. lakukan auto pull
-3. lakukan manual pull 10-15
+3. lakukan manual pull 25 (250) kali
 4. lakukan real world pull
 
 ## Informasi Fast Pull
@@ -61,7 +61,7 @@ tertinggi adalah :     7036
 
 -------------------------------------------------------------------------
 > Laporan pull HSR (0.6% atau 0.0006):
-Streak tertinggi adalah :    24_400 | gunakan 22_000
+Streak tertinggi adalah :    24_400 | gunakan 21_000
 Modus Jackpot adalah 3986
 
 Ini adalah Testing Ground untuk HSR. dimana probabilitas milik mereka adalah 0.6%.
@@ -100,7 +100,7 @@ Aturan penggunaan:
 # Kemungkinan beruntung!
 a_probability = 0.0006
 # Berapa banyak minimum percobaan
-a_percobaan = 22_000
+a_percobaan = 20_000
 # Batch  size terkecil mau berapa
 a_batchSize = 1000
 
@@ -254,7 +254,7 @@ def predict_next_jackpot_mle(jackpot_distances):
 def automatic_pull():
   """
   Tujuan adalah melakukan pull otomatis untuk mendapatkan nilai N.
-  dan melakukan pull tambahan sesuai dengan perkiraan 95% menuju jackpot.
+  dan melakukan pull tambahan sesuai dengan perkiraan 99% menuju jackpot.
 
   intinya kita akan terus melakukan loop hingga total pull mendekati kemungkinan 99%/95% jackpot.
   """
