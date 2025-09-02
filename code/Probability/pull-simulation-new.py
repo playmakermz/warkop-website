@@ -104,6 +104,7 @@ a_percobaan = 20_000
 # Batch  size terkecil mau berapa
 a_batchSize = 1000
 # alternative batch size
+# ini gak boleh lebih dari 10. karena setiap pull disini bernilai 10, beserta laporan mereka juga
 a_little_batch_size = 10
 
 
