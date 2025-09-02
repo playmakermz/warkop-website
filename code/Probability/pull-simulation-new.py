@@ -103,6 +103,8 @@ a_probability = 0.0006
 a_percobaan = 20_000
 # Batch  size terkecil mau berapa
 a_batchSize = 1000
+# alternative batch size
+a_little_batch_size = 10
 
 
 # ============================================================= Cukup Modifikasi bagian sini! ===================================================================
@@ -176,8 +178,6 @@ def satu_pull():
       total_pulls += first_hit
       # Informasi jackpot didapatkan +1
       total_jackpot += 1
-      # Tambahkan informasi pull baru (spesial untuk fungsi ini saja   )
-      new_pull += 1
       # Informasi jackpot yang sebelumnya didapatkanberapa pull
       total_jackpot_terakhir = jarak_jackpot
       # informasi banyak pull menuju jackpot disimpan ke list jackpot
@@ -185,8 +185,11 @@ def satu_pull():
       # informai percobaan di reset ke nol
       jarak_jackpot = 0
       print(f"====>  jackpot jackpot didapatkan {total_pulls}  <====")
+      print(f"====>  Informasi New Pull         {new_pull}  <====")
       print(f"\033[31m =================== Jackpot didapatkan ===================== \033[0m")
-      # akhiri loop ke 95%
+      # akhiri loop ke 99%
+      # New pull di reset ke nol
+      new_pull = 0
       loop_terakhir = False
 
   else:
@@ -196,6 +199,50 @@ def satu_pull():
       # Tambahkan informasi pull baru (spesial untuk fungsi ini saja   )
       new_pull += little_batch_size
       print(f"kamu tidak beruntung, total pull: {total_pulls}")
+
+
+# ================================================================== Satu pull alternative ==================================================================
+def a_satu_pull(asr):
+  """Satu kali pull"""
+  global jarak_jackpot, total_jackpot, total_jackpot_terakhir, total_pulls,new_pull, loop_test, loop_terakhir, loop_bagian_dua
+
+  # ini adalah berapa banyak batch nilai random yang akan digenerate
+  pulls = np.random.random(size=a_little_batch_size)
+  # ini akan mencari tau kalau ada nilai random yang lebih kecil dari p(probabilitas jackpot))
+  hits = np.where(pulls < p)[0]  # index jackpot. Informasi array dimana saja jackpot ditemukan.
+
+  # ini adalah mencari tau kalau ada nilai random yang lebih kecil dari p(probabilitas jackpot))
+  if len(hits) > 0:
+      # Jackpot pertama dalam batch 'hits'
+      first_hit = hits[0] + 1
+      # Jackpot pertama dalam batch 'hits'
+      jarak_jackpot += first_hit
+      # Jackpot pertama dalam batch 'hits'
+      total_pulls += first_hit
+      # Informasi jackpot didapatkan +1
+      total_jackpot += 1
+      # Informasi jackpot yang sebelumnya didapatkanberapa pull
+      total_jackpot_terakhir = jarak_jackpot
+      # informasi banyak pull menuju jackpot disimpan ke list jackpot
+      jackpot_list.append(jarak_jackpot)
+      # informai percobaan di reset ke nol
+      jarak_jackpot = 0
+      print(f"====>  jackpot jackpot didapatkan {len(jackpot_list)}  <====")
+      print(f"====>  Informasi Total pull         {total_pulls}  <====")
+      print(f"====>  Informasi New Pull         {new_pull}  <====")
+      print(f"====> Menuju p99 {asr} , seharusnya kurang {(asr - new_pull)} percobaan lagi!")
+      print(f"\033[31m =================== Jackpot didapatkan. Loop Diulang! ===================== \033[0m")
+      # akhiri loop ke 99%
+      # New pull di reset ke nol
+      new_pull = 0
+      loop_terakhir = False
+
+  else:
+      # Tidak ada jackpot dalam batch
+      jarak_jackpot += a_little_batch_size
+      total_pulls += a_little_batch_size
+      # Tambahkan informasi pull baru (spesial untuk fungsi ini saja   )
+      new_pull += a_little_batch_size
 
 # ====================================================== Opsi 02
 def sepuluh_pull():
@@ -300,7 +347,6 @@ def automatic_pull():
 
   # Setelah selesai, lakukan pull real world
   jarak_jackpot = total_jackpot_terakhir
-  print("\033[32m ====================> Real World Pull Now! <================= \033[0m")
   print(f"Total pull       : {total_pulls}")
   print(f"Total jackpot    : {total_jackpot}")
   print(f"Jackpot tertinggi: {max(jackpot_list)}")
@@ -330,6 +376,7 @@ def automatic_pull():
       print(f"\033[34m ===================== Belum Jackpot ======================= \033[0m")
       print("loop berakhir")
       print(f"\033[34m ===================== Semua loop selesai  ======================= \033[0m")
+      print("\033[32m ====================> Real World Pull Now! <================= \033[0m")
       # Akhiri loop ini
       loop_terakhir = False
       # akhiri semua loop, ini untuk mastikan bagian kedua berakhir
@@ -337,12 +384,9 @@ def automatic_pull():
       break
     # tujuan jika belum jackpot, lakukan pull normal secara loop ke 95%
     else:
-      satu_pull()
+      a_satu_pull(p100_pred)
       bukti += 1
-      ii_terakhir += 1
-      print(f"Pull ke {ii_terakhir}: ")
-      print(f"Bukti pull ke {bukti}: ")
-      print(f"menuju kemungkinan 99.99%: {p100_pred}") # <================ Atur nilai ini sesuai dengan prediksi 95% jackpot
+      ii_terakhir += a_little_batch_size
 
 
 
