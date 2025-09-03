@@ -256,6 +256,13 @@ def sepuluh_pull():
       print(f"Pull ke : {i+1}: ", end="")
       satu_pull()
 
+# =================================================== opsi 04 melakukan input manual =============================================
+def manual_pull(asr):
+  """ Pull sebanyak input manual """
+  for i in range(asr):
+    print(f"pull Manual ke : {i+1}", end="")
+    satu_pull()
+
 # ========================================================= Prediksi untuk opsi 03
 def predict_next_jackpot_mle(jackpot_distances):
   """
@@ -436,7 +443,7 @@ def main():
       print("1. Pull 1 kali")
       print("2. Pull 10 kali")
       print("3. Automatic pull fast")
-      print("4. Reset")
+      print("4. Manual pull input")
       choice = input("Pilih opsi: ")
 
       if choice == "1":
@@ -450,7 +457,8 @@ def main():
         print("\033[93m =============================== Semua loop selesai ===================================== \033[0m")
         print("\033[93m =============================== Realword Pull      ===================================== \033[0m")
       elif choice == "4":
-        reset_button()
+        usIN = input("Pilih berapa banyak pull: ")
+        manual_pull(int(usIN))
       else:
           print("Opsi tidak valid, coba lagi.")
 
