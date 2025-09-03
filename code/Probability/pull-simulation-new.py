@@ -102,6 +102,19 @@ disini melakukan satu kali pull setiap ... simulasi pull:
 Nilai pull baru: 13515
 Total pull: 343888
 
+>>>>>>>>>>>>>>>>>>>>>>>>> Variabel yang digunaka n <<<<<<<<<<<<<<<<<<<<<<<
+
+# Kemungkinan beruntung!
+a_probability = 0.0006
+# Berapa banyak minimum percobaan
+a_percobaan = 20_000
+# Batch  size terkecil mau berapa
+a_batchSize = 1000
+# alternative batch size
+# ini gak boleh lebih dari 10. karena setiap pull disini bernilai 10, beserta laporan mereka juga
+a_little_batch_size = 10
+
+
 
 
 
