@@ -64,7 +64,7 @@ tertinggi adalah :     7036
 
 -------------------------------------------------------------------------
 > Laporan pull HSR (0.6% atau 0.0006):
-Streak tertinggi adalah :    34_487 | gunakan 20_000
+Streak tertinggi adalah :    34_487 | gunakan 20_000 - 21_000
 Modus Jackpot adalah 3986
 
 Ini adalah Testing Ground untuk HSR. dimana probabilitas milik mereka adalah 0.6%.
@@ -84,6 +84,23 @@ Record Pull HSR 19/08/2025:
 Total pull: 233461
 Total jackpot: 112
 
+>>>>>>>       Pengalaman Gacha beruntung 03/09/2025 <<<<<<<<
+
+jackpot di HSR tgl 02/09/2025 dan 03/09/2025. Jadi trick simulasi gacha ini hanya gunakan satu kali sehari saja.
+
+disini melakukan satu kali pull setiap ... simulasi pull:
+
+252
+252
+252
+252
+252
+252
+126
+357
+
+Nilai pull baru: 13515
+Total pull: 343888
 
 
 
