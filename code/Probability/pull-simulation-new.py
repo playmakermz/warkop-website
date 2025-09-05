@@ -59,8 +59,23 @@ jangan terlalu besar ukuran batch size, karena akan membuat simulasi kurang deta
 
 -------------------------------------------------------------------------
 > Laporan pull Ak (2% atau 0.0020):
-tertinggi adalah :     7036
+tertinggi adalah :     10742
+lakukan percobaan di : 8000
 
+Jackpot tertinggi: 10742
+
+
+>>>>>>>>>>>>> Informasi Variabel yang akan digunakan 
+
+# Kemungkinan beruntung!
+a_probability = 0.0020
+# Berapa banyak minimum percobaan
+a_percobaan = 8_000
+# Batch  size terkecil mau berapa
+a_batchSize = 700
+# alternative batch size
+# ini gak boleh lebih dari 10. karena setiap pull disini bernilai 10, beserta laporan mereka juga
+a_little_batch_size = 10
 
 -------------------------------------------------------------------------
 > Laporan pull HSR (0.6% atau 0.0006):
@@ -131,14 +146,14 @@ Aturan penggunaan:
 # ============================================================= Cukup Modifikasi bagian sini! ===================================================================
 
 # Kemungkinan beruntung!
-a_probability = 0.0006
+a_probability = 0.0020
 # Berapa banyak minimum percobaan
-a_percobaan = 20_000
+a_percobaan = 6_000
 # Batch  size terkecil mau berapa
-a_batchSize = 1000
+a_batchSize = 100
 # alternative batch size
 # ini gak boleh lebih dari 10. karena setiap pull disini bernilai 10, beserta laporan mereka juga
-a_little_batch_size = 10
+a_little_batch_size = 1
 
 
 # ============================================================= Cukup Modifikasi bagian sini! ===================================================================
