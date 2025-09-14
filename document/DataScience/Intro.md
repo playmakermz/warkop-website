@@ -91,79 +91,129 @@ Beberapa konsep dasar yang digunakan dalam statistik inferensial adalah teori pr
 Pengantar Ilmu Data: Dari Probabilitas hingga Pembelajaran Mesin
 Ilmu data adalah bidang yang menggunakan berbagai teori dan teknik untuk mengekstrak wawasan dari data. Panduan ini akan membahas konsep-konsep fundamental yang menjadi dasar dalam analisis dan pemodelan data.
 
+Pengantar Ilmu Data: Dari Probabilitas hingga Pembelajaran Mesin
+Ilmu data adalah bidang yang menggunakan berbagai teori dan teknik untuk mengekstrak wawasan dari data. Panduan ini akan membahas konsep-konsep fundamental yang menjadi dasar dalam analisis dan pemodelan data.
+
 ## 🎲 Fondasi: Teori Probabilitas
-Untuk membangun model dari sampel populasi, kita memerlukan pendekatan teori probabilitas1. Probabilitas adalah angka yang menunjukkan tingkat atau derajat ketidakpastian suatu fenomena2. Ada tiga teori utama dalam probabilitas:
-Teori Laplace: Teori ini menyatakan bahwa semua kejadian memiliki peluang yang sama untuk terjadi3. Contohnya, saat melempar dadu, probabilitas untuk mendapatkan angka ganjil (1, 3, atau 5) adalah 1/2, karena ada tiga angka ganjil dari total enam kemungkinan sisi dadu4.
-Teori Frequentist: Menurut teori ini, probabilitas suatu kejadian bergantung pada seberapa sering kejadian itu terjadi dalam sejumlah besar percobaan5. Semakin banyak percobaan pelemparan dadu yang dilakukan, semakin tinggi kemungkinan kita akan mendapatkan angka ganjil6.
-Teori Bayesian (Subjektif): Dalam teori ini, peneliti menentukan nilai kemungkinan berdasarkan informasi yang telah mereka miliki sebelumnya, yang disebut sebagai "a priori"7.
+Untuk membangun model dari sampel populasi, kita memerlukan pendekatan teori probabilitas. Probabilitas adalah angka yang menunjukkan tingkat atau derajat ketidakpastian suatu fenomena. Ada tiga teori utama dalam probabilitas:
+
+Teori Laplace: Teori ini menyatakan bahwa semua kejadian memiliki peluang yang sama untuk terjadi. Contohnya, saat melempar dadu, probabilitas untuk mendapatkan angka ganjil (1, 3, atau 5) adalah 1/2, karena ada tiga angka ganjil dari total enam kemungkinan sisi dadu.
+
+Teori Frequentist: Menurut teori ini, probabilitas suatu kejadian bergantung pada seberapa sering kejadian itu terjadi dalam sejumlah besar percobaan. Semakin banyak percobaan pelemparan dadu yang dilakukan, semakin tinggi kemungkinan kita akan mendapatkan angka ganjil.
+
+Teori Bayesian (Subjektif): Dalam teori ini, peneliti menentukan nilai kemungkinan berdasarkan informasi yang telah mereka miliki sebelumnya, yang disebut sebagai "a priori".
 
 ## 📊 Statistik Inferensial: Sampling & Uji Hipotesis
-Dalam statistik inferensial, kita membuat asumsi tentang populasi berdasarkan sampel acak yang kita ambil8. Sampel ini adalah perwakilan terbatas dari populasi yang lebih besar9.
+Dalam statistik inferensial, kita membuat asumsi tentang populasi berdasarkan sampel acak yang kita ambil. Sampel ini adalah perwakilan terbatas dari populasi yang lebih besar.
+
 Penentuan Sampel
 Ada tiga metode dasar untuk menentukan sampel:
-Berdasarkan populasi yang jumlahnya telah diketahui10.
-Berdasarkan populasi yang jumlahnya tidak diketahui11.
-Berdasarkan jumlah sampel bertingkat12.
+
+Berdasarkan populasi yang jumlahnya telah diketahui.
+
+Berdasarkan populasi yang jumlahnya tidak diketahui.
+
+Berdasarkan jumlah sampel bertingkat.
+
 Distribusi Probabilitas
-Distribusi probabilitas adalah cara umum yang digunakan untuk menentukan pola yang ada di dalam suatu data13.
+Distribusi probabilitas adalah cara umum yang digunakan untuk menentukan pola yang ada di dalam suatu data.
+
 Uji Hipotesis
-Uji hipotesis adalah kesimpulan sementara yang kebenarannya harus dibuktikan melalui penelitian14. Ini berfungsi sebagai titik awal untuk mengonfirmasi pernyataan dari sampel yang telah dikumpulkan15.
-Hipotesis Nol (H0​): Ini adalah pernyataan negatif yang dianggap benar sampai terbukti salah16. Dalam analogi persidangan, ini sama dengan "praduga tak bersalah," di mana seseorang dianggap tidak bersalah kecuali terbukti sebaliknya17.
-Hipotesis Alternatif (H1​): Ini adalah pernyataan positif yang dianggap salah kecuali terbukti benar18. Dalam analogi yang sama, ini adalah pernyataan bahwa seseorang telah melakukan kejahatan19.
+Uji hipotesis adalah kesimpulan sementara yang kebenarannya harus dibuktikan melalui penelitian. Ini berfungsi sebagai titik awal untuk mengonfirmasi pernyataan dari sampel yang telah dikumpulkan.
+
+Hipotesis Nol (H 
+0
+​
+ ): Ini adalah pernyataan negatif yang dianggap benar sampai terbukti salah. Dalam analogi persidangan, ini sama dengan "praduga tak bersalah," di mana seseorang dianggap tidak bersalah kecuali terbukti sebaliknya.
+
+Hipotesis Alternatif (H 
+1
+​
+ ): Ini adalah pernyataan positif yang dianggap salah kecuali terbukti benar. Dalam analogi yang sama, ini adalah pernyataan bahwa seseorang telah melakukan kejahatan.
+
 Terdapat dua tipe uji hipotesis:
-Uji Langsung (Directional): Hipotesis yang arahnya jelas, di mana peneliti dapat melakukan uji satu arah (uji kanan atau uji kiri)20.
-Uji Tidak Langsung (Non-directional): Hipotesis yang tidak memiliki arah tertentu21. Biasanya, hipotesis ini menggunakan frasa "sama dengan" pada
-H0​22.
+
+Uji Langsung (Directional): Hipotesis yang arahnya jelas, di mana peneliti dapat melakukan uji satu arah (uji kanan atau uji kiri).
+
+Uji Tidak Langsung (Non-directional): Hipotesis yang tidak memiliki arah tertentu. Biasanya, hipotesis ini menggunakan frasa "sama dengan" pada H 
+0
+​
+ .
 
 ## 📝 Memahami Data
 Kualitas dan bentuk data sangat memengaruhi hasil analisis.
+
 Kualitas dan Keterbatasan Data
-Data berkualitas rendah dapat mempersulit proses prediksi23. Beberapa masalah kualitas data yang umum termasuk:
-Noise dan outlier (nilai ekstrem)24.
-Nilai yang hilang atau salah25.
-Duplikasi data26.
+Data berkualitas rendah dapat mempersulit proses prediksi. Beberapa masalah kualitas data yang umum termasuk:
+
+Noise dan outlier (nilai ekstrem).
+
+Nilai yang hilang atau salah.
+
+Duplikasi data.
+
 Beberapa komponen utama yang menjadi indikator data berkualitas baik adalah:
-Akurasi: Baik secara posisi, waktu, maupun atribut27.
-Kelengkapan dan Konsistensi28.
-Reliabilitas dan Representatif29.
+
+Akurasi: Baik secara posisi, waktu, maupun atribut.
+
+Kelengkapan dan Konsistensi.
+
+Reliabilitas dan Representatif.
+
 Bentuk Dasar Data
-Data memiliki dua bentuk dasar yang menjelaskan identitasnya30:
-Data Diskrit: Diperoleh dari hasil perhitungan dan tidak memiliki satuan unit, contohnya jumlah penduduk31.
-Data Kontinu: Diperoleh dari hasil pengukuran dan memiliki satuan, seperti suhu (Celcius) atau berat (kilogram)32.
+Data memiliki dua bentuk dasar yang menjelaskan identitasnya:
+
+Data Diskrit: Diperoleh dari hasil perhitungan dan tidak memiliki satuan unit, contohnya jumlah penduduk.
+
+Data Kontinu: Diperoleh dari hasil pengukuran dan memiliki satuan, seperti suhu (Celcius) atau berat (kilogram).
+
 Jenis Analisis Data
 Terdapat beberapa jenis analisis berdasarkan waktunya:
-Analisis Historis: Menjelaskan data dari masa lalu33.
-Analisis Deskriptif: Menjelaskan data dari masa lalu dan masa kini34.
-Analisis Prediktif: Menjelaskan kejadian yang mungkin terjadi di masa depan35.
+
+Analisis Historis: Menjelaskan data dari masa lalu.
+
+Analisis Deskriptif: Menjelaskan data dari masa lalu dan masa kini.
+
+Analisis Prediktif: Menjelaskan kejadian yang mungkin terjadi di masa depan.
 
 ## 🤖 Model Prediktif dan Algoritma
 Model prediktif digunakan untuk membuat prediksi tentang masa depan berdasarkan data historis.
+
 Regresi
-Regresi adalah model yang digunakan untuk memahami hubungan antara variabel bebas (indikator) dan variabel terikat36.
-Regresi Linear Sederhana: Menganalisis hubungan antara satu variabel bebas dan satu variabel terikat37.
-Regresi Linear Berganda (Multiple): Menganalisis hubungan variabel yang jumlahnya lebih dari dua38.
+Regresi adalah model yang digunakan untuk memahami hubungan antara variabel bebas (indikator) dan variabel terikat.
+
+Regresi Linear Sederhana: Menganalisis hubungan antara satu variabel bebas dan satu variabel terikat.
+
+Regresi Linear Berganda (Multiple): Menganalisis hubungan variabel yang jumlahnya lebih dari dua.
+
+
+Dilisensikan oleh Google
 Pohon Keputusan (Decision Tree)
-Ketika hubungan antar variabel tidak linear, algoritma pohon keputusan dapat digunakan39. Algoritma ini membagi dataset menjadi bagian-bagian yang lebih kecil untuk membuat model prediksi40. Beberapa terminologi penting dalam pohon keputusan meliputi
-Root Node, Splitting, Decision Node, dan Pruning41.
+Ketika hubungan antar variabel tidak linear, algoritma pohon keputusan dapat digunakan. Algoritma ini membagi dataset menjadi bagian-bagian yang lebih kecil untuk membuat model prediksi. Beberapa terminologi penting dalam pohon keputusan meliputi Root Node, Splitting, Decision Node, dan Pruning.
 
 ## 🧠 Klasifikasi dan Pembelajaran Mesin
-Klasifikasi adalah proses penting untuk mengkategorikan data ke dalam kelas atau label yang telah ditentukan424242.
+Klasifikasi adalah proses penting untuk mengkategorikan data ke dalam kelas atau label yang telah ditentukan.
+
 Proses Klasifikasi
-Proses ini biasanya melibatkan pembagian data menggunakan
-prinsip Pareto (80/20), di mana 80% data digunakan untuk pelatihan (training) model dan 20% sisanya digunakan untuk pengujian (testing) model43. Tujuannya adalah membuat model yang dapat melakukan klasifikasi otomatis pada data uji44.
+Proses ini biasanya melibatkan pembagian data menggunakan prinsip Pareto (80/20), di mana 80% data digunakan untuk pelatihan (training) model dan 20% sisanya digunakan untuk pengujian (testing) model. Tujuannya adalah membuat model yang dapat melakukan klasifikasi otomatis pada data uji.
+
 Bentuk-Bentuk Pembelajaran Mesin
 Supervised Learning (Pembelajaran Terbimbing)
-Komputer belajar dari data yang sudah diberi label45. Contohnya, komputer dilatih dengan ribuan gambar berlabel "kucing" dan "anjing" untuk mengenali polanya46. Setelah itu, komputer diuji dengan gambar baru tanpa label untuk melihat apakah ia bisa mengklasifikasikannya dengan benar47. Penerapan di dunia nyata adalah algoritma rekomendasi YouTube, yang menyarankan konten serupa berdasarkan riwayat tontonan pengguna48.
+Komputer belajar dari data yang sudah diberi label. Contohnya, komputer dilatih dengan ribuan gambar berlabel "kucing" dan "anjing" untuk mengenali polanya. Setelah itu, komputer diuji dengan gambar baru tanpa label untuk melihat apakah ia bisa mengklasifikasikannya dengan benar. Penerapan di dunia nyata adalah algoritma rekomendasi YouTube, yang menyarankan konten serupa berdasarkan riwayat tontonan pengguna.
+
 Unsupervised Learning (Pembelajaran Tak Terbimbing)
-Komputer mengklasifikasikan data yang tidak memiliki label49. Peneliti tidak memiliki ekspektasi output tertentu; sebaliknya, komputer secara mandiri mengidentifikasi pola atau ciri khas dalam data tersebut50. Fokus utamanya adalah pada data input, sementara output sepenuhnya ditentukan oleh mesin51.
+Komputer mengklasifikasikan data yang tidak memiliki label. Peneliti tidak memiliki ekspektasi output tertentu; sebaliknya, komputer secara mandiri mengidentifikasi pola atau ciri khas dalam data tersebut. Fokus utamanya adalah pada data input, sementara output sepenuhnya ditentukan oleh mesin.
+
 Semi-Supervised Learning
-Ini adalah gabungan dari
- supervised dan unsupervised learning, di mana sebagian data memiliki label dan sebagian lagi tidak52.
+Ini adalah gabungan dari supervised dan unsupervised learning, di mana sebagian data memiliki label dan sebagian lagi tidak.
+
 Reinforcement Learning (RL)
-Ini adalah pendekatan pembelajaran mesin yang didasarkan pada data
- real-time, berbeda dengan model lain yang menggunakan data historis53. Algoritma RL berfokus pada analisis pola data
-real-time dan belajar melalui sistem reward (jika melakukan fungsi yang benar) dan punishment (jika melakukan fungsi yang salah)54. Contohnya adalah optimasi iklan berdasarkan
-Click-Through Rate (CTR), di mana iklan yang mendapat banyak interaksi akan lebih sering ditampilkan untuk efektivitas dana55.
+Ini adalah pendekatan pembelajaran mesin yang didasarkan pada data real-time, berbeda dengan model lain yang menggunakan data historis. Algoritma RL berfokus pada analisis pola data real-time dan belajar melalui sistem reward (jika melakukan fungsi yang benar) dan punishment (jika melakukan fungsi yang salah). Contohnya adalah optimasi iklan berdasarkan Click-Through Rate (CTR), di mana iklan yang mendapat banyak interaksi akan lebih sering ditampilkan untuk efektivitas dana.
+
+
+
+
+
 
 
 ## Referensi
