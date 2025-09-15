@@ -31,6 +31,21 @@ NLP disini tidak sesederhana suatu bentuk 'kata' mereka lebih kompleks dari itu.
 
 ## 1.2 Unicode dan encoding
 
+- Unicode: "Merupakan system yang menjadi representasi huruf didalam berbagai macam script menulis yang ada diseluruh dunia"
+- UTF-8: adalah bentuk metode encoding untuk represetnasi dari unicode point di file text.
+
+## 1.3 Regular Expressions
+
+"Bentuk notasi algebra untuk string dari set huruf" Disini Regex digunakan untuk melakukan pemilhan, pencarian, dan manipulasi text string, Proses yang krusial untuk pre-tokenization di algoritma BPE. 
+
+## 1.4 Minimum Edit Distance
+
+Secara definisi ini bisa diartikan "nilai minimum untuk edit operasi ( +, -, /) butuh transformasi satu string ke string yang lain." Tujuannny adalah memperbaiki adannya typo pada text yang dianalisa.
+
+# 2. Language Model
+
+## 2.1. N-gram Language Models
+
 
 ## Referensi
 - [Natural Language Processing](https://huggingface.co/learn/llm-course/chapter1/2?fw=pt)
