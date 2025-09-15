@@ -121,7 +121,7 @@ Total pull: 343888
 
 pull saber.
 
-disini hanya melakukan 1 kali pull real, tanpa ada pull simulasi tambahan
+disini hanya melakukan 1 kali pull real, tanpa ada pull simulasi tambahan(Manual)
 
 Nilai pull baru: 11490
 Total pull: 33052
@@ -129,6 +129,8 @@ Total pull: 33052
 >>>>>>>>>>>>>>>>>>>>>>>>> Variabel yang digunaka n <<<<<<<<<<<<<<<<<<<<<<<
 
 # Kemungkinan beruntung!
+# 0.8 untuk Light Cone
+# a_probability = 0.0008
 a_probability = 0.0006
 # Berapa banyak minimum percobaan
 a_percobaan = 20_000
