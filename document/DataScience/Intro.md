@@ -212,7 +212,8 @@ Ini adalah pendekatan pembelajaran mesin yang didasarkan pada data real-time, be
 
 
 
-
+## Bab lanjutan
+- [Natural Language Processing](./AI-NLP.md)
 
 
 
