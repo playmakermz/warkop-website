@@ -46,6 +46,12 @@ Secara definisi ini bisa diartikan "nilai minimum untuk edit operasi ( +, -, /) 
 
 ## 2.1. N-gram Language Models
 
+- Definisi: N-grams mungkin adalah bentuk paling sederhana daari suatu model bahasa. mereka disini menempatkan probability ke urutan dari kata atau token dan prediksi kata/token selanjutnya berdasarkan perhitungan Asumsi Markov.
+- Probability Estimation: Probability biasannya dilakukan estimasi mengunakan "Maximum Likehooh Estimation (MLE)" dengan menghitung munculnya n-gram pada pelatihan corpus.
+- Smoothing: Penyelesaian masalah jika n-grams tidak ditemukan pada data latihan dengan cara alokasi ulang probability mass.
+- Evaluasi:
+  - Perplexity: metrix standart yang digunakan untuk perhitungan n-gram models. 
+
 
 ## Referensi
 - [Natural Language Processing](https://huggingface.co/learn/llm-course/chapter1/2?fw=pt)
