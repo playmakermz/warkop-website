@@ -102,6 +102,7 @@ Total jackpot: 112
 >>>>>>>       Pengalaman Gacha beruntung 03/09/2025 <<<<<<<<
 
 jackpot di HSR tgl 02/09/2025 dan 03/09/2025. Jadi trick simulasi gacha ini hanya gunakan satu kali sehari saja.
+- Pastikan untuk menggunakan akun inverse kalau mau gacha. disaat simulasi dimulai gunakan akun kebalikan dari akun dimana tujuan gacha
 
 disini melakukan satu kali pull setiap ... simulasi pull:
 
