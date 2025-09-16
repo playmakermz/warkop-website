@@ -126,7 +126,16 @@ disini hanya melakukan 1 kali pull real, tanpa ada pull simulasi tambahan(Manual
 Nilai pull baru: 11490
 Total pull: 33052
 
->>>>>>>>>>>>>>>>>>>>>>>>> Variabel yang digunaka n <<<<<<<<<<<<<<<<<<<<<<<
+>>>>>>>       Pengalaman Gacha beruntung 16/09/2025 <<<<<<<<
+
+pull saber LC.
+
+disini hanya melakukan 1 kali pull real, tanpa ada pull simulasi tambahan(Manual)
+
+Nilai pull baru: ?
+Total pull: ?
+
+>>>>>>>>>>>>>>>>>>>>>>>>> Variabel yang digunaka n ( Untuk Karakter gacha) <<<<<<<<<<<<<<<<<<<<<<<
 
 # Kemungkinan beruntung!
 # 0.8 untuk Light Cone
@@ -139,6 +148,20 @@ a_batchSize = 1000
 # alternative batch size
 # ini gak boleh lebih dari 10. karena setiap pull disini bernilai 10, beserta laporan mereka juga
 a_little_batch_size = 10
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Variabel yang digunakan untuk gacha LC <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+# Kemungkinan beruntung!
+a_probability = 0.0008
+# Berapa banyak minimum percobaan
+a_percobaan = 16_000
+# Batch  size terkecil mau berapa
+a_batchSize = 1000
+# alternative batch size
+# ini gak boleh lebih dari 10. karena setiap pull disini bernilai 10, beserta laporan mereka juga
+a_little_batch_size = 10
+
 
 
 
@@ -157,9 +180,9 @@ Aturan penggunaan:
 # ============================================================= Cukup Modifikasi bagian sini! ===================================================================
 
 # Kemungkinan beruntung!
-a_probability = 0.0006
+a_probability = 0.0008
 # Berapa banyak minimum percobaan
-a_percobaan = 20_000
+a_percobaan = 16_000
 # Batch  size terkecil mau berapa
 a_batchSize = 1000
 # alternative batch size
