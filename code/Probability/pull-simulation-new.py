@@ -57,7 +57,7 @@ semisal untuk AK batch size 100, untuk HSR batch size 600.
 
 jangan terlalu besar ukuran batch size, karena akan membuat simulasi kurang detail. semisal nilai jackpot adalah 5000, dengan setiap batch loop adalah 1000, maka simulasi akan kurang detail.
 
--------------------------------------------------------------------------
+-------------------------------------------------------------------------[Arknight]-----------------------------------------------------------------------
 > Laporan pull Ak (2% atau 0.0020):
 tertinggi adalah :     10742
 lakukan percobaan di : 8000
@@ -67,17 +67,24 @@ Jackpot tertinggi: 10742
 
 >>>>>>>>>>>>> Informasi Variabel yang akan digunakan
 
+#Game Name
+game_name = "Arknights"
 # Kemungkinan beruntung!
 a_probability = 0.0020
 # Berapa banyak minimum percobaan
-a_percobaan = 8_000
+a_percobaan = 4_000
 # Batch  size terkecil mau berapa
-a_batchSize = 700
+a_batchSize = 300
 # alternative batch size
 # ini gak boleh lebih dari 10. karena setiap pull disini bernilai 10, beserta laporan mereka juga
 a_little_batch_size = 10
 
----------------------------------------------------------------------------------------------------------------------------------------
+>>>>>>>>>>>>>> Informasi jackpot didapatkan
+
+Jackpot Real pull didapatakan saat: 5, 50, 65, 131, 132, 150+
+
+dengan 10 kali Simulasi percobaan gagal
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 > Laporan pull HSR (0.6% atau 0.0006):
 Streak tertinggi adalah :    34_487 | gunakan 20_000 - 21_000
 Modus Jackpot adalah 3986
