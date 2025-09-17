@@ -102,7 +102,6 @@ Total jackpot: 112
 >>>>>>>       Pengalaman Gacha beruntung 03/09/2025 <<<<<<<<
 
 jackpot di HSR tgl 02/09/2025 dan 03/09/2025. Jadi trick simulasi gacha ini hanya gunakan satu kali sehari saja.
-- Pastikan untuk menggunakan akun inverse kalau mau gacha. disaat simulasi dimulai gunakan akun kebalikan dari akun dimana tujuan gacha
 
 disini melakukan satu kali pull setiap ... simulasi pull:
 
@@ -127,16 +126,7 @@ disini hanya melakukan 1 kali pull real, tanpa ada pull simulasi tambahan(Manual
 Nilai pull baru: 11490
 Total pull: 33052
 
->>>>>>>       Pengalaman Gacha beruntung 16/09/2025 <<<<<<<<
-
-pull saber LC.
-
-disini hanya melakukan 1 kali pull real, tanpa ada pull simulasi tambahan(Manual)
-
-Nilai pull baru: ?
-Total pull: ?
-
->>>>>>>>>>>>>>>>>>>>>>>>> Variabel yang digunaka n ( Untuk Karakter gacha) <<<<<<<<<<<<<<<<<<<<<<<
+>>>>>>>>>>>>>>>>>>>>>>>>> Variabel yang digunaka n <<<<<<<<<<<<<<<<<<<<<<<
 
 # Kemungkinan beruntung!
 # 0.8 untuk Light Cone
@@ -149,20 +139,6 @@ a_batchSize = 1000
 # alternative batch size
 # ini gak boleh lebih dari 10. karena setiap pull disini bernilai 10, beserta laporan mereka juga
 a_little_batch_size = 10
-
-
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Variabel yang digunakan untuk gacha LC <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-# Kemungkinan beruntung!
-a_probability = 0.0008
-# Berapa banyak minimum percobaan
-a_percobaan = 16_000
-# Batch  size terkecil mau berapa
-a_batchSize = 1000
-# alternative batch size
-# ini gak boleh lebih dari 10. karena setiap pull disini bernilai 10, beserta laporan mereka juga
-a_little_batch_size = 10
-
 
 
 
@@ -180,16 +156,17 @@ Aturan penggunaan:
 
 # ============================================================= Cukup Modifikasi bagian sini! ===================================================================
 
+#Game Name
+game_name = "Arknights"
 # Kemungkinan beruntung!
-a_probability = 0.0008
+a_probability = 0.0020
 # Berapa banyak minimum percobaan
-a_percobaan = 16_000
+a_percobaan = 4_000
 # Batch  size terkecil mau berapa
-a_batchSize = 1000
+a_batchSize = 300
 # alternative batch size
 # ini gak boleh lebih dari 10. karena setiap pull disini bernilai 10, beserta laporan mereka juga
 a_little_batch_size = 10
-
 
 
 # ============================================================= Cukup Modifikasi bagian sini! ===================================================================
@@ -197,6 +174,9 @@ a_little_batch_size = 10
 # probabilitas jackpot HSR
 # karakter probabilitas 5 Star
 p = a_probability
+
+# Opsi Auto 03
+a_03 = True
 
 
 # ======================== Variabel penentu =======================================================
@@ -341,7 +321,7 @@ def sepuluh_pull():
 def manual_pull(asr):
   """ Pull sebanyak input manual """
   for i in range(asr):
-    print(f"pull Manual ke : {i+1}", end="")
+    print(f"pull Manual ke : {i+1}. Jarak Jackpot : {jarak_jackpot}", end="")
     satu_pull()
 
 # ========================================================= Prediksi untuk opsi 03
@@ -397,7 +377,7 @@ def automatic_pull():
 
   intinya kita akan terus melakukan loop hingga total pull mendekati kemungkinan 99%/95% jackpot.
   """
-  global jarak_jackpot, total_jackpot, total_jackpot_terakhir, total_pulls, new_pull, loop_test, loop_terakhir, ii_terakhir, bukti, loop_bagian_dua
+  global jarak_jackpot, total_jackpot, total_jackpot_terakhir, total_pulls, new_pull, loop_test, loop_terakhir, ii_terakhir, bukti, loop_bagian_dua, a_03
 
   last_log = time.time()
   while True:
@@ -453,8 +433,10 @@ def automatic_pull():
   try:
       modus = df["Jarak Jackpot"].mode()[0]
       print(f"\nModus Jackpot: {modus}")
+      print(f"\n Modus Jackpot List: {statistics.multimode(jackpot_list)}")
   except:
       print("\nModus tidak dapat dihitung (data terlalu unik).")
+      print(f"\n Modus Jackpot List: {statistics.multimode(jackpot_list)}")
   predict_next_jackpot_mle(jackpot_list)
 
   # iteration untuk loop terakhir
@@ -465,6 +447,7 @@ def automatic_pull():
   while loop_terakhir:
     # tujuan adalah jika off chance pull lebih dari prediksi 95% maka akhiri loop
     if ii_terakhir >= (p100_pred - 10 ): # <============== Atur nilai ini sesuai dengan prediksi 95% jackpot
+      a_03 = False
       print(f"\033[34m ===================== Belum Jackpot ======================= \033[0m")
       print("loop berakhir")
       print(f"\033[34m ===================== Semua loop selesai  ======================= \033[0m")
@@ -518,12 +501,16 @@ def main():
   global total_jackpot
   while True:
       print("\n================= Simulasi Gacha V2 =====================")
+      print(f"\n================= Game Name: {game_name} =====================")
       print(f"Nilai Pull baru                : {new_pull}")
       print(f"Banyak percobaan yang dilakukan sekarang untuk menuju jackpot : {jarak_jackpot}")
       print(f"banyak percobaan untukk jackpot sebelumnya  : {total_jackpot_terakhir}")
       print("1. Pull 1 kali")
       print("2. Pull 10 kali")
-      print("3. Automatic pull fast")
+      if a_03 == True:
+        print("3. Automatic pull fast")
+      else:
+        print('.')
       print("4. Manual pull input")
       choice = input("Pilih opsi: ")
 
@@ -532,11 +519,14 @@ def main():
       elif choice == "2":
         sepuluh_pull()
       elif choice == "3":
-        while loop_bagian_dua:
+        if a_03 == True:
+          while loop_bagian_dua:
             reset_button()
             automatic_pull()
-        print("\033[93m =============================== Semua loop selesai ===================================== \033[0m")
-        print("\033[93m =============================== Realword Pull      ===================================== \033[0m")
+          print("\033[93m =============================== Semua loop selesai ===================================== \033[0m")
+          print("\033[93m =============================== Realword Pull      ===================================== \033[0m")
+        else:
+          print('03 empty')
       elif choice == "4":
         usIN = input("Pilih berapa banyak pull: ")
         manual_pull(int(usIN))
