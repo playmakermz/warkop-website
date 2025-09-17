@@ -438,13 +438,14 @@ def automatic_pull():
   print(df.describe())  # statistik ringkas
   print("\n📊 Frekuensi Jarak Jackpot:")
   print(df["Jarak Jackpot"].value_counts().head(10))  # 10 nilai paling sering muncul
+  jackpot_list.sort(reverse=True)
   try:
       modus = df["Jarak Jackpot"].mode()[0]
       print(f"\nModus Jackpot: {modus}")
-      print(f"\n Modus Jackpot List: {statistics.multimode(jackpot_list)}")
+      print(f"\n Modus Jackpot List: {jackpot_list[:5]}")
   except:
       print("\nModus tidak dapat dihitung (data terlalu unik).")
-      print(f"\n Modus Jackpot List: {statistics.multimode(jackpot_list)}")
+      print(f"\n Modus Jackpot List: {jackpot_list[:5]}")
   predict_next_jackpot_mle(jackpot_list)
 
   # iteration untuk loop terakhir
