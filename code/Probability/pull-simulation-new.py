@@ -442,7 +442,7 @@ def automatic_pull():
   try:
       modus = df["Jarak Jackpot"].mode()[0]
       print(f"\nModus Jackpot: {modus}")
-      print(f"\n Modus Jackpot List: {jackpot_list[:5]}")
+      print(f"\n Modus Jackpot List: {jackpot_list[:30]}")
   except:
       print("\nModus tidak dapat dihitung (data terlalu unik).")
       print(f"\n Modus Jackpot List: {jackpot_list[:5]}")
