@@ -13,6 +13,7 @@ from math import log, ceil
 2. Memberikan chace kasar yang lebih tinggi untuk mendapatkan jackpot. Karena pull virtual ini, akan memberikan kita chace diluar dari game.
 > Perempumaan nomor 2 adalah seperti ini: kita ingin mendapatkan dua dadu dengan angka 6. jika kita hanya melakukan 1 kali percobaan, maka chace kita adalah 1/36. jika kita melakukan 10 kali percobaan, maka chace kita adalah 10/36, lebih baik daripada 1/36.
 3. intinya dengan simulasi ini, intinya "Strike when iron is hot".
+4. jangan takut gagal di simulasi trial. Ambil yang menurutmu paling tinggi. kalau gagal bisa coba lagi nanti.
 
 # Teori dalam bentuk matematika
 
