@@ -59,9 +59,13 @@ Secara definisi ini bisa diartikan "nilai minimum untuk edit operasi ( +, -, /) 
 - Feedforward Neural Language models: Mengambil representasi dari kata sebelumnya menjadi input dan output dari probability distribusi dari kata selanjutnya.
 - Transformer-based Large Language Models (LLMs): adalah program AI complex yang dapat memahami dan membuat bahasa manusia. Mereka dissini memilki "perhatian khusus" untuk menghubungkan kata melalui teks panjang dan "mengingat" puluhan ribu kata disaat bersamaan. ini membuat mereka sangat bagus uintuk membuat text baru berdasarkan apa yang kamu tanyakan, potensi ini sangat bisa melebarkan kemampuan dari komputer dalam mengelolah bahasa.
 
-## 3.2 The Big Change: Large Language Model (LLMs)
+## 3 The Big Change: Large Language Model (LLMs)
 
 - Akhir-akhir ini, banyak sekali macam AI model yang kita kenal sebagai LLM seperti GPT dan Grok datang dan mengubah perkembangan dari NLP. 
+
+- Ini adalah bentuk kecerdasan buatan sekala masive, yang telah 'membaca' teks dengan jumlah besar( triliunan "parameters" atau bit dari suatu pengetahuan )
+
+- Nilai jualnya adalah memiliki kemampuan superpower untuk memahami dan membuat ulang teks manusia, memahami suatu pola, dan bentuk pengelolahan lain didalam suatu teks bahasa.
 
 # Glossary (Glosarium)
 
