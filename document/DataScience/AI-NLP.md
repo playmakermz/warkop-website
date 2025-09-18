@@ -56,7 +56,16 @@ Secara definisi ini bisa diartikan "nilai minimum untuk edit operasi ( +, -, /) 
 
 - Limit dari N-grams: N-grams disini tumbuh dan berkembang dengan tujuan meningkatkan order dan inability untuk menciptakan(Generalize) kata yang tidak diketahui.
 - Neural Appropach: Neural Language Model didasarkan dari kata ke suatu ruang dimana dipertemukan dengan konteks yang mirip atau menyerupai. Disini akan membutuhkan ukuran energi yang cukup banyak untuk dilatih.
-- 
+- Feedforward Neural Language models: Mengambil representasi dari kata sebelumnya menjadi input dan output dari probability distribusi dari kata selanjutnya.
+- Transformer-based Large Language Models (LLMs):
+
+# Glossary (Glosarium)
+
+- Large Language Model(LLM): secara
+- "Transformer based"  :
+- Natural Language Processing :
+- vastly broadened the scope :
+- Tokens : Unit kecil didalam Language model yang menjalankan proses, menjadikan mereka keseluruhan kata, ini adalah bagian dari kata (subwords), atau bahakan satuan huruf. 
 
 
 ## Referensi
