@@ -50,7 +50,13 @@ Secara definisi ini bisa diartikan "nilai minimum untuk edit operasi ( +, -, /) 
 - Probability Estimation: Probability biasannya dilakukan estimasi mengunakan "Maximum Likehooh Estimation (MLE)" dengan menghitung munculnya n-gram pada pelatihan corpus.
 - Smoothing: Penyelesaian masalah jika n-grams tidak ditemukan pada data latihan dengan cara alokasi ulang probability mass.
 - Evaluasi:
-  - Perplexity: metrix standart yang digunakan untuk perhitungan n-gram models. 
+  - Perplexity: metrix standart yang digunakan untuk perhitungan n-gram models.
+
+## 2.2 Neural Language Models (Beyond N-grams)
+
+- Limit dari N-grams: N-grams disini tumbuh dan berkembang dengan tujuan meningkatkan order dan inability untuk menciptakan(Generalize) kata yang tidak diketahui.
+- Neural Appropach: Neural Language Model didasarkan dari kata ke suatu ruang dimana dipertemukan dengan konteks yang mirip atau menyerupai. Disini akan membutuhkan ukuran energi yang cukup banyak untuk dilatih.
+- 
 
 
 ## Referensi
