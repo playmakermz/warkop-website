@@ -5,6 +5,7 @@ import os
 import numpy as np
 import pandas as pd
 from math import log, ceil
+from datetime import datetime
 
 """
 # Teori dibalik ini
@@ -38,6 +39,8 @@ Pada teori probabilitas, kapan dilakukan pull tidak akan berpengaruh, karena sem
 Semisal kita melempar dua dadu pada hari senin, dan hari selasa, maka total percobaan yang kita lakukan adalah 2 kali.
 
 # ======================================== Catatan Pull ==============================================================
+
+0. Mengubah Persen ke desimal: 0.50% / 100 = 0,0050
 
 Cara penggunaan:
 1. modif Probability dan variabel lainnya.
@@ -165,16 +168,16 @@ Aturan penggunaan:
 # ============================================================= Cukup Modifikasi bagian sini! ===================================================================
 
 #Game Name
-game_name = "Arknights"
+game_name = "PGR"
 # Kemungkinan beruntung!
-a_probability = 0.0020
+a_probability = 0.0050
 # Berapa banyak minimum percobaan
-a_percobaan = 4_000
+a_percobaan = 2_000
 # Batch  size terkecil mau berapa
-a_batchSize = 300
+a_batchSize = 200
 # alternative batch size
 # ini gak boleh lebih dari 10. karena setiap pull disini bernilai 10, beserta laporan mereka juga
-a_little_batch_size = 10
+a_little_batch_size = 20
 
 
 # ============================================================= Cukup Modifikasi bagian sini! ===================================================================
@@ -257,9 +260,12 @@ def satu_pull():
       jackpot_list.append(jarak_jackpot)
       # informai percobaan di reset ke nol
       jarak_jackpot = 0
-      print(f"====>  jackpot jackpot didapatkan {total_pulls}  <====")
+      print(f"\n ====>  jackpot jackpot didapatkan {total_pulls}  <====")
       print(f"====>  Informasi New Pull         {new_pull}  <====")
-      print(f"\033[31m =================== Jackpot didapatkan ===================== \033[0m")
+      print(f"\033[31m =================== Jackpot didapatkan. Misi Gagal! ===================== \033[0m")
+      # Catatat kegagalan ini
+      with open("jackpot.txt", "a") as f:
+          f.write(f"\n ------> Kegagalan pada simulasi ke: {new_pull} , pull baru: {new_pull} , Total pull: {total_jackpot_terakhir}")
       # akhiri loop ke 99%
       # New pull di reset ke nol
       new_pull = 0
@@ -446,15 +452,11 @@ def automatic_pull():
   try:
       modus = df["Jarak Jackpot"].mode()[0]
       print(f"\nModus Jackpot: {modus}")
-      with open("jackpot.txt", "w") as f:
-        f.write(f"Ini list jackpot : {jackpot_list}")
       #file_j = open("jackpot.txt", "w")
       #file_j.write(jackpot_list)
       #file_j.close()
       print('=========> Catatan jackpot telah ditulis ')
   except:
-      with open("jackpot.txt", "w") as f:
-        f.write(f"Ini list jackpot : {jackpot_list[:50]}")
       print("\nModus tidak dapat dihitung (data terlalu unik).")
   predict_next_jackpot_mle(jackpot_list)
 
@@ -518,6 +520,16 @@ def reset_button():
 
 def main():
   global total_jackpot
+
+  # Get the current date and time
+  current_datetime = datetime.now()
+
+  # Format the datetime object to a string showing only hour, minute, and second
+  formatted_time = current_datetime.strftime("%H:%M:%S")
+
+  # Buat penanda waktu untuk file
+  with open("jackpot.txt", "a") as f:
+          f.write(f"\n ============  {formatted_time} =============")
   while True:
       print("\n================= Simulasi Gacha V2 =====================")
       print(f"\n================= Game Name: {game_name} =====================")
@@ -548,7 +560,11 @@ def main():
           print('03 empty')
       elif choice == "4":
         usIN = input("Pilih berapa banyak pull: ")
+        with open("jackpot.txt", "a") as f:
+          f.write(f"\n Ini nilai percobaan : {usIN} , Nilai pull baru: {new_pull} , Total pull: {jarak_jackpot}")
         manual_pull(int(usIN))
+        # Catatan pull terbaru yang lama
+        rec_new_pull = new_pull
       else:
           print("Opsi tidak valid, coba lagi.")
 
