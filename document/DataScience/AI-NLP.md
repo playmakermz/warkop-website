@@ -67,6 +67,17 @@ Secara definisi ini bisa diartikan "nilai minimum untuk edit operasi ( +, -, /) 
 
 - Nilai jualnya adalah memiliki kemampuan superpower untuk memahami dan membuat ulang teks manusia, memahami suatu pola, dan bentuk pengelolahan lain didalam suatu teks bahasa.
 
+# 4. Large Language Models (LLMs) and Advanced Training 
+
+## 4.1 Apa itu LLMs?
+
+Large Language Models adalah bentukan dari sistem AI yang bisa memahami dan mebuat teks selayaknya manusia. Kita bayangkan sebagai system yang berjalan sendiri dengan pengalaman telah membaca miliaran buku dan website untuk memahami bahasa manusia. 
+
+## 4.2 Bagaimana LLM bekerja?
+- Decoder only models: berfungsi untuk membuat teks satu persatu, dan memprediksi apa yang harus selanjutnya. selayaknya manusia berbicara, setelah kita berpikir, tahap selanjutnya adalah memilih kata.
+- Encoder Decoder models: sederhannya ini adalah bagian translate anatar bahasa manusia. indonesia inggris dan sebaliknya.
+- Encoder only models: fokusnya adalah untuk memahami teks bukan untuk membuat ulang. Ini sangat berfungsi sebagai mesin analisa teks manusia, mengambil makna atau emosi yang ada didalam teks.
+
 # Glossary (Glosarium)
 
 - Large Language Model(LLM): secara
