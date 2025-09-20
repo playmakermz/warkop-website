@@ -189,12 +189,12 @@ game_name = "PGR"
 # Kemungkinan beruntung!
 a_probability = 0.04
 # Berapa banyak minimum percobaan
-a_percobaan = 340
+a_percobaan = 300
 # Batch  size terkecil mau berapa
-a_batchSize = 50
+a_batchSize = 5
 # alternative batch size
 # ini gak boleh lebih dari 10. karena setiap pull disini bernilai 10, beserta laporan mereka juga
-a_little_batch_size = 20
+a_little_batch_size = 1
 
 
 # ============================================================= Cukup Modifikasi bagian sini! ===================================================================
