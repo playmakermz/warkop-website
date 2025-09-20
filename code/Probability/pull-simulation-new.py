@@ -61,6 +61,23 @@ semisal untuk AK batch size 100, untuk HSR batch size 600.
 
 jangan terlalu besar ukuran batch size, karena akan membuat simulasi kurang detail. semisal nilai jackpot adalah 5000, dengan setiap batch loop adalah 1000, maka simulasi akan kurang detail.
 
+----------------------------------------------------------- [ PGR  ]
+
+
+#Game Name
+game_name = "PGR"
+# Kemungkinan beruntung!
+a_probability = 0.0050
+# Berapa banyak minimum percobaan
+a_percobaan = 2_300
+# Batch  size terkecil mau berapa
+a_batchSize = 200
+# alternative batch size
+# ini gak boleh lebih dari 10. karena setiap pull disini bernilai 10, beserta laporan mereka juga
+a_little_batch_size = 20
+
+
+
 -------------------------------------------------------------------------[Arknight]-----------------------------------------------------------------------
 > Laporan pull Ak (2% atau 0.0020):
 tertinggi adalah :     10742
@@ -156,7 +173,7 @@ a_little_batch_size = 10
 
 
 ====================== CAtatan tidak terpakai ==================================================
-
+``
 Aturan penggunaan:
 0. Pastikan pull rate kamu sesuaikan dengan gamenya. simulasi inin hanya cocok jika pull rate sama dengan yang ada pada game.
 1. Cari tau dengan "go 20 jackpot" dua kali. untuk mengetahui Streak tertinggi
@@ -170,11 +187,11 @@ Aturan penggunaan:
 #Game Name
 game_name = "PGR"
 # Kemungkinan beruntung!
-a_probability = 0.0050
+a_probability = 0.04
 # Berapa banyak minimum percobaan
-a_percobaan = 2_000
+a_percobaan = 340
 # Batch  size terkecil mau berapa
-a_batchSize = 200
+a_batchSize = 50
 # alternative batch size
 # ini gak boleh lebih dari 10. karena setiap pull disini bernilai 10, beserta laporan mereka juga
 a_little_batch_size = 20
@@ -448,7 +465,7 @@ def automatic_pull():
   jackpot_list.sort(reverse=True)
   # Buat file untuk list jackpot
 
-  
+
   try:
       modus = df["Jarak Jackpot"].mode()[0]
       print(f"\nModus Jackpot: {modus}")
@@ -529,7 +546,7 @@ def main():
 
   # Buat penanda waktu untuk file
   with open("jackpot.txt", "a") as f:
-          f.write(f"\n ============  {formatted_time} =============")
+      f.write(f"\n ============  Game Name : (game_name) Time: {formatted_time} =============")
   while True:
       print("\n================= Simulasi Gacha V2 =====================")
       print(f"\n================= Game Name: {game_name} =====================")
