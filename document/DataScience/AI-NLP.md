@@ -67,16 +67,29 @@ Secara definisi ini bisa diartikan "nilai minimum untuk edit operasi ( +, -, /) 
 
 - Nilai jualnya adalah memiliki kemampuan superpower untuk memahami dan membuat ulang teks manusia, memahami suatu pola, dan bentuk pengelolahan lain didalam suatu teks bahasa.
 
-# 4. Large Language Models (LLMs) and Advanced Training 
+## 4. Large Language Models (LLMs) and Advanced Training 
 
-## 4.1 Apa itu LLMs?
+### 4.1 Apa itu LLMs?
 
 Large Language Models adalah bentukan dari sistem AI yang bisa memahami dan mebuat teks selayaknya manusia. Kita bayangkan sebagai system yang berjalan sendiri dengan pengalaman telah membaca miliaran buku dan website untuk memahami bahasa manusia. 
 
-## 4.2 Bagaimana LLM bekerja?
+### 4.2 Bagaimana LLM bekerja?
 - Decoder only models: berfungsi untuk membuat teks satu persatu, dan memprediksi apa yang harus selanjutnya. selayaknya manusia berbicara, setelah kita berpikir, tahap selanjutnya adalah memilih kata.
 - Encoder Decoder models: sederhannya ini adalah bagian translate anatar bahasa manusia. indonesia inggris dan sebaliknya.
 - Encoder only models: fokusnya adalah untuk memahami teks bukan untuk membuat ulang. Ini sangat berfungsi sebagai mesin analisa teks manusia, mengambil makna atau emosi yang ada didalam teks.
+
+### 4.3 Bagaimana LLMs belajara
+- Pretraining: AI akan membaca dengan sejumlah besar teks dari internet dan belajar memprediksii kata selanjutnya didalam kalimat. Selayaknya bayi yang belajar komunikasi dari orang tuanya.
+- Insstruction Training: AI belajar untuk mengikutii instruksi seperti "Coba jawab pertanyaan" atau "buatkan kesimpulan." Latihan sederhana seperti ini akan didampingi dengan contoh jawaban yang benar.
+- Alignment Training: AI akan belajar etika yang memastikan responnya sesuai dengan manusia. semisal AI milik Elon akan belajar etika berdasarkan sudut pandang Elon.
+
+### 4.4 The Technology Behind LLMs
+
+- Attention Mechanism: Ini adalah teknologi yang akan membantu LLMs memahami suatu konteks. disaat pemrosesan kata, AI akan menganalisa seluruh kata didalam kalimat untuk memahmi setiap kata yang dipakai.
+- How Attention Works: Setiap kata akan memiliki tiga bentuk representasi: Query( Apa yang harus dicari ), Key (Apa yang direpresentasikan ), dan Nilai (Informasi apa yang terkandung)
+- Challenges with LLMs: Halusinasi, terkadang hasil proses LLMs terdengar meyakinkan tetapi sebenarnya itu salah. Bias, dikarenakan bacaan AI berasal dari internet yang ada informasi subjektif itu dapat mempengaruhi AI. Hak cipta, tergantung dengan penciptannya, mereka bisa saja mengunakan sumber tidak resmi untuk belajar.
+
+  
 
 # Glossary (Glosarium)
 
@@ -84,7 +97,9 @@ Large Language Models adalah bentukan dari sistem AI yang bisa memahami dan mebu
 - "Transformer based"  :
 - Natural Language Processing :
 - vastly broadened the scope :
-- Tokens : Unit kecil didalam Language model yang menjalankan proses, menjadikan mereka keseluruhan kata, ini adalah bagian dari kata (subwords), atau bahakan satuan huruf. 
+- Tokens : Unit kecil didalam Language model yang menjalankan proses, menjadikan mereka keseluruhan kata, ini adalah bagian dari kata (subwords), atau bahakan satuan huruf.
+
+
 
 
 ## Referensi
