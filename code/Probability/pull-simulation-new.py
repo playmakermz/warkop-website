@@ -48,6 +48,14 @@ Cara penggunaan:
 3. lakukan manual pull berkali-kali, ikuti note disetiap game. (HSR, untuk setiap 250 pull simulasi == 1 realword)
 4. lakukan real world pull
 
+Cara Penggunaan V2:
+1. Ubah Probabilitas ke desimal. Contoh: 0.50% jadi 0.50 / 100 = 0,0050
+2. Modifikasi Probabilitas dan variabel
+3. Auto pull
+4. Manual pull pertama. Jika gagal, lakukan insert pull lalu Manual pull ( ulangi 1-4 kali. lalu reset simulasi )
+5. Jangan tergoda dengan 10 pull Real World.
+
+
 
 *Hati-hati terkadang ampas itu menyertai simulasi. Untuk HSR gunakan simulasi satu hari satu kali
 
