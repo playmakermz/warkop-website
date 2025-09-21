@@ -103,12 +103,38 @@ Large Language Models adalah bentukan dari sistem AI yang bisa memahami dan mebu
 
 ### 5.2 Speech Recognition ( Understanding Speech )
 Bagaimana Komputer belajar memahami cara bicara?
+
 - Encode: Mendengarkan secara seksama bagaimana cara bicara dan membuat pemahaman internal
 - Decoder: mengubah pemahaman tersebut menjadi data tulis
 
 Self-Supervised Learning: Computer akan belajar berdasarkan banyaknya audio suara tanpa ada kata kunci script yang menjadi panduan untuk menebak apa yang dikatakan, selayaknya bayi yang berusaha belajar cara bicara dari keluarga.
 
-CTC ( Connectionist Temporal Classification ): 
+- CTC ( Connectionist Temporal Classification ): Metode unik untuk membantu komputer mengetahui suara apa yang sesuai dengan kata tanpa diberitahu kapan suara tersebut dimulai dan berhenti. membiarkan komputer menebak
+- Measuring Success: Word Error Rate(WER) adalah nilai ukur dimana berapa banyak kata yang komputer salah tebak.
+
+### 5.3 Text to Speech ( Membuat komputer berbicara )
+proses Komputer belajar berbicara:
+- Membaca text tertulis
+- Mengubah text ke bentuk suara bahasa
+- Mengatur agar suara memiliki nada natural seperti manusia
+
+
+### 5.4 Modern TTS Technology: sistem kompresi ( Audio Codecs )
+- Mengambil tata bicara asli dan mengubahnya menjadi bentuk yang lebih simple dalam digital.
+- Memahami inti penting dari patern bagaimana suara bekerja.
+- Membuat ulang tata bicara dari data sederhana tersebut
+
+### 5.5 Vector Quantization 
+Komputer mampu untuk melakukan kombinasi dari set suara, mengembangkan, dan melakukan kombinasi dari set suara untuk menghasilkan suara utuh. Sederhanannya seperti warna-warna yang kita lihat itu adalah hasil kombinasi dari R.G.B
+
+### 5.6 VALL-E 
+adalah bentuk sistem muktahir yang digunakan untuk:
+- Memahami bagaimana seseorang berbicara dari informasi beberapa detik dari audio
+- Membuat tata bicara baru dari informasi orang lain
+- Membuat perkataan original yang belum tentu orang tersebut pernah katakan.
+
+### 5.7 Evaluating Artificial Speech 
+Mean Opinion Score (MOS): adalah bentuk tindakan manusia untuk memberikan rating kualitas dari suara hasil kommputer dari 1( Suara kaku) - 5 (Suara sempurna)
 
 # Glossary (Glosarium)
 
