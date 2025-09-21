@@ -89,7 +89,26 @@ Large Language Models adalah bentukan dari sistem AI yang bisa memahami dan mebu
 - How Attention Works: Setiap kata akan memiliki tiga bentuk representasi: Query( Apa yang harus dicari ), Key (Apa yang direpresentasikan ), dan Nilai (Informasi apa yang terkandung)
 - Challenges with LLMs: Halusinasi, terkadang hasil proses LLMs terdengar meyakinkan tetapi sebenarnya itu salah. Bias, dikarenakan bacaan AI berasal dari internet yang ada informasi subjektif itu dapat mempengaruhi AI. Hak cipta, tergantung dengan penciptannya, mereka bisa saja mengunakan sumber tidak resmi untuk belajar.
 
-  
+## 5. Understanding Speech Processing
+
+### 5.1 Basic Speech Sounds
+- What is Speech Processing: Pemrosesan bicara adalah bagaimana suatu komputer memamhami bagaimana bahasa manusia dan mengubahnya lagi menjadi bahasa suara. Selayaknya komputer mendenngarkan dan berbicara kepada kita dengan normal.
+- How We Make Speech Sounds:
+  - Phones, adalah bangunan sederhana dari bahasa. Contohnya  adalah "ah," "bee," atau "guh." Peneliti menggunakan aplhabet khusus untuk menentukan dan membuat suara yang natural  
+  - Prosody, Ini adalah bentuk melody dari suara, bagaimana suara kita yang nada tinggi ke rendah, menjadi semakin kencang atau halus, dan bagaimana kata itu disatikuan. Memberikan ciri khas antara kata pasive, tanya, dan perintah.
+- How computer "See" speech:
+  - Sound Waves : Disaat kita sebagai manusia berbicara, kita menciptakan vibrasi diatas angin.
+  - Sound note (Spectograms) : Time, Pitch, Volume
+  - MFCC Features: adalah nilai ukur spesial yang berfokus sebagai bagaian dari suara, tujuan adalah untuk memahami bagaimana seseorang berbicara, atau menyerupai bagaimana telinga kita memproses suara.
+
+### 5.2 Speech Recognition ( Understanding Speech )
+Bagaimana Komputer belajar memahami cara bicara?
+- Encode: Mendengarkan secara seksama bagaimana cara bicara dan membuat pemahaman internal
+- Decoder: mengubah pemahaman tersebut menjadi data tulis
+
+Self-Supervised Learning: Computer akan belajar berdasarkan banyaknya audio suara tanpa ada kata kunci script yang menjadi panduan untuk menebak apa yang dikatakan, selayaknya bayi yang berusaha belajar cara bicara dari keluarga.
+
+CTC ( Connectionist Temporal Classification ): 
 
 # Glossary (Glosarium)
 
