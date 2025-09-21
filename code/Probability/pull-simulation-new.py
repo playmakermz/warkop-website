@@ -210,16 +210,19 @@ Aturan penggunaan:
 # ============================================================= Cukup Modifikasi bagian sini! ===================================================================
 
 #Game Name
-game_name = "PGR Cosu"
+game_name = "HSR Scharacter"
 # Kemungkinan beruntung!
-a_probability = 0.049
+# 0.8 untuk Light Cone
+# a_probability = 0.0008
+a_probability = 0.0006
 # Berapa banyak minimum percobaan
-a_percobaan = 240
+a_percobaan = 20_000
 # Batch  size terkecil mau berapa
-a_batchSize = 5
+a_batchSize = 1000
 # alternative batch size
 # ini gak boleh lebih dari 10. karena setiap pull disini bernilai 10, beserta laporan mereka juga
-a_little_batch_size = 1
+a_little_batch_size = 10
+
 
 
 # ============================================================= Cukup Modifikasi bagian sini! ===================================================================
@@ -580,7 +583,7 @@ def main():
 
   # Buat penanda waktu untuk file
   with open("jackpot.txt", "a") as f:
-      f.write(f"\n ============  Game Name : (game_name) Time: {formatted_time} =============")
+      f.write(f"\n ============  Game Name : {game_name} Time: {formatted_time} ============= \n")
   # Lagnsung simulasi
   langsung()
   while True:
