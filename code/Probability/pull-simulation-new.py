@@ -193,13 +193,13 @@ Aturan penggunaan:
 # ============================================================= Cukup Modifikasi bagian sini! ===================================================================
 
 #Game Name
-game_name = "PGR"
+game_name = "PGR weapon"
 # Kemungkinan beruntung!
 a_probability = 0.04
 # Berapa banyak minimum percobaan
-a_percobaan = 300
+a_percobaan = 260
 # Batch  size terkecil mau berapa
-a_batchSize = 5
+a_batchSize = 2
 # alternative batch size
 # ini gak boleh lebih dari 10. karena setiap pull disini bernilai 10, beserta laporan mereka juga
 a_little_batch_size = 1
@@ -541,6 +541,15 @@ def reset_button():
   print("Semua variabel telah direset.")
 
 
+# Langsung
+def langsung():
+  while loop_bagian_dua:
+        reset_button()
+        automatic_pull()
+  print("\033[93m =============================== Semua loop selesai ===================================== \033[0m")
+  print("\033[93m =============================== Realword Pull      ===================================== \033[0m")
+
+
 # ========================= Starter =======================================================
 
 def main():
@@ -555,7 +564,10 @@ def main():
   # Buat penanda waktu untuk file
   with open("jackpot.txt", "a") as f:
       f.write(f"\n ============  Game Name : (game_name) Time: {formatted_time} =============")
+  # Lagnsung simulasi
+  langsung()
   while True:
+      
       print("\n================= Simulasi Gacha V2 =====================")
       print(f"\n================= Game Name: {game_name} =====================")
       print(f"Nilai Pull baru                : {new_pull}")
@@ -563,6 +575,7 @@ def main():
       print(f"banyak percobaan untukk jackpot sebelumnya  : {total_jackpot_terakhir}")
       print("1. Pull 1 kali")
       print("2. Pull 10 kali")
+      
       if a_03 == True:
         print("3. Automatic pull fast")
       else:
