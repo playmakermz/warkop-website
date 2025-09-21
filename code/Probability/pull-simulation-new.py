@@ -85,6 +85,23 @@ a_batchSize = 200
 a_little_batch_size = 20
 
 
+>>>>>>>>>>>>>>>>>> PGR Cosu
+
+#Game Name
+game_name = "PGR Cosu"
+# Kemungkinan beruntung!
+a_probability = 0.049
+# Berapa banyak minimum percobaan
+a_percobaan = 240
+# Batch  size terkecil mau berapa
+a_batchSize = 5
+# alternative batch size
+# ini gak boleh lebih dari 10. karena setiap pull disini bernilai 10, beserta laporan mereka juga
+a_little_batch_size = 1
+
+# 2 kali sukses. pity 80/100
+
+
 
 -------------------------------------------------------------------------[Arknight]-----------------------------------------------------------------------
 > Laporan pull Ak (2% atau 0.0020):
@@ -193,13 +210,13 @@ Aturan penggunaan:
 # ============================================================= Cukup Modifikasi bagian sini! ===================================================================
 
 #Game Name
-game_name = "PGR weapon"
+game_name = "PGR Cosu"
 # Kemungkinan beruntung!
-a_probability = 0.04
+a_probability = 0.049
 # Berapa banyak minimum percobaan
-a_percobaan = 260
+a_percobaan = 240
 # Batch  size terkecil mau berapa
-a_batchSize = 2
+a_batchSize = 5
 # alternative batch size
 # ini gak boleh lebih dari 10. karena setiap pull disini bernilai 10, beserta laporan mereka juga
 a_little_batch_size = 1
