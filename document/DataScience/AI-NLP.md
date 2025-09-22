@@ -177,7 +177,22 @@ Contoh: "New york city"
 
 ### 6.5 How computers learn these task 
 
-**Hidden Markov Models (HMMs)**
+**Hidden Markov Models (HMMs)** Algortima nya akan seperti ini:
+- Komputer akan melihat apa tujuan kata tersebut
+- Mengingat kata apa sebelumnya
+- Membuat asumsi akan kegunaan kata itu
+- Menggunakan algoritma tambahan Viterbi untuk mencari lanjutannya
+
+**Conditional Random Fields(CRFs)** Algoritma yang lebih cangih dari sebelumnya.
+
+Komputer akan memperhatikan:
+- Kata itu sendiri
+- kata sebelum dan sesudah
+- Mencari tau apakah huruf besar atau kecil
+- Akhiran katanya (contoh: "nya" )
+- clue lain yang tersebar didalam kata
+
+### 6.6 Syntatic Parsing - Understanding Sentence Structure 
 
 
 # Glossary (Glosarium)
