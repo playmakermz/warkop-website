@@ -229,7 +229,7 @@ Aturan penggunaan:
 # ============================================================= Cukup Modifikasi bagian sini! ===================================================================
 
 #Game Name
-game_name = "HSR Scharacter"
+game_name = "System 02 - HSR Scharacter"
 # Kemungkinan beruntung!
 # 0.8 untuk Light Cone
 # a_probability = 0.0008
@@ -434,8 +434,11 @@ def predict_next_jackpot_mle(jackpot_distances):
   print(f"- 95% kemungkinan ≤                        : {p95_pred:,}")
   print(f"- 98% kemungkinan ≤                        : {p98_pred:,}")
   print(f"- 99% kemungkinan ≤                        : {p99_pred:,}")
-  print(f"- 99.09% kemungkinan ≤                       : {p100_pred:,}")
-    print(f"- 99.99% kemungkinan ≤                       : {p100_pred:,}")
+  print(f"- 99.09% kemungkinan ≤                       : {p999_pred:,}")
+  print(f"- 99.99% kemungkinan ≤                       : {p100_pred:,}")
+
+  with open("jackpot.txt", "a") as f:
+    f.write(f"\n ------> Kemungkinan 99.99% : {p100_pred} \n")
 
   return {
       "p_hat": p_hat,
