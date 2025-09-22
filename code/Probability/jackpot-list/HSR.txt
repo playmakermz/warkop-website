@@ -26,3 +26,11 @@
  Ini nilai percobaan : 400 , Nilai pull baru: 13020 , Total pull: 36452
  ------> Kegagalan pada simulasi ke: 93 , pull baru: 13112 , Total pull: 36545
  ============  Game Name : HSR Scharacter Time: 14:05:44 ============= 
+
+ Ini nilai percobaan : 600 , Nilai pull baru: 11510 , Total pull: 33739
+ ------> Kegagalan pada simulasi ke: 11913 , pull baru: 11913 , Total pull: 34143
+ ============  Game Name : HSR Scharacter Time: 16:10:09 ============= 
+
+ Ini nilai percobaan : 600 , Nilai pull baru: 11520 , Total pull: 32334
+ Ini nilai percobaan : 600 , Nilai pull baru: 12120 , Total pull: 32934
+ Ini nilai percobaan : 400 , Nilai pull baru: 12720 , Total pull: 33534
