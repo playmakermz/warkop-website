@@ -59,6 +59,25 @@ Cara Penggunaan V2:
 
 *Hati-hati terkadang ampas itu menyertai simulasi. Untuk HSR gunakan simulasi satu hari satu kali
 
+# =========================================== pendekatan ===================================
+
+## pendekatan 1
+
+1. Lakukan simulasi sampai hit "Waktu Real world"
+2. Real world pull
+3. Nilai sembarang untuk insert simulasi pull
+4. lakukan step 2-3 hingga 3 atau 4 kali
+
+
+## Pendekatan 2
+
+1. Lakukan simulasi sampai hit "waktu Real World"
+2. Real world pull
+3. Reset dan mulai tahapan 1-2 dari awal lagi.
+
+
+# ========================================= Pendekatan ===================================
+
 ## Informasi Fast Pull
 
 Fast pull ini adalah simulasi pull yang dilakukan dalam satu kali perulangan. Semisal kita melakukan 100 pull dalam satu kali perulangan, maka kita tidak perlu melakukan 100 kali perulangan.
