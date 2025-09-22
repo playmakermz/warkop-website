@@ -194,6 +194,57 @@ Komputer akan memperhatikan:
 
 ### 6.6 Syntatic Parsing - Understanding Sentence Structure 
 
+Contoh bagaimana komputer memecah kaliimat menjadi bagian-bagian yangnbisa mereka pahami:
+```
+Sentence
+├── Noun Phrase: "The big dog"
+│   ├── "The" (determiner)
+│   ├── "big" (adjective)  
+│   └── "dog" (noun)
+└── Verb Phrase: "chased the cat"
+    ├── "chased" (verb)
+    └── Noun Phrase: "the cat"
+        ├── "the" (determiner)
+        └── "cat" (noun)
+```
+Pemahaman tersebut didasarkan oleh aturan tata bahasa.
+
+**The CKY Algorithm**  adalah bentuk semantic dimana digunakan untuk membuat kalimat dari bentuk paling kecil lalu ke paling besar. 
+
+### 6.7 Dependency Parsing - understanding word relationship
+Selain menyatukan kata menjadii parse, dependency parsing mengambarkan garis yang menunjukan bagaimana kata itu terhubung satu sama lain. 
+
+Contoh: "The dog chased the cat"
+```
+chased (root)
+├── dog (subject)
+│   └── The (determiner)
+└── cat (object)
+    └── the (determiner)
+```
+
+**Dua pendekatan yang digunakan:**
+- Transition-based parsing
+  - Membaca kalimat secara utuh satu kali
+  - Membuat urutan dan mengambil keputusan untuk setiap langkah
+  - Metode inii cepat tetapi kurang dalam kompleksitas
+
+- Graph-based parsing:
+  - Mencari segala kata yang mungkin ada hubungannya
+  - Mencari kesimpulan terbaik dari hubungan tersebut.
+  - Metode ini lebih akurat tetapi lebih lama
+
+### 6.8 Kenapa ini penting?
+**Peng aplikasiakan di dunia nyata**
+- Search engine, yang memahamii permintaan user (Query)
+- Translation, yang memahami struktur kalimat dan translate lebih sempurna
+- Voice Assistance, Memahami perintah dan pertanyaan lebih baik
+- Text Analysis, mencari informasi penting didalam dokumen
+
+**Measuring Success**
+- Akurasi, berapa banyak kata yang diberi label benar
+- F1 Score, menyeimbangkan jawaban benar dan menjauhi jawaban salah
+- Akurasi akan semakin tinggi jika sumber didapatkan dari teks tertulis yang memiliki format penulisan sempurna
 
 # Glossary (Glosarium)
 
