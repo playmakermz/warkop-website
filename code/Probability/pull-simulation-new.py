@@ -518,6 +518,7 @@ def automatic_pull():
       print("loop berakhir")
       print(f"\033[34m ===================== Semua loop selesai  ======================= \033[0m")
       print("\033[32m ====================> Real World Pull Now! <================= \033[0m")
+      print(f"\n ==========================> Game : {game_name} <=========================")
       # Akhiri loop ini
       loop_terakhir = False
       # akhiri semua loop, ini untuk mastikan bagian kedua berakhir
