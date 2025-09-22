@@ -136,6 +136,50 @@ adalah bentuk sistem muktahir yang digunakan untuk:
 ### 5.7 Evaluating Artificial Speech 
 Mean Opinion Score (MOS): adalah bentuk tindakan manusia untuk memberikan rating kualitas dari suara hasil kommputer dari 1( Suara kaku) - 5 (Suara sempurna)
 
+## 6. Understanding Linguistic Strucutre
+
+### 6.1 What is Linguistic structure analysis
+
+ini adalah bagaimana sebuah komputer belajar tata bahasa dan struktur dari suatu kalimat, seperti membedakan kata benda, kata kerja, dan kalimat disaat kita sekolah. Dibawah ini adalah teknik yang mereka gunakan
+
+### 6.2 Part of speech tagging (POS)
+
+POS disini adalah pendekatan untuk memberikan label disetiap kata didalam kalimat yang menjadi deskripsi. Contoh: "aku suka makan kue"
+- "aku" = subject
+- "suka makan" = predikat
+- "kue" = object
+
+### 6.3 tantangan 
+*Dibawah ini adalah contoh kalimat bahasa inggris. 
+- "I will book a flight" (book = verb)
+- "I read a good book" (book = noun)
+
+Kesulitan ada pada pada komputer menentukan inti kata dari context kalimat. 
+
+### 6.4 Named Entity Recognition (NER )
+NER mencari dan memberikan label informasi penting yang ada didalam teks, contohnya: nama orang, tempat, perusahaan, tanggal, dll. 
+
+contoh: "X was founded by Elon Musk in Mars."
+
+- "X" = organisasi
+- "Elon Musk" = orang
+- "Mars" = lokasi
+
+**The BIO System** adalah metode untuk melabeli:
+- Beginging of an entitiy
+- Inside an entitity ( continuation )
+- Outside any entity
+
+Contoh: "New york city"
+- "New" = B-Location
+- "York" = I-Location
+- "City" = O-location
+
+### 6.5 How computers learn these task 
+
+**Hidden Markov Models (HMMs)**
+
+
 # Glossary (Glosarium)
 
 - Large Language Model(LLM): secara
