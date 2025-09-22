@@ -437,8 +437,8 @@ def predict_next_jackpot_mle(jackpot_distances):
   print(f"- 99.09% kemungkinan ≤                       : {p999_pred:,}")
   print(f"- 99.99% kemungkinan ≤                       : {p100_pred:,}")
 
-  with open("jackpot.txt", "a") as f:
-    f.write(f"\n ------> Kemungkinan 99.99% : {p100_pred} \n")
+  #with open("jackpot.txt", "a") as f:
+  #  f.write(f"\n ------> Kemungkinan 99.99% : {p100_pred} \n")
 
   return {
       "p_hat": p_hat,
