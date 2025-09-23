@@ -265,7 +265,7 @@ a_percobaan = 20_000
 a_batchSize = 1000
 # alternative batch size
 # ini gak boleh lebih dari 10. karena setiap pull disini bernilai 10, beserta laporan mereka juga
-a_little_batch_size = 60
+a_little_batch_size = 10
 
 
 
@@ -449,7 +449,7 @@ def predict_next_jackpot_mle(jackpot_distances):
   p98_pred = ceil(log(1 - 0.95) / log(1 - p_hat))
   p99_pred = ceil(log(1 - 0.99) / log(1 - p_hat))
   p999_pred = ceil(log(1 - 0.999) / log(1 - p_hat))
-  p100_pred = ceil(log(1 - 0.9999) / log(1 - p_hat))
+  p100_pred = ceil(log(1 - 0.999) / log(1 - p_hat))
   p101_pred = ceil(log(1 - 0.99999) / log(1 - p_hat))
   p102_pred = ceil(log(1 - 0.99999) / log(1 - p_hat))
 
@@ -603,7 +603,7 @@ def automatic_pull():
 
     while loop_terakhir:
     # tujuan adalah jika off chance pull lebih dari prediksi 95% maka akhiri loop
-        if ii_terakhir >= (p100_pred - 1 ): # <============== Atur nilai ini sesuai dengan prediksi 95% jackpot
+        if ii_terakhir >= (p100_pred - 10 ): # <============== Atur nilai ini sesuai dengan prediksi 95% jackpot
             a_03 = False
             print(f"\033[34m ===================== Belum Jackpot ======================= \033[0m")
             print("loop berakhir")
