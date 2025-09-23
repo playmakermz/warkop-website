@@ -266,7 +266,10 @@ a_batchSize = 1000
 # alternative batch size
 # ini gak boleh lebih dari 10. karena setiap pull disini bernilai 10, beserta laporan mereka juga
 a_little_batch_size = 10
-
+# Ini untuk memilih meotde pull 
+# NO : Normal speed 
+# MP : Multiprocess
+pull_method = 'MP'
 
 
 # ============================================================= Cukup Modifikasi bagian sini! ===================================================================
@@ -366,7 +369,7 @@ def satu_pull():
       total_pulls += little_batch_size
       # Tambahkan informasi pull baru (spesial untuk fungsi ini saja   )
       new_pull += little_batch_size
-      print(f"kamu tidak beruntung, total pull: {total_pulls}")
+      print(f"kamu tidak beruntung, total pull: {total_pulls:,}")
 
 
 # ================================================================== Satu pull alternative ==================================================================
@@ -396,7 +399,7 @@ def a_satu_pull(asr):
       # informai percobaan di reset ke nol
       jarak_jackpot = 0
       print(f"====>  jackpot jackpot didapatkan {len(jackpot_list)}  <====")
-      print(f"====>  Informasi Total pull         {total_pulls}  <====")
+      print(f"====>  Informasi Total pull         {total_pulls:,}  <====")
       print(f"====>  Informasi New Pull         {new_pull}  <====")
       print(f"====> Menuju p99 {asr} , seharusnya kurang {(asr - new_pull)} percobaan lagi!")
       print(f"\033[31m =================== Jackpot didapatkan. Loop Diulang! ===================== \033[0m")
@@ -424,7 +427,7 @@ def sepuluh_pull():
 def manual_pull(asr):
   """ Pull sebanyak input manual """
   for i in range(asr):
-    print(f"pull Manual ke : {i+1}. Jarak Jackpot : {jarak_jackpot}", end="")
+    print(f"pull Manual ke : {i+1}. Jarak Jackpot : {jarak_jackpot:,}", end="")
     satu_pull()
 
 # ========================================================= Prediksi untuk opsi 03
@@ -569,10 +572,10 @@ def automatic_pull():
                 print(f"Array List JackPot : {sorted(jackpot_list, reverse=True)[:5]}")
     # Setelah selesai, lakukan pull real world
     jarak_jackpot = total_jackpot_terakhir
-    print(f"Total pull       : {total_pulls}")
-    print(f"Total jackpot    : {total_jackpot}")
+    print(f"Total pull       : {total_pulls:,}")
+    print(f"Total jackpot    : {total_jackpot:,}")
     print(f"Jackpot tertinggi: {max(jackpot_list)}")
-    print(f"jarak jackpot terakhir: {total_jackpot_terakhir}")
+    print(f"jarak jackpot terakhir: {total_jackpot_terakhir:,}")
 
   # Setelah selesai, tampilkan analisis distribusi jackpot
     df = pd.DataFrame(jackpot_list, columns=["Jarak Jackpot"])
@@ -740,7 +743,7 @@ def automatic_pull_mp(workers=None):
         # update stop condition once we have enough jackpots
         if len(jackpot_list) >= 5 and stop_value.value == 0:
             preds = predict_next_jackpot_mle(jackpot_list)
-            stop_value.value = preds["p100_pred"] - 1
+            stop_value.value = preds["p100_pred"] - 10
             print(f"🛑 Target set to {stop_value.value} based on p100_pred")
 
         # mirror old automatic_pull() progress output
@@ -790,7 +793,10 @@ def automatic_pull_mp(workers=None):
 def langsung():
   while loop_bagian_dua:
         reset_button()
-        automatic_pull_mp()
+        if pull_method == "NO":
+          automatic_pull()
+        elif pull_method == "MP":
+          automatic_pull_mp()
   print("\033[93m =============================== Semua loop selesai ===================================== \033[0m")
   print("\033[93m =============================== Realword Pull      ===================================== \033[0m")
 
