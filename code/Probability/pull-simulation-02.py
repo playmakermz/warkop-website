@@ -241,17 +241,51 @@ a_little_batch_size = 60
 
 
 
-====================== CAtatan tidak terpakai ==================================================
-``
-Aturan penggunaan:
-0. Pastikan pull rate kamu sesuaikan dengan gamenya. simulasi inin hanya cocok jika pull rate sama dengan yang ada pada game.
-1. Cari tau dengan "go 20 jackpot" dua kali. untuk mengetahui Streak tertinggi
-2. lakukan pull 10 secara manual dan berjalan ke nilai mendekati yang tertinggi
-3. jika sudah dekat, semisal nilai tertinggi adalah 700,
-4. lakukan beberapa 10 kali pull simulasi, usahakan jangan terlalu banyak, lalu lakukan 10 pull real world.
+# =========================================== pendekatan 24-09-2025 ===================================
+
+Tujuan adalah gacha Evernight dengan pengeluaran paling sedikit ( 14 pull total untuk evernight ).
+Disini dilakukan dua pendekatan sekaligus
+
+## pendekatan 1
+- Simulasi sampai selesai
+- lakukan pull 1 real
+- Ulangi pendekatan 1 sebanyak 5 kali
+
+
+## Pendekatan 2
+
+1. Simulasi sampai selesai
+2. 1 real pull akun utama
+3. lanjutkan simulasi sebelumnya dengan 'manual insert'
+4. 10-11 real pull akun cadangan
+5. 1. real pull akun utama
+6. jika masih belum, lanjutkan simulasi lagi
+7. 1 real pull akun utama
+8. jika masih belum, maka ulangi lagi nomor 6 dan 7
+
+## Laporan praktik yang dilakukan pd 24-09-2025
+
+1. Simulasi sampai selesai
+2. 1 real pull akun utama
+3. lanjutkan simulasi sebelumnya dengan 'manual insert' (700 simulasi)
+4. 10-11 real pull akun cadangan
+5. 1. real pull akun utama
+6. jika masih belum, lanjutkan simulasi lagi ( 300 simulasi )
+7. 1 real pull akun utama
+8. lanjutkan lagi simulasi ( 300 simulasi )
+9. 1 real pull akun utama. Jackpot!
+
+Laporan pull simulasi:
+pull Baru: 12810
+Total: 13226
+
+
+
+
+# ========================================= Pendekatan ===================================
 """
 
-# ============================================================= Cukup Modifikasi bagian sini! ===================================================================
+# =============================================================> Cukup Modifikasi bagian sini! <===================================================================
 
 #Game Name
 game_name = "System 02 - HSR Scharacter"
@@ -269,10 +303,10 @@ a_little_batch_size = 10
 # Ini untuk memilih meotde pull 
 # NO : Normal speed 
 # MP : Multiprocess
-pull_method = 'MP'
+pull_method = 'NO'
 
 
-# ============================================================= Cukup Modifikasi bagian sini! ===================================================================
+# =============================================================> Cukup Modifikasi bagian sini! <===================================================================
 
 # probabilitas jackpot HSR
 # karakter probabilitas 5 Star
