@@ -24,6 +24,13 @@ except ImportError:
 3. intinya dengan simulasi ini, intinya "Strike when iron is hot".
 4. jangan takut gagal di simulasi trial. Ambil yang menurutmu paling tinggi. kalau gagal bisa coba lagi nanti.
 
+# Teori dasar ke dua 
+
+Bayangkan ini adalah lomba lempar dadu untuk mendapatkan angka 6. ada dua dadu: dadu pertama berbentuk lacip dan kotak sempurna, dadu kedua bentuknya lebih halus pada setiap sisinya. 
+simulasi kita ibaratkan sebagai dadu halus, sedangkan real adalah dadu lancip. tentu ada perbedaan pada permukaan dadu, yang memungkinkan mereka tidak berjalan sepenuhnya sama 100%. 
+Tetapi yang paling penting disini adalah sebuah 'act' untuk mencari hasil terdekat dengan jackpot pada dadu lancip. karena dasar perbandingan antara dadu lancip dan dadu halus adalah sama-sama 1/6.
+ini adalah 'act' untuk mendekati.
+
 # Teori dalam bentuk matematika
 
 Jawabannya: Tono jauh lebih mungkin dapat “dua angka enam”.
