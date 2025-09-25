@@ -519,7 +519,7 @@ def predict_next_jackpot_mle(jackpot_distances):
   p98_pred = ceil(log(1 - 0.95) / log(1 - p_hat))
   p99_pred = ceil(log(1 - 0.99) / log(1 - p_hat))
   p999_pred = ceil(log(1 - 0.999) / log(1 - p_hat))
-  p100_pred = ceil(log(1 - 0.9) / log(1 - p_hat))
+  p100_pred = ceil(log(1 - 0.999) / log(1 - p_hat))
   p101_pred = ceil(log(1 - 0.99999) / log(1 - p_hat))
   p102_pred = ceil(log(1 - 0.99999) / log(1 - p_hat))
 
