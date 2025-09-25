@@ -214,6 +214,22 @@ disini hanya melakukan 1 kali pull real, tanpa ada pull simulasi tambahan(Manual
 Nilai pull baru: 11490
 Total pull: 33052
 
+>>>>>>> Pengalaman 25-09-2025
+
+Pull saber, tapi rate off.
+
+ ============  Game Name : System 02 - HSR Scharacter Time: 06:19:25 ============= 
+
+ Ini nilai percobaan : 700 , Nilai pull baru: 11500 , Total pull: 11995
+ Ini nilai percobaan : 300 , Nilai pull baru: 12200 , Total pull: 12695
+ Ini nilai percobaan : 200 , Nilai pull baru: 12500 , Total pull: 12995
+ Ini nilai percobaan : 200 , Nilai pull baru: 12700 , Total pull: 13195
+ Ini nilai percobaan : 200 , Nilai pull baru: 12900 , Total pull: 13395 ------------- ( setelah 200 selesai. 1 real dan jackpot!)
+ Ini nilai percobaan : 1000 , Nilai pull baru: 13100 , Total pull: 13595
+ ------> Kegagalan pada simulasi ke: 13141 , pull baru: 13141 , Total pull: 13637
+
+ biasakan dimulai dari 700 dan 200-300 untuk setiap simulasi. jika gagal maka coba lagi selanjutnya. disetiap sela 700, 300,200,200,200 adalah 1 real world pull
+
 >>>>>>>>>>>>>>>>>>>>>>>>> Variabel yang digunaka hsr <<<<<<<<<<<<<<<<<<<<<<<
 
 # Kemungkinan beruntung!
@@ -352,6 +368,8 @@ new_pull = 0
 loop_terakhir = True
 # loop bagian dua akan memaksa opsi 3 dilakukan kembali hingga 95% jackpot
 loop_bagian_dua = True
+# Catatan on-going pull untuk versi terbarukan
+on_pull = 0
 # ======================== Variabel Modification on process =======================================================
 
 
@@ -370,7 +388,7 @@ def clear_screen():
 # ============================== Opsi 01
 def satu_pull():
   """Satu kali pull"""
-  global jarak_jackpot, total_jackpot, total_jackpot_terakhir, total_pulls,new_pull, loop_test, loop_terakhir, loop_bagian_dua
+  global jarak_jackpot, total_jackpot, total_jackpot_terakhir, total_pulls,new_pull, loop_test, loop_terakhir, loop_bagian_dua, on_pull
 
   # ini adalah berapa banyak batch nilai random yang akan digenerate
   pulls = np.random.random(size=little_batch_size)
@@ -393,6 +411,8 @@ def satu_pull():
       jackpot_list.append(jarak_jackpot)
       # informai percobaan di reset ke nol
       jarak_jackpot = 0
+      # Format on going pull ke 0
+      on_pull = 0
       print(f"\n ====>  jackpot jackpot didapatkan {total_pulls}  <====")
       print(f"====>  Informasi New Pull         {new_pull}  <====")
       print(f"\033[31m =================== Jackpot didapatkan. Misi Gagal! ===================== \033[0m")
@@ -410,13 +430,15 @@ def satu_pull():
       total_pulls += little_batch_size
       # Tambahkan informasi pull baru (spesial untuk fungsi ini saja   )
       new_pull += little_batch_size
+      # tambahkan pull ke on going 
+      on_pull += little_batch_size
       print(f"kamu tidak beruntung, total pull: {total_pulls:,}")
 
 
 # ================================================================== Satu pull alternative ==================================================================
 def a_satu_pull(asr):
   """Satu kali pull"""
-  global jarak_jackpot, total_jackpot, total_jackpot_terakhir, total_pulls,new_pull, loop_test, loop_terakhir, loop_bagian_dua
+  global jarak_jackpot, total_jackpot, total_jackpot_terakhir, total_pulls,new_pull, loop_test, loop_terakhir, loop_bagian_dua, on_pull
 
   # ini adalah berapa banyak batch nilai random yang akan digenerate
   pulls = np.random.random(size=a_little_batch_size)
@@ -448,6 +470,8 @@ def a_satu_pull(asr):
       # New pull di reset ke nol
       new_pull = 0
       loop_terakhir = False
+      # reset pull on going
+      on_pull = 0
 
   else:
       # Tidak ada jackpot dalam batch
@@ -455,6 +479,8 @@ def a_satu_pull(asr):
       total_pulls += a_little_batch_size
       # Tambahkan informasi pull baru (spesial untuk fungsi ini saja   )
       new_pull += a_little_batch_size
+      # tambahkan on going pull
+      on_pull += a_little_batch_size
 
 # ====================================================== Opsi 02
 def sepuluh_pull():
@@ -493,7 +519,7 @@ def predict_next_jackpot_mle(jackpot_distances):
   p98_pred = ceil(log(1 - 0.95) / log(1 - p_hat))
   p99_pred = ceil(log(1 - 0.99) / log(1 - p_hat))
   p999_pred = ceil(log(1 - 0.999) / log(1 - p_hat))
-  p100_pred = ceil(log(1 - 0.999) / log(1 - p_hat))
+  p100_pred = ceil(log(1 - 0.9) / log(1 - p_hat))
   p101_pred = ceil(log(1 - 0.99999) / log(1 - p_hat))
   p102_pred = ceil(log(1 - 0.99999) / log(1 - p_hat))
 
@@ -565,7 +591,7 @@ def automatic_pull():
     """
     global jarak_jackpot, total_jackpot, total_jackpot_terakhir
     global total_pulls, new_pull, loop_test, loop_terakhir
-    global ii_terakhir, bukti, loop_bagian_dua, a_03
+    global ii_terakhir, bukti, loop_bagian_dua, a_03, on_pull
 
     start_time = time.time()
     last_log = time.time()
@@ -658,6 +684,8 @@ def automatic_pull():
             loop_terakhir = False
       # akhiri semua loop, ini untuk mastikan bagian kedua berakhir
             loop_bagian_dua = False
+            # On Going pull
+            on_pull += ii_terakhir
             break
     # tujuan jika belum jackpot, lakukan pull normal secara loop ke 95%
         else:
@@ -675,7 +703,7 @@ def automatic_pull():
 # opsi 4
 def reset_button():
   """Reset semua variabel"""
-  global total_pulls, total_jackpot, jarak_jackpot, total_jackpot_terakhir, jackpot_list, new_pull, ii_terakhir, bukti, loop_terakhir
+  global total_pulls, total_jackpot, jarak_jackpot, total_jackpot_terakhir, jackpot_list, new_pull, ii_terakhir, bukti, loop_terakhir, on_pull
   # ======================== Variabel Modification on process =======================================================
   # keseluruhan pull yang dilakukan
   total_pulls = 0
@@ -864,6 +892,7 @@ def main():
       print(f"\n================= Game Name: {game_name} =====================")
       print(f"Nilai Pull baru                : {new_pull}")
       print(f"Banyak percobaan yang dilakukan sekarang untuk menuju jackpot : {jarak_jackpot}")
+      print(f"Bentuk on going setelah mengikuti panduan prediksi : {on_pull}")
       print(f"banyak percobaan untukk jackpot sebelumnya  : {total_jackpot_terakhir}")
       print("1. Pull 1 kali")
       print("2. Pull 10 kali")
