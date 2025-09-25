@@ -611,6 +611,7 @@ def automatic_pull():
         # original slow loop as fallback
         while True:
             if total_jackpot_terakhir >= (nilai_N - 10):
+                jarak_jackpot = total_jackpot_terakhir
                 break
             pulls_arr = np.random.random(size=batch_size)
             hits = np.where(pulls_arr < p)[0]
@@ -638,7 +639,7 @@ def automatic_pull():
                 last_log = time.time()
                 print(f"Array List JackPot : {sorted(jackpot_list, reverse=True)[:5]}")
     # Setelah selesai, lakukan pull real world
-    jarak_jackpot = total_jackpot_terakhir
+    #jarak_jackpot = total_jackpot_terakhir
     print(f"Total pull       : {total_pulls:,}")
     print(f"Total jackpot    : {total_jackpot:,}")
     print(f"Jackpot tertinggi: {max(jackpot_list)}")
@@ -686,6 +687,8 @@ def automatic_pull():
             loop_bagian_dua = False
             # On Going pull
             on_pull += ii_terakhir
+            # reset new pull
+            new_pull = 0
             break
     # tujuan jika belum jackpot, lakukan pull normal secara loop ke 95%
         else:
