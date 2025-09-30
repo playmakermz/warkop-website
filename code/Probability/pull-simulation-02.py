@@ -9,7 +9,7 @@ import multiprocessing as mp
 from datetime import datetime
 
 try:
-    from numba import njit
+    from numba import jit
     NUMBA_AVAILABLE = True
 except ImportError:
     NUMBA_AVAILABLE = False
@@ -519,7 +519,7 @@ def predict_next_jackpot_mle(jackpot_distances):
   p98_pred = ceil(log(1 - 0.95) / log(1 - p_hat))
   p99_pred = ceil(log(1 - 0.99) / log(1 - p_hat))
   p999_pred = ceil(log(1 - 0.999) / log(1 - p_hat))
-  p100_pred = ceil(log(1 - 0.999) / log(1 - p_hat))
+  p100_pred = ceil(log(1 - 0.9) / log(1 - p_hat))
   p101_pred = ceil(log(1 - 0.99999) / log(1 - p_hat))
   p102_pred = ceil(log(1 - 0.99999) / log(1 - p_hat))
 
@@ -554,7 +554,7 @@ def predict_next_jackpot_mle(jackpot_distances):
 # ========================================================== For Numba
 
 if NUMBA_AVAILABLE:
-    @njit
+    @jit
     def simulate_batches(prob, batch_size, target, start_streak):
         """
         Fast loop: keep pulling in batches until total streak >= target.
@@ -577,6 +577,7 @@ if NUMBA_AVAILABLE:
                 streak += hit_idx + 1
                 jackpots.append(streak)
                 streak = 0
+                
             else:
                 pulls_done += batch_size
                 streak += batch_size
@@ -601,6 +602,8 @@ def automatic_pull():
         pulls, jackpots, final_streak = simulate_batches(
             p, batch_size, nilai_N - 10, jarak_jackpot
         )
+        print("FFFFFFFFFFFFFFFFFFFFFFFFF ===================================================== FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")
+        print(f"\n Informasi sebelum berpindah ke loop lambat. nilai_N : {nilai_N} - 10  dan jarak_jackpot : {jarak_jackpot}")
         total_pulls += pulls
         if jackpots:
             jackpot_list.extend(jackpots)
@@ -612,6 +615,10 @@ def automatic_pull():
         while True:
             if total_jackpot_terakhir >= (nilai_N - 10):
                 jarak_jackpot = total_jackpot_terakhir
+                with open("jackpot.txt", "a") as f:
+                  f.write(f"\n Informasi sebelum berpindah ke loop lambat. nilai_N : {nilai_N}  dan total_jackpot_terakhir : {total_jackpot_terakhir}")
+                print("FFFFFFFFFFFFFFFFFFFFFFFFF ===================================================== FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")
+                print(f"\n Informasi sebelum berpindah ke loop lambat. nilai_N : {nilai_N}  dan total_jackpot_terakhir : {total_jackpot_terakhir}")
                 break
             pulls_arr = np.random.random(size=batch_size)
             hits = np.where(pulls_arr < p)[0]
@@ -698,8 +705,6 @@ def automatic_pull():
 
     # ---- remainder of your original function (printing results, df.describe(), 
     #       predict_next_jackpot_mle, and the final while loop) stays exactly the same ----
-    
-
 
 
 
