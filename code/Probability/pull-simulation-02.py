@@ -426,6 +426,7 @@ def satu_pull():
 
   else:
       # Tidak ada jackpot dalam batch
+      # Berikan ke total on going jarak_jackpot
       jarak_jackpot += little_batch_size
       total_pulls += little_batch_size
       # Tambahkan informasi pull baru (spesial untuk fungsi ini saja   )
@@ -519,7 +520,7 @@ def predict_next_jackpot_mle(jackpot_distances):
   p98_pred = ceil(log(1 - 0.95) / log(1 - p_hat))
   p99_pred = ceil(log(1 - 0.99) / log(1 - p_hat))
   p999_pred = ceil(log(1 - 0.999) / log(1 - p_hat))
-  p100_pred = ceil(log(1 - 0.9) / log(1 - p_hat))
+  p100_pred = ceil(log(1 - 0.999) / log(1 - p_hat))
   p101_pred = ceil(log(1 - 0.99999) / log(1 - p_hat))
   p102_pred = ceil(log(1 - 0.99999) / log(1 - p_hat))
 
@@ -555,32 +556,35 @@ def predict_next_jackpot_mle(jackpot_distances):
 
 if NUMBA_AVAILABLE:
     @jit
-    def simulate_batches(prob, batch_size, target, start_streak):
+    def simulate_batches(prob, batch_size, nilai_N, start_streak):
         """
         Fast loop: keep pulling in batches until total streak >= target.
         Returns total pulls, jackpots list, and final streak.
         """
+
         pulls_done = 0
         jackpots = []
-        streak = start_streak
+        # ini ada untuk menghitung pull berjalan bukan total pull
+        streak = 0
+        hit_idx = 0
 
-        while streak < target:
-            rand_vals = np.random.random(batch_size)
-            hit_idx = -1
-            for i in range(batch_size):
-                if rand_vals[i] < prob:
-                    hit_idx = i
-                    break
+        while True:
+            if streak >= (nilai_N - 10):
+                break
 
-            if hit_idx >= 0:          # jackpot found in this batch
+            pulls = np.random.random(size=batch_size)
+            hits = np.where(pulls < p)[0]
+
+            if len(hits) > 0:
                 pulls_done += hit_idx + 1
                 streak += hit_idx + 1
                 jackpots.append(streak)
                 streak = 0
-                
+
             else:
                 pulls_done += batch_size
                 streak += batch_size
+
         return pulls_done, jackpots, streak
 
 
@@ -600,7 +604,7 @@ def automatic_pull():
     if NUMBA_AVAILABLE:
         # single JIT-compiled call does the heavy lifting
         pulls, jackpots, final_streak = simulate_batches(
-            p, batch_size, nilai_N - 10, jarak_jackpot
+            p, batch_size, nilai_N , jarak_jackpot
         )
         print("FFFFFFFFFFFFFFFFFFFFFFFFF ===================================================== FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")
         print(f"\n Informasi sebelum berpindah ke loop lambat. nilai_N : {nilai_N} - 10  dan jarak_jackpot : {jarak_jackpot}")
@@ -609,6 +613,7 @@ def automatic_pull():
             jackpot_list.extend(jackpots)
             total_jackpot += len(jackpots)
             total_jackpot_terakhir = jackpots[-1]
+        # Informati on going pull
         jarak_jackpot = final_streak
     else:
         # original slow loop as fallback
@@ -651,6 +656,7 @@ def automatic_pull():
     print(f"Total jackpot    : {total_jackpot:,}")
     print(f"Jackpot tertinggi: {max(jackpot_list)}")
     print(f"jarak jackpot terakhir: {total_jackpot_terakhir:,}")
+    print(f"Informasi on-going pull: {jarak_jackpot}")
 
   # Setelah selesai, tampilkan analisis distribusi jackpot
     df = pd.DataFrame(jackpot_list, columns=["Jarak Jackpot"])
@@ -681,7 +687,7 @@ def automatic_pull():
 
     while loop_terakhir:
     # tujuan adalah jika off chance pull lebih dari prediksi 95% maka akhiri loop
-        if ii_terakhir >= (p100_pred - 10 ): # <============== Atur nilai ini sesuai dengan prediksi 95% jackpot
+        if ii_terakhir >= (p100_pred - 10 ): # <============== Atur nilai ini sesuai dengan prediksi 99% jackpot
             a_03 = False
             print(f"\033[34m ===================== Belum Jackpot ======================= \033[0m")
             print("loop berakhir")
@@ -693,7 +699,8 @@ def automatic_pull():
       # akhiri semua loop, ini untuk mastikan bagian kedua berakhir
             loop_bagian_dua = False
             # On Going pull
-            on_pull += ii_terakhir
+            #on_pull += ii_terakhir
+
             # reset new pull
             new_pull = 0
             break
