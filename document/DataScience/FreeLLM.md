@@ -76,12 +76,12 @@ Model yang tersedia: https://puter.com/puterai/chat/models
 
         #chat-input {
             display: flex;
+            gap: 10px;
         }
 
-        #chat-input input {
+        #chat-input input[type="text"] {
             flex-grow: 1;
             padding: 10px;
-            margin-right: 10px;
             border: 1px solid #ddd;
             border-radius: 4px;
         }
@@ -98,6 +98,33 @@ Model yang tersedia: https://puter.com/puterai/chat/models
         #chat-input button:hover {
             background: #0056b3;
         }
+
+        #file-input {
+            display: none;
+        }
+
+        .file-upload-btn {
+            padding: 10px 20px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .file-upload-btn:hover {
+            background: #218838;
+        }
+
+        .file-selected {
+            padding: 5px 10px;
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #155724;
+            margin-bottom: 10px;
+        }
     </style>
     <script src="https://js.puter.com/v2/"></script>
 
@@ -106,8 +133,11 @@ Model yang tersedia: https://puter.com/puterai/chat/models
 <body>
     <div id="chat-container">
         <div id="messages"></div>
+        <div id="file-selected-info"></div>
         <div id="chat-input">
-            <input type="text" id="input-message" placeholder="Type a message...">
+            <input type="file" id="file-input" accept=".pdf" />
+            <button class="file-upload-btn" onclick="selectFile()">Upload PDF</button>
+            <input type="text" id="input-message" placeholder="Type a message or upload a PDF...">
             <button onclick="sendMessage()">Send</button>
         </div>
     </div>
@@ -115,6 +145,8 @@ Model yang tersedia: https://puter.com/puterai/chat/models
 
     <script>
         const messages = [];
+        let uploadedFilePath = null;
+
         function addMessage(msg, isUser) {
             const messagesDiv = document.getElementById("messages");
             const messageDiv = document.createElement("div");
@@ -127,23 +159,96 @@ Model yang tersedia: https://puter.com/puterai/chat/models
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
         }
 
-        function sendMessage() {
+        function selectFile() {
+            document.getElementById("file-input").click();
+        }
+
+        document.getElementById("file-input").addEventListener("change", async (event) => {
+            const fileInput = event.target;
+            const fileInfoDiv = document.getElementById("file-selected-info");
+            
+            if (fileInput.files.length === 0) return;
+
+            const file = fileInput.files[0];
+            fileInfoDiv.innerHTML = `<div class="file-selected">📄 Uploading ${file.name}...</div>`;
+
+            try {
+                const uploadedFiles = await puter.fs.upload(fileInput.files);
+                uploadedFilePath = uploadedFiles[0].path;
+                fileInfoDiv.innerHTML = `<div class="file-selected">✅ ${file.name} uploaded! Click Send to analyze.</div>`;
+            } catch (error) {
+                console.error("Upload error:", error);
+                fileInfoDiv.innerHTML = `<div class="file-selected" style="background: #f8d7da; border-color: #f5c6cb; color: #721c24;">❌ Upload failed. Please try again.</div>`;
+                uploadedFilePath = null;
+            }
+        });
+
+        async function sendMessage() {
             const input = document.getElementById("input-message");
             const message = input.value.trim();
-            if (message) {
+            const fileInfoDiv = document.getElementById("file-selected-info");
+
+            if (uploadedFilePath) {
+                const fileName = fileInfoDiv.textContent.match(/✅ (.*) uploaded/)?.[1] || 'PDF';
+                const userPrompt = message || 'Please analyze this PDF document and provide a summary.';
+                
+                addMessage(`📄 ${fileName}: ${userPrompt}`, true);
+                input.value = '';
+                fileInfoDiv.innerHTML = '<div class="file-selected">🤖 Analyzing PDF...</div>';
+
+                try {
+                    const response = await puter.ai.chat({
+                        messages: [
+                            ...messages,
+                            {
+                                role: 'user',
+                                content: [
+                                    { type: 'file', puter_path: uploadedFilePath },
+                                    { type: 'text', text: userPrompt }
+                                ]
+                            }
+                        ],
+                        model: 'gpt-5-nano'
+                    });
+
+                    addMessage(response.message.content, false);
+                    messages.push({ 
+                        role: 'user', 
+                        content: `[PDF Analysis] ${userPrompt}` 
+                    });
+                    messages.push(response.message);
+                    
+                    fileInfoDiv.innerHTML = '';
+                    uploadedFilePath = null;
+                    document.getElementById("file-input").value = '';
+                } catch (error) {
+                    console.error("AI response error:", error);
+                    addMessage("Sorry, there was an error analyzing the PDF. Please try again.", false);
+                    fileInfoDiv.innerHTML = '';
+                    uploadedFilePath = null;
+                    document.getElementById("file-input").value = '';
+                }
+            } else if (message) {
                 addMessage(message, true);
                 input.value = '';
-                // Record the message in array of messages
                 messages.push({ content: message, role: 'user' });
-                // Call the AI chat function
-                puter.ai.chat(messages, {model: 'gpt-5-nano'}).then(response => {
-                    addMessage(response, false);
+
+                try {
+                    const response = await puter.ai.chat(messages, {model: 'claude-sonnet-4-5-20250929'});
+                    addMessage(response.message.content, false);
                     messages.push(response.message);
-                }).catch(error => {
+                } catch (error) {
                     console.error("AI response error:", error);
-                });
+                    addMessage("Sorry, there was an error. Please try again.", false);
+                }
             }
         }
+
+        document.getElementById("input-message").addEventListener("keypress", (event) => {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        });
     </script>
 </body>
 
