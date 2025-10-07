@@ -7,6 +7,8 @@ Intinya disini kita diberikan opsi mengunakan model LLM secara gratis, dengan ca
 
 Demo puter ada disini: https://docs.puter.com/playground/?example=ai-chatgpt
 
+Model yang tersedia: https://puter.com/puterai/chat/models
+
 ## Tahapan
 1. Buat aplikasi replit
 2. tempel code dibawah
