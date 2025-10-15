@@ -165,6 +165,50 @@ a_little_batch_size = 10
 Jackpot Real pull didapatakan saat: 5, 50, 65, 131, 132, 150+
 
 dengan 10 kali Simulasi percobaan gagal
+
+>>>>>>>>>>>>>> Pengalaman gacha 15 / 10 / 2025 <<<<<<<<<<<<<<<<<<<
+
+
+#Game Name
+game_name = "Arknights"
+# Kemungkinan beruntung!
+# 0.8 untuk Light Cone
+# a_probability = 0.0008
+a_probability = 0.0020
+# Berapa banyak minimum percobaan
+a_percobaan = 6_000
+# Batch  size terkecil mau berapa
+a_batchSize = 300
+# alternative batch size
+# ini gak boleh lebih dari 10. karena setiap pull disini bernilai 10, beserta laporan mereka juga
+a_little_batch_size = 10
+# Ini untuk memilih meotde pull 
+# NO : Normal speed 
+# MP : Multiprocess
+pull_method = 'NO'
+
+--------------- jackpot 1 -----------------
+pull baru: 460
+
+total : 9810
+
+Tambahan: 13 ( real pull. Urutan : 1, simulasi, 1, simulasi, 10, 1 ( jackpot ) )
+
+--------------- jackpot 2 -----------
+
+pull baru: 410
+
+total: 9800
+
+tambahan : 3 real ( 1, simulai, 1 )
+
+------------- jackpot 3 --------------
+
+pull baru: 510
+
+total: 9870
+
+tambahan : 8 ( 1, simulasi, 7 )
 ---------------------------------------------------------------------- [ HSR ] ------------------------------------------------------------------------------------------------------------------------------
 > Laporan pull HSR (0.6% atau 0.0006):
 Streak tertinggi adalah :    34_487 | gunakan 20_000 - 21_000
@@ -263,6 +307,27 @@ a_batchSize = 1000
 a_little_batch_size = 60
 
 
+....................... ini hsr
+
+#Game Name
+game_name = "System 02 - HSR Scharacter"
+# Kemungkinan beruntung!
+# 0.8 untuk Light Cone
+# a_probability = 0.0008
+a_probability = 0.0006
+# Berapa banyak minimum percobaan
+a_percobaan = 22_000
+# Batch  size terkecil mau berapa
+a_batchSize = 1000
+# alternative batch size
+# ini gak boleh lebih dari 10. karena setiap pull disini bernilai 10, beserta laporan mereka juga
+a_little_batch_size = 10
+# Ini untuk memilih meotde pull 
+# NO : Normal speed 
+# MP : Multiprocess
+pull_method = 'NO'
+
+
 
 # =========================================== pendekatan 24-09-2025 ===================================
 
@@ -310,16 +375,17 @@ Total: 13226
 
 # =============================================================> Cukup Modifikasi bagian sini! <===================================================================
 
+
 #Game Name
-game_name = "System 02 - HSR Scharacter"
+game_name = "Arknights"
 # Kemungkinan beruntung!
 # 0.8 untuk Light Cone
 # a_probability = 0.0008
-a_probability = 0.0006
+a_probability = 0.0020
 # Berapa banyak minimum percobaan
-a_percobaan = 20_000
+a_percobaan = 6_000
 # Batch  size terkecil mau berapa
-a_batchSize = 1000
+a_batchSize = 300
 # alternative batch size
 # ini gak boleh lebih dari 10. karena setiap pull disini bernilai 10, beserta laporan mereka juga
 a_little_batch_size = 10
@@ -520,7 +586,7 @@ def predict_next_jackpot_mle(jackpot_distances):
   p98_pred = ceil(log(1 - 0.95) / log(1 - p_hat))
   p99_pred = ceil(log(1 - 0.99) / log(1 - p_hat))
   p999_pred = ceil(log(1 - 0.999) / log(1 - p_hat))
-  p100_pred = ceil(log(1 - 0.999) / log(1 - p_hat))
+  p100_pred = ceil(log(1 - 0.9999) / log(1 - p_hat))
   p101_pred = ceil(log(1 - 0.99999) / log(1 - p_hat))
   p102_pred = ceil(log(1 - 0.99999) / log(1 - p_hat))
 
