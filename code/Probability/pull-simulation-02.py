@@ -209,6 +209,10 @@ pull baru: 510
 total: 9870
 
 tambahan : 8 ( 1, simulasi, 7 )
+
+============================== > Theory < ===========================
+
+adalah untuk pastikan dapatkan nilai simulasi paling tinggi, minimal 9800. lalu lanjutkan dengan pull asli tanpa mempedulikan simulasi, jalankan terus pull asli tersebut tanpa simulai hingga jackpot.
 ---------------------------------------------------------------------- [ HSR ] ------------------------------------------------------------------------------------------------------------------------------
 > Laporan pull HSR (0.6% atau 0.0006):
 Streak tertinggi adalah :    34_487 | gunakan 20_000 - 21_000
