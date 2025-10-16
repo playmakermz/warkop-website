@@ -397,6 +397,8 @@ a_little_batch_size = 10
 # NO : Normal speed 
 # MP : Multiprocess
 pull_method = 'NO'
+# atur untuk nilai minimal berapa banyak usaha menuju loop
+min_desire = 9800
 
 
 # =============================================================> Cukup Modifikasi bagian sini! <===================================================================
@@ -590,7 +592,7 @@ def predict_next_jackpot_mle(jackpot_distances):
   p98_pred = ceil(log(1 - 0.95) / log(1 - p_hat))
   p99_pred = ceil(log(1 - 0.99) / log(1 - p_hat))
   p999_pred = ceil(log(1 - 0.999) / log(1 - p_hat))
-  p100_pred = ceil(log(1 - 0.9999) / log(1 - p_hat))
+  p100_pred = ceil(log(1 - 0.9999) / log(1 - p_hat)) # ======================== p100 / e100
   p101_pred = ceil(log(1 - 0.99999) / log(1 - p_hat))
   p102_pred = ceil(log(1 - 0.99999) / log(1 - p_hat))
 
@@ -764,16 +766,20 @@ def automatic_pull():
             print(f"\033[34m ===================== Semua loop selesai  ======================= \033[0m")
             print("\033[32m ====================> Real World Pull Now! <================= \033[0m")
             print(f"\n ==========================> Game : {game_name} <=========================")
-      # Akhiri loop ini
-            loop_terakhir = False
+      # Akhiri loop ini jika minimum.
+            # ini adalah untuk mengatur minimum usaha jackpot "min_desire"
+            if ii_terakhir >= min_desire:
+                
+              loop_terakhir = False
       # akhiri semua loop, ini untuk mastikan bagian kedua berakhir
-            loop_bagian_dua = False
+              loop_bagian_dua = False
             # On Going pull
             #on_pull += ii_terakhir
 
             # reset new pull
-            new_pull = 0
-            break
+              new_pull = 0
+              break
+            print('===============> loop berulang kembali!  <==========================')
     # tujuan jika belum jackpot, lakukan pull normal secara loop ke 95%
         else:
             a_satu_pull(p100_pred)
