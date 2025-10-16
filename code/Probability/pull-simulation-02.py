@@ -397,7 +397,7 @@ a_little_batch_size = 10
 # NO : Normal speed 
 # MP : Multiprocess
 pull_method = 'NO'
-# atur untuk nilai minimal berapa banyak usaha menuju loop
+# atur untuk nilai minimal berapa banyak usaha menuju loop. bisa nilai 0 sampai infinite
 min_desire = 9800
 
 
@@ -592,7 +592,7 @@ def predict_next_jackpot_mle(jackpot_distances):
   p98_pred = ceil(log(1 - 0.95) / log(1 - p_hat))
   p99_pred = ceil(log(1 - 0.99) / log(1 - p_hat))
   p999_pred = ceil(log(1 - 0.999) / log(1 - p_hat))
-  p100_pred = ceil(log(1 - 0.9999) / log(1 - p_hat)) # ======================== p100 / e100
+  p100_pred = ceil(log(1 - 0.9999) / log(1 - p_hat)) # ======================== p100 / e100 ( 0.9999 )
   p101_pred = ceil(log(1 - 0.99999) / log(1 - p_hat))
   p102_pred = ceil(log(1 - 0.99999) / log(1 - p_hat))
 
