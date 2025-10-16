@@ -780,11 +780,15 @@ def automatic_pull():
               new_pull = 0
               break
             print('===============> loop berulang kembali!  <==========================')
+            continue
     # tujuan jika belum jackpot, lakukan pull normal secara loop ke 95%
-        else:
-            a_satu_pull(p100_pred)
-            bukti += 1
-            ii_terakhir += a_little_batch_size
+        #else:
+            #a_satu_pull(p100_pred)
+            #bukti += 1
+            #ii_terakhir += a_little_batch_size
+        a_satu_pull(p100_pred)
+        bukti += 1
+        ii_terakhir += a_little_batch_size
 
     # ---- remainder of your original function (printing results, df.describe(), 
     #       predict_next_jackpot_mle, and the final while loop) stays exactly the same ----
