@@ -766,29 +766,21 @@ def automatic_pull():
             print(f"\033[34m ===================== Semua loop selesai  ======================= \033[0m")
             print("\033[32m ====================> Real World Pull Now! <================= \033[0m")
             print(f"\n ==========================> Game : {game_name} <=========================")
-      # Akhiri loop ini jika minimum.
-            # ini adalah untuk mengatur minimum usaha jackpot "min_desire"
-            if ii_terakhir >= min_desire:
-                
-              loop_terakhir = False
+      # Akhiri loop ini jika minimum.               
+            loop_terakhir = False
       # akhiri semua loop, ini untuk mastikan bagian kedua berakhir
-              loop_bagian_dua = False
+            loop_bagian_dua = False
             # On Going pull
             #on_pull += ii_terakhir
 
             # reset new pull
-              new_pull = 0
-              break
-            print('===============> loop berulang kembali!  <==========================')
-            continue
+            new_pull = 0
+            break
     # tujuan jika belum jackpot, lakukan pull normal secara loop ke 95%
-        #else:
-            #a_satu_pull(p100_pred)
-            #bukti += 1
-            #ii_terakhir += a_little_batch_size
-        a_satu_pull(p100_pred)
-        bukti += 1
-        ii_terakhir += a_little_batch_size
+        else:
+            a_satu_pull(p100_pred)
+            bukti += 1
+            ii_terakhir += a_little_batch_size
 
     # ---- remainder of your original function (printing results, df.describe(), 
     #       predict_next_jackpot_mle, and the final while loop) stays exactly the same ----
