@@ -388,7 +388,7 @@ game_name = "System 02 - HSR Scharacter"
 # a_probability = 0.0008
 a_probability = 0.0006
 # Berapa banyak minimum percobaan
-a_percobaan = 15_000
+a_percobaan = 22_000
 # Batch  size terkecil mau berapa
 a_batchSize = 1000
 # alternative batch size
