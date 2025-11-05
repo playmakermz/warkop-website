@@ -293,14 +293,16 @@ a_probability = 0.0006
 # Berapa banyak minimum percobaan
 a_percobaan = 22_000
 # Batch  size terkecil mau berapa
-a_batchSize = 1000
+a_batchSize = 200
 # alternative batch size
 # ini gak boleh lebih dari 10. karena setiap pull disini bernilai 10, beserta laporan mereka juga
-a_little_batch_size = 10
+a_little_batch_size = 100
 # Ini untuk memilih meotde pull 
 # NO : Normal speed 
 # MP : Multiprocess
 pull_method = 'NO'
+# p100
+pp100 = 0.999
 
 
 
@@ -477,6 +479,8 @@ def predict_next_jackpot_mle(jackpot_distances):
   mean_k = float(np.mean(data))
   p_hat = 1.0 / mean_k
 
+  #pp100
+
   mean_pred = mean_k
   median_pred = ceil(log(0.5) / log(1 - p_hat))
   p90_pred = ceil(log(1 - 0.90) / log(1 - p_hat))
@@ -484,7 +488,7 @@ def predict_next_jackpot_mle(jackpot_distances):
   p98_pred = ceil(log(1 - 0.95) / log(1 - p_hat))
   p99_pred = ceil(log(1 - 0.99) / log(1 - p_hat))
   p999_pred = ceil(log(1 - 0.999) / log(1 - p_hat))
-  p100_pred = ceil(log(1 - 0.9999) / log(1 - p_hat))
+  p100_pred = ceil(log(1 - pp100) / log(1 - p_hat))
   p101_pred = ceil(log(1 - 0.99999) / log(1 - p_hat))
   p102_pred = ceil(log(1 - 0.99999) / log(1 - p_hat))
 
