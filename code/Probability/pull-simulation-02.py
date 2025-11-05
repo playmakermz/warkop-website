@@ -4,7 +4,7 @@ import statistics
 import os
 import numpy as np
 import pandas as pd
-from math import log, ceil
+from numpy import log, ceil, log1p
 import multiprocessing as mp
 from datetime import datetime
 
@@ -13,6 +13,7 @@ try:
     NUMBA_AVAILABLE = True
 except ImportError:
     NUMBA_AVAILABLE = False
+
 
 
 """
@@ -381,15 +382,15 @@ Total: 13226
 
 
 #Game Name
-game_name = "Arknights"
+game_name = "System 02 - HSR Scharacter"
 # Kemungkinan beruntung!
 # 0.8 untuk Light Cone
 # a_probability = 0.0008
-a_probability = 0.0020
+a_probability = 0.0006
 # Berapa banyak minimum percobaan
-a_percobaan = 6_000
+a_percobaan = 15_000
 # Batch  size terkecil mau berapa
-a_batchSize = 300
+a_batchSize = 1000
 # alternative batch size
 # ini gak boleh lebih dari 10. karena setiap pull disini bernilai 10, beserta laporan mereka juga
 a_little_batch_size = 10
@@ -397,8 +398,6 @@ a_little_batch_size = 10
 # NO : Normal speed 
 # MP : Multiprocess
 pull_method = 'NO'
-# atur untuk nilai minimal berapa banyak usaha menuju loop. bisa nilai 0 sampai infinite
-min_desire = 9800
 
 
 # =============================================================> Cukup Modifikasi bagian sini! <===================================================================
@@ -585,16 +584,25 @@ def predict_next_jackpot_mle(jackpot_distances):
   mean_k = float(np.mean(data))
   p_hat = 1.0 / mean_k
 
+  # Ganti log(1 - p_hat) dengan log1p(-p_hat)
+  log_survival_prob = log1p(-p_hat)
+
+# Pastikan log_survival_prob tidak nol untuk menghindari ZeroDivisionError
+  if log_survival_prob == 0:
+    # return error atau nilai default besar
+    # ...
+    return None # Atau raise Exception
+
   mean_pred = mean_k
-  median_pred = ceil(log(0.5) / log(1 - p_hat))
-  p90_pred = ceil(log(1 - 0.90) / log(1 - p_hat))
-  p95_pred = ceil(log(1 - 0.95) / log(1 - p_hat))
-  p98_pred = ceil(log(1 - 0.95) / log(1 - p_hat))
-  p99_pred = ceil(log(1 - 0.99) / log(1 - p_hat))
-  p999_pred = ceil(log(1 - 0.999) / log(1 - p_hat))
-  p100_pred = ceil(log(1 - 0.9999) / log(1 - p_hat)) # ======================== p100 / e100 ( 0.9999 )
-  p101_pred = ceil(log(1 - 0.99999) / log(1 - p_hat))
-  p102_pred = ceil(log(1 - 0.99999) / log(1 - p_hat))
+  median_pred = ceil(log(0.5) / log_survival_prob)
+  p90_pred = ceil(log(1 - 0.90) / log_survival_prob)
+  p95_pred = ceil(log(1 - 0.95) / log_survival_prob)
+  p98_pred = ceil(log(1 - 0.98) / log_survival_prob) # 0.98, bukan 0.95
+  p99_pred = ceil(log(1 - 0.99) / log_survival_prob)
+  p999_pred = ceil(log(1 - 0.999) / log_survival_prob)
+  p100_pred = ceil(log(1 - 0.9999) / log_survival_prob)
+  p101_pred = ceil(log(1 - 0.99999) / log_survival_prob)
+  p102_pred = ceil(log(1 - 0.999999) / log_survival_prob)
 
   print("\n🎯 Prediksi Jackpot Berikutnya (MLE):")
   print(f"- p̂ (peluang jackpot per pull): {p_hat:.6f} ({p_hat*100:.4f}%)")
@@ -766,7 +774,7 @@ def automatic_pull():
             print(f"\033[34m ===================== Semua loop selesai  ======================= \033[0m")
             print("\033[32m ====================> Real World Pull Now! <================= \033[0m")
             print(f"\n ==========================> Game : {game_name} <=========================")
-      # Akhiri loop ini jika minimum.               
+      # Akhiri loop ini
             loop_terakhir = False
       # akhiri semua loop, ini untuk mastikan bagian kedua berakhir
             loop_bagian_dua = False
