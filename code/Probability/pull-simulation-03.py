@@ -10,6 +10,7 @@ from datetime import datetime
 
 try:
     from numba import jit
+
     NUMBA_AVAILABLE = True
 except ImportError:
     NUMBA_AVAILABLE = False
@@ -24,10 +25,10 @@ except ImportError:
 3. intinya dengan simulasi ini, intinya "Strike when iron is hot".
 4. jangan takut gagal di simulasi trial. Ambil yang menurutmu paling tinggi. kalau gagal bisa coba lagi nanti.
 
-# Teori dasar ke dua 
+# Teori dasar ke dua
 
-Bayangkan ini adalah lomba lempar dadu untuk mendapatkan angka 6. ada dua dadu: dadu pertama berbentuk lacip dan kotak sempurna, dadu kedua bentuknya lebih halus pada setiap sisinya. 
-simulasi kita ibaratkan sebagai dadu halus, sedangkan real adalah dadu lancip. tentu ada perbedaan pada permukaan dadu, yang memungkinkan mereka tidak berjalan sepenuhnya sama 100%. 
+Bayangkan ini adalah lomba lempar dadu untuk mendapatkan angka 6. ada dua dadu: dadu pertama berbentuk lacip dan kotak sempurna, dadu kedua bentuknya lebih halus pada setiap sisinya.
+simulasi kita ibaratkan sebagai dadu halus, sedangkan real adalah dadu lancip. tentu ada perbedaan pada permukaan dadu, yang memungkinkan mereka tidak berjalan sepenuhnya sama 100%.
 Tetapi yang paling penting disini adalah sebuah 'act' untuk mencari hasil terdekat dengan jackpot pada dadu lancip. karena dasar perbandingan antara dadu lancip dan dadu halus adalah sama-sama 1/6.
 ini adalah 'act' untuk mendekati.
 
@@ -182,8 +183,8 @@ a_batchSize = 300
 # alternative batch size
 # ini gak boleh lebih dari 10. karena setiap pull disini bernilai 10, beserta laporan mereka juga
 a_little_batch_size = 10
-# Ini untuk memilih meotde pull 
-# NO : Normal speed 
+# Ini untuk memilih meotde pull
+# NO : Normal speed
 # MP : Multiprocess
 pull_method = 'NO'
 
@@ -266,7 +267,7 @@ Total pull: 33052
 
 Pull saber, tapi rate off.
 
- ============  Game Name : System 02 - HSR Scharacter Time: 06:19:25 ============= 
+ ============  Game Name : System 02 - HSR Scharacter Time: 06:19:25 =============
 
  Ini nilai percobaan : 700 , Nilai pull baru: 11500 , Total pull: 11995
  Ini nilai percobaan : 300 , Nilai pull baru: 12200 , Total pull: 12695
@@ -326,8 +327,8 @@ a_batchSize = 1000
 # alternative batch size
 # ini gak boleh lebih dari 10. karena setiap pull disini bernilai 10, beserta laporan mereka juga
 a_little_batch_size = 10
-# Ini untuk memilih meotde pull 
-# NO : Normal speed 
+# Ini untuk memilih meotde pull
+# NO : Normal speed
 # MP : Multiprocess
 pull_method = 'NO'
 
@@ -372,28 +373,28 @@ pull Baru: 12810
 Total: 13226
 """
 
+
 # =============================================================> Cukup Modifikasi bagian sini! <===================================================================
 
-#Game Name
+# Game Name
 game_name = "System 02 - HSR Scharacter"
 # Kemungkinan beruntung!
 # 0.8 untuk Light Cone
 # a_probability = 0.0008
 a_probability = 0.0006
 # Berapa banyak minimum percobaan
-a_percobaan = 28_000
+a_percobaan = 22_000
 # Batch  size terkecil mau berapa
 a_batchSize = 200
 # alternative batch size
 # ini gak boleh lebih dari 10. karena setiap pull disini bernilai 10, beserta laporan mereka juga
 a_little_batch_size = 100
-# Ini untuk memilih meotde pull 
-# NO : Normal speed 
+# Ini untuk memilih meotde pull
+# NO : Normal speed
 # MP : Multiprocess
-pull_method = 'NO'
-# p100
-pp100 = 0.9
-
+pull_method = "NO"
+# p100 (0.9999)
+pp100 = 0.99
 
 
 # =============================================================> Cukup Modifikasi bagian sini! <===================================================================
@@ -408,14 +409,14 @@ a_03 = True
 
 # ======================== Variabel penentu =======================================================
 # Variabel sampai mendekati jackpot. Ubah Nilai N sesuai dengan Streak tertinggi yang didapatkan sesuai dengan pull game.
-nilai_N =  a_percobaan
+nilai_N = a_percobaan
 
 # Berapa detik sekali melakukan print
-log_interval=10
+log_interval = 10
 
-#Ukuran batch size one pull
+# Ukuran batch size one pull
 little_batch_size = 1
-#Ukuran batch size automatic pull fast
+# Ukuran batch size automatic pull fast
 batch_size = a_batchSize
 
 # ======================== Variabel Modification on process =======================================================
@@ -443,185 +444,240 @@ on_pull = 0
 # untuk automatic pull
 loop_test = True
 
+
 # ================================== Clear screen untuk melakukan refresh screen
 def clear_screen():
-  # For Windows
-  if os.name == 'nt':
-      _ = os.system('cls')
-  # For macOS and Linux
-  else:
-      _ = os.system('clear')
+    # For Windows
+    if os.name == "nt":
+        _ = os.system("cls")
+    # For macOS and Linux
+    else:
+        _ = os.system("clear")
+
 
 # ============================== Opsi 01
 def satu_pull():
-  """Satu kali pull"""
-  global jarak_jackpot, total_jackpot, total_jackpot_terakhir, total_pulls,new_pull, loop_test, loop_terakhir, loop_bagian_dua, on_pull
+    """Satu kali pull"""
+    global \
+        jarak_jackpot, \
+        total_jackpot, \
+        total_jackpot_terakhir, \
+        total_pulls, \
+        new_pull, \
+        loop_test, \
+        loop_terakhir, \
+        loop_bagian_dua, \
+        on_pull
 
-  # ini adalah berapa banyak batch nilai random yang akan digenerate
-  pulls = np.random.random(size=little_batch_size)
-  # ini akan mencari tau kalau ada nilai random yang lebih kecil dari p(probabilitas jackpot))
-  hits = np.where(pulls < p)[0]  # index jackpot. Informasi array dimana saja jackpot ditemukan.
+    # ini adalah berapa banyak batch nilai random yang akan digenerate
+    pulls = np.random.random(size=little_batch_size)
+    # ini akan mencari tau kalau ada nilai random yang lebih kecil dari p(probabilitas jackpot))
+    hits = np.where(pulls < p)[
+        0
+    ]  # index jackpot. Informasi array dimana saja jackpot ditemukan.
 
-  # ini adalah mencari tau kalau ada nilai random yang lebih kecil dari p(probabilitas jackpot))
-  if len(hits) > 0:
-      # Jackpot pertama dalam batch 'hits'
-      first_hit = hits[0] + 1
-      # Jackpot pertama dalam batch 'hits'
-      jarak_jackpot += first_hit
-      # Jackpot pertama dalam batch 'hits'
-      total_pulls += first_hit
-      # Informasi jackpot didapatkan +1
-      total_jackpot += 1
-      # Informasi jackpot yang sebelumnya didapatkanberapa pull
-      total_jackpot_terakhir = jarak_jackpot
-      # informasi banyak pull menuju jackpot disimpan ke list jackpot
-      jackpot_list.append(jarak_jackpot)
-      # informai percobaan di reset ke nol
-      jarak_jackpot = 0
-      # Format on going pull ke 0
-      on_pull = 0
-      print(f"\n ====>  jackpot jackpot didapatkan {total_pulls}  <====")
-      print(f"====>  Informasi New Pull         {new_pull}  <====")
-      print(f"\033[31m =================== Jackpot didapatkan. Misi Gagal! ===================== \033[0m")
-      # Catatat kegagalan ini
-      with open("jackpot.txt", "a") as f:
-          f.write(f"\n ------> Kegagalan pada simulasi ke: {new_pull} , pull baru: {new_pull} , Total pull: {total_jackpot_terakhir}")
-      # akhiri loop ke 99%
-      # New pull di reset ke nol
-      new_pull = 0
-      loop_terakhir = False
+    # ini adalah mencari tau kalau ada nilai random yang lebih kecil dari p(probabilitas jackpot))
+    if len(hits) > 0:
+        # Jackpot pertama dalam batch 'hits'
+        first_hit = hits[0] + 1
+        # Jackpot pertama dalam batch 'hits'
+        jarak_jackpot += first_hit
+        # Jackpot pertama dalam batch 'hits'
+        total_pulls += first_hit
+        # Informasi jackpot didapatkan +1
+        total_jackpot += 1
+        # Informasi jackpot yang sebelumnya didapatkanberapa pull
+        total_jackpot_terakhir = jarak_jackpot
+        # informasi banyak pull menuju jackpot disimpan ke list jackpot
+        jackpot_list.append(jarak_jackpot)
+        # informai percobaan di reset ke nol
+        jarak_jackpot = 0
+        # Format on going pull ke 0
+        on_pull = 0
+        print(f"\n ====>  jackpot jackpot didapatkan {total_pulls}  <====")
+        print(f"====>  Informasi New Pull         {new_pull}  <====")
+        print(
+            f"\033[31m =================== Jackpot didapatkan. Misi Gagal! ===================== \033[0m"
+        )
+        # Catatat kegagalan ini
+        with open("jackpot.txt", "a") as f:
+            f.write(
+                f"\n ------> Kegagalan pada simulasi ke: {new_pull} , pull baru: {new_pull} , Total pull: {total_jackpot_terakhir}"
+            )
+        # akhiri loop ke 99%
+        # New pull di reset ke nol
+        new_pull = 0
+        loop_terakhir = False
 
-  else:
-      # Tidak ada jackpot dalam batch
-      # Berikan ke total on going jarak_jackpot
-      jarak_jackpot += little_batch_size
-      total_pulls += little_batch_size
-      # Tambahkan informasi pull baru (spesial untuk fungsi ini saja   )
-      new_pull += little_batch_size
-      # tambahkan pull ke on going 
-      on_pull += little_batch_size
-      print(f"kamu tidak beruntung, total pull: {total_pulls:,}")
+    else:
+        # Tidak ada jackpot dalam batch
+        # Berikan ke total on going jarak_jackpot
+        jarak_jackpot += little_batch_size
+        total_pulls += little_batch_size
+        # Tambahkan informasi pull baru (spesial untuk fungsi ini saja   )
+        new_pull += little_batch_size
+        # tambahkan pull ke on going
+        on_pull += little_batch_size
+        print(f"kamu tidak beruntung, total pull: {total_pulls:,}")
 
 
 # ================================================================== Satu pull alternative ==================================================================
 def a_satu_pull(asr):
-  """Satu kali pull"""
-  global jarak_jackpot, total_jackpot, total_jackpot_terakhir, total_pulls,new_pull, loop_test, loop_terakhir, loop_bagian_dua, on_pull
+    """Satu kali pull"""
+    global \
+        jarak_jackpot, \
+        total_jackpot, \
+        total_jackpot_terakhir, \
+        total_pulls, \
+        new_pull, \
+        loop_test, \
+        loop_terakhir, \
+        loop_bagian_dua, \
+        on_pull
 
-  # ini adalah berapa banyak batch nilai random yang akan digenerate
-  pulls = np.random.random(size=a_little_batch_size)
-  # ini akan mencari tau kalau ada nilai random yang lebih kecil dari p(probabilitas jackpot))
-  hits = np.where(pulls < p)[0]  # index jackpot. Informasi array dimana saja jackpot ditemukan.
+    # ini adalah berapa banyak batch nilai random yang akan digenerate
+    pulls = np.random.random(size=a_little_batch_size)
+    # ini akan mencari tau kalau ada nilai random yang lebih kecil dari p(probabilitas jackpot))
+    hits = np.where(pulls < p)[
+        0
+    ]  # index jackpot. Informasi array dimana saja jackpot ditemukan.
 
-  # ini adalah mencari tau kalau ada nilai random yang lebih kecil dari p(probabilitas jackpot))
-  if len(hits) > 0:
-      # Jackpot pertama dalam batch 'hits'
-      first_hit = hits[0] + 1
-      # Jackpot pertama dalam batch 'hits'
-      jarak_jackpot += first_hit
-      # Jackpot pertama dalam batch 'hits'
-      total_pulls += first_hit
-      # Informasi jackpot didapatkan +1
-      total_jackpot += 1
-      # Informasi jackpot yang sebelumnya didapatkanberapa pull
-      total_jackpot_terakhir = jarak_jackpot
-      # informasi banyak pull menuju jackpot disimpan ke list jackpot
-      jackpot_list.append(jarak_jackpot)
-      # informai percobaan di reset ke nol
-      jarak_jackpot = 0
-      print(f"====>  jackpot jackpot didapatkan {len(jackpot_list)}  <====")
-      print(f"====>  Informasi Total pull         {total_pulls:,}  <====")
-      print(f"====>  Informasi New Pull         {new_pull}  <====")
-      print(f"====> Menuju p99 {asr} , seharusnya kurang {(asr - new_pull)} percobaan lagi!")
-      print(f"\033[31m =================== Jackpot didapatkan. Loop Diulang! ===================== \033[0m")
-      # akhiri loop ke 99%
-      # New pull di reset ke nol
-      new_pull = 0
-      loop_terakhir = False
-      # reset pull on going
-      on_pull = 0
+    # ini adalah mencari tau kalau ada nilai random yang lebih kecil dari p(probabilitas jackpot))
+    if len(hits) > 0:
+        # Jackpot pertama dalam batch 'hits'
+        first_hit = hits[0] + 1
+        # Jackpot pertama dalam batch 'hits'
+        jarak_jackpot += first_hit
+        # Jackpot pertama dalam batch 'hits'
+        total_pulls += first_hit
+        # Informasi jackpot didapatkan +1
+        total_jackpot += 1
+        # Informasi jackpot yang sebelumnya didapatkanberapa pull
+        total_jackpot_terakhir = jarak_jackpot
+        # informasi banyak pull menuju jackpot disimpan ke list jackpot
+        jackpot_list.append(jarak_jackpot)
+        # informai percobaan di reset ke nol
+        jarak_jackpot = 0
+        print(f"====>  jackpot jackpot didapatkan {len(jackpot_list)}  <====")
+        print(f"====>  Informasi Total pull         {total_pulls:,}  <====")
+        print(f"====>  Informasi New Pull         {new_pull}  <====")
+        print(
+            f"====> Menuju p99 {asr} , seharusnya kurang {(asr - new_pull)} percobaan lagi!"
+        )
+        print(
+            f"\033[31m =================== Jackpot didapatkan. Loop Diulang! ===================== \033[0m"
+        )
+        # akhiri loop ke 99%
+        # New pull di reset ke nol
+        new_pull = 0
+        loop_terakhir = False
+        # reset pull on going
+        on_pull = 0
 
-  else:
-      # Tidak ada jackpot dalam batch
-      jarak_jackpot += a_little_batch_size
-      total_pulls += a_little_batch_size
-      # Tambahkan informasi pull baru (spesial untuk fungsi ini saja   )
-      new_pull += a_little_batch_size
-      # tambahkan on going pull
-      on_pull += a_little_batch_size
+    else:
+        # Tidak ada jackpot dalam batch
+        jarak_jackpot += a_little_batch_size
+        total_pulls += a_little_batch_size
+        # Tambahkan informasi pull baru (spesial untuk fungsi ini saja   )
+        new_pull += a_little_batch_size
+        # tambahkan on going pull
+        on_pull += a_little_batch_size
+
 
 # ====================================================== Opsi 02
 def sepuluh_pull():
-  """Sepuluh kali pull"""
-  # dimulai dari 0 sampai 9(hitungannya adalah 10 kali))
-  for i in range(10):
-      print(f"Pull ke : {i+1}: ", end="")
-      satu_pull()
+    """Sepuluh kali pull"""
+    # dimulai dari 0 sampai 9(hitungannya adalah 10 kali))
+    for i in range(10):
+        print(f"Pull ke : {i + 1}: ", end="")
+        satu_pull()
+
 
 # =================================================== opsi 04 melakukan input manual =============================================
 def manual_pull(asr):
-  """ Pull sebanyak input manual """
-  for i in range(asr):
-    print(f"pull Manual ke : {i+1}. Jarak Jackpot : {jarak_jackpot:,}", end="")
-    satu_pull()
+    """Pull sebanyak input manual"""
+    for i in range(asr):
+        print(f"pull Manual ke : {i + 1}. Jarak Jackpot : {jarak_jackpot:,}", end="")
+        satu_pull()
+
 
 # ========================================================= Prediksi untuk opsi 03
 def predict_next_jackpot_mle(jackpot_distances):
-  """
-  Prediksi (frekuentis) jarak pull sampai jackpot berikutnya
-  berdasarkan data jarak jackpot sebelumnya.
-  """
-  global data, mean_k, p_hat, mean_pred, median_pred, p90_pred, p95_pred, p99_pred, p98_pred, p100_pred
-  data = [int(k) for k in jackpot_distances if isinstance(k, (int, np.integer)) and k > 0]
-  if len(data) == 0:
-      print("❌ Data jackpot kosong, tidak bisa prediksi.")
-      return None
+    """
+    Prediksi (frekuentis) jarak pull sampai jackpot berikutnya
+    berdasarkan data jarak jackpot sebelumnya.
+    """
+    global \
+        data, \
+        mean_k, \
+        p_hat, \
+        mean_pred, \
+        median_pred, \
+        p90_pred, \
+        p95_pred, \
+        p99_pred, \
+        p98_pred, \
+        p100_pred
+    data = [
+        int(k) for k in jackpot_distances if isinstance(k, (int, np.integer)) and k > 0
+    ]
+    if len(data) == 0:
+        print("❌ Data jackpot kosong, tidak bisa prediksi.")
+        return None
 
-  mean_k = float(np.mean(data))
-  p_hat = 1.0 / mean_k
+    mean_k = float(np.mean(data))
+    p_hat = 1.0 / mean_k
 
-  mean_pred = mean_k
-  median_pred = ceil(log(0.5) / log(1 - p_hat))
-  p90_pred = ceil(log(1 - 0.90) / log(1 - p_hat))
-  p95_pred = ceil(log(1 - 0.95) / log(1 - p_hat))
-  p98_pred = ceil(log(1 - 0.95) / log(1 - p_hat))
-  p99_pred = ceil(log(1 - 0.99) / log(1 - p_hat))
-  p999_pred = ceil(log(1 - 0.999) / log(1 - p_hat))
-  p100_pred = ceil(log(1 - pp100) / log(1 - p_hat))
-  p101_pred = ceil(log(1 - 0.99999) / log(1 - p_hat))
-  p102_pred = ceil(log(1 - 0.99999) / log(1 - p_hat))
+    mean_pred = mean_k
+    median_pred = ceil(log(0.5) / log(1 - p_hat))
+    p90_pred = ceil(log(1 - 0.90) / log(1 - p_hat))
+    p95_pred = ceil(log(1 - 0.95) / log(1 - p_hat))
+    p98_pred = ceil(log(1 - 0.95) / log(1 - p_hat))
+    p99_pred = ceil(log(1 - 0.99) / log(1 - p_hat))
+    p999_pred = ceil(log(1 - 0.999) / log(1 - p_hat))
+    p100_pred = ceil(log(1 - pp100) / log(1 - p_hat))
+    p101_pred = ceil(log(1 - 0.99999) / log(1 - p_hat))
+    p102_pred = ceil(log(1 - 0.99999) / log(1 - p_hat))
 
-  print("\n🎯 Prediksi Jackpot Berikutnya (MLE):")
-  print(f"- p̂ (peluang jackpot per pull): {p_hat:.6f} ({p_hat*100:.4f}%)")
-  print(f"- Rata-rata pulls sampai jackpot berikutnya : {int(round(mean_pred)):,}")
-  print(f"- Median pulls (50% kasus)                : {median_pred:,}")
-  print(f"- 90% kemungkinan ≤                        : {p90_pred:,}")
-  print(f"- 95% kemungkinan ≤                        : {p95_pred:,}")
-  print(f"- 98% kemungkinan ≤                        : {p98_pred:,}")
-  print(f"- 99% kemungkinan ≤                        : {p99_pred:,}")
-  print(f"- 99.09% kemungkinan ≤                       : {p999_pred:,}")
-  print(f"- 99.99% kemungkinan ≤                    ------>    : {p100_pred:,}")
-  print(f"- 99.999% kemungkinan ≤                       : {p101_pred:,}  ---- Kurang : + {jarak_jackpot - p101_pred}")
-  print(f"- 99.9999% kemungkinan ≤                       : {p102_pred:,}  ---- Kurang : + {jarak_jackpot - p102_pred}")
+    print("\n🎯 Prediksi Jackpot Berikutnya (MLE):")
+    print(f"- p̂ (peluang jackpot per pull): {p_hat:.6f} ({p_hat * 100:.4f}%)")
+    print(f"- Rata-rata pulls sampai jackpot berikutnya : {int(round(mean_pred)):,}")
+    print(f"- Median pulls (50% kasus)                : {median_pred:,}")
+    print(f"- 90% kemungkinan ≤                        : {p90_pred:,}")
+    print(f"- 95% kemungkinan ≤                        : {p95_pred:,}")
+    print(f"- 98% kemungkinan ≤                        : {p98_pred:,}")
+    print(f"- 99% kemungkinan ≤                        : {p99_pred:,}")
+    print(f"- 99.09% kemungkinan ≤                       : {p999_pred:,}")
+    print(f"- 99.99% kemungkinan ≤                    ------>    : {p100_pred:,}")
+    print(
+        f"- 99.999% kemungkinan ≤                       : {p101_pred:,}  ---- Kurang : + {jarak_jackpot - p101_pred}"
+    )
+    print(
+        f"- 99.9999% kemungkinan ≤                       : {p102_pred:,}  ---- Kurang : + {jarak_jackpot - p102_pred}"
+    )
 
-  #with open("jackpot.txt", "a") as f:
-  #  f.write(f"\n ------> Kemungkinan 99.99% : {p100_pred} \n")
+    # with open("jackpot.txt", "a") as f:
+    #  f.write(f"\n ------> Kemungkinan 99.99% : {p100_pred} \n")
 
-  return {
-      "p_hat": p_hat,
-      "mean_pred": int(round(mean_pred)),
-      "median_pred": int(median_pred),
-      "p90_pred": int(p90_pred),
-      "p95_pred": int(p95_pred),
-      "p98_pred": int(p98_pred),
-      "p99_pred": int(p99_pred),
-      "p99.09_pred": int(p100_pred),
-      "p100_pred": int(p100_pred),
-  }
+    print(f"p100 : {p100_pred:,}")
+
+    return {
+        "p_hat": p_hat,
+        "mean_pred": int(round(mean_pred)),
+        "median_pred": int(median_pred),
+        "p90_pred": int(p90_pred),
+        "p95_pred": int(p95_pred),
+        "p98_pred": int(p98_pred),
+        "p99_pred": int(p99_pred),
+        "p99.09_pred": int(p100_pred),
+        "p100_pred": int(p100_pred),
+    }
+
 
 # ========================================================== For Numba
 
 if NUMBA_AVAILABLE:
+
     @jit
     def simulate_batches(prob, batch_size, nilai_N, start_streak):
         """
@@ -655,7 +711,6 @@ if NUMBA_AVAILABLE:
         return pulls_done, jackpots, streak
 
 
-
 # ========================================================= Opsi 03
 def automatic_pull():
     """
@@ -671,10 +726,14 @@ def automatic_pull():
     if NUMBA_AVAILABLE:
         # single JIT-compiled call does the heavy lifting
         pulls, jackpots, final_streak = simulate_batches(
-            p, batch_size, nilai_N , jarak_jackpot
+            p, batch_size, nilai_N, jarak_jackpot
         )
-        print("FFFFFFFFFFFFFFFFFFFFFFFFF ===================================================== FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")
-        print(f"\n Informasi sebelum berpindah ke loop lambat. nilai_N : {nilai_N} - 10  dan jarak_jackpot : {jarak_jackpot}")
+        print(
+            "FFFFFFFFFFFFFFFFFFFFFFFFF ===================================================== FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
+        )
+        print(
+            f"\n Informasi sebelum berpindah ke loop lambat. nilai_N : {nilai_N} - 10  dan jarak_jackpot : {jarak_jackpot}"
+        )
         total_pulls += pulls
         if jackpots:
             jackpot_list.extend(jackpots)
@@ -688,9 +747,15 @@ def automatic_pull():
             if total_jackpot_terakhir >= (nilai_N - 10):
                 jarak_jackpot = total_jackpot_terakhir
                 with open("jackpot.txt", "a") as f:
-                  f.write(f"\n Informasi sebelum berpindah ke loop lambat. nilai_N : {nilai_N}  dan total_jackpot_terakhir : {total_jackpot_terakhir}")
-                print("FFFFFFFFFFFFFFFFFFFFFFFFF ===================================================== FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")
-                print(f"\n Informasi sebelum berpindah ke loop lambat. nilai_N : {nilai_N}  dan total_jackpot_terakhir : {total_jackpot_terakhir}")
+                    f.write(
+                        f"\n Informasi sebelum berpindah ke loop lambat. nilai_N : {nilai_N}  dan total_jackpot_terakhir : {total_jackpot_terakhir}"
+                    )
+                print(
+                    "FFFFFFFFFFFFFFFFFFFFFFFFF ===================================================== FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
+                )
+                print(
+                    f"\n Informasi sebelum berpindah ke loop lambat. nilai_N : {nilai_N}  dan total_jackpot_terakhir : {total_jackpot_terakhir}"
+                )
                 break
             pulls_arr = np.random.random(size=batch_size)
             hits = np.where(pulls_arr < p)[0]
@@ -709,8 +774,12 @@ def automatic_pull():
 
             if time.time() - last_log >= 10:
                 clear_screen()
-                print("=====================>  Fast Pull System  <====================\n")
-                print(f"kamu tidak beruntung, Pull sebelum jackpot: {total_jackpot_terakhir:,}")
+                print(
+                    "=====================>  Fast Pull System  <====================\n"
+                )
+                print(
+                    f"kamu tidak beruntung, Pull sebelum jackpot: {total_jackpot_terakhir:,}"
+                )
                 print(f"Target jarak adalah : {(nilai_N - 10)}")
                 print(f"Jackpot tertinggi : {max(jackpot_list):,}")
                 print(f"Total pull : {total_pulls:,}")
@@ -718,14 +787,14 @@ def automatic_pull():
                 last_log = time.time()
                 print(f"Array List JackPot : {sorted(jackpot_list, reverse=True)[:5]}")
     # Setelah selesai, lakukan pull real world
-    #jarak_jackpot = total_jackpot_terakhir
+    # jarak_jackpot = total_jackpot_terakhir
     print(f"Total pull       : {total_pulls:,}")
     print(f"Total jackpot    : {total_jackpot:,}")
     print(f"Jackpot tertinggi: {max(jackpot_list)}")
     print(f"jarak jackpot terakhir: {total_jackpot_terakhir:,}")
     print(f"Informasi on-going pull: {jarak_jackpot}")
 
-  # Setelah selesai, tampilkan analisis distribusi jackpot
+    # Setelah selesai, tampilkan analisis distribusi jackpot
     df = pd.DataFrame(jackpot_list, columns=["Jarak Jackpot"])
     print("\n📊 Distribusi Jackpot:")
     print(df.describe())  # statistik ringkas
@@ -735,79 +804,102 @@ def automatic_pull():
     jackpot_list.sort(reverse=True)
     # Buat file untuk list jackpot
 
-
     try:
         modus = df["Jarak Jackpot"].mode()[0]
         print(f"\nModus Jackpot: {modus}")
-      #file_j = open("jackpot.txt", "w")
-      #file_j.write(jackpot_list)
-      #file_j.close()
-        print('=========> Catatan jackpot telah ditulis ')
+        # file_j = open("jackpot.txt", "w")
+        # file_j.write(jackpot_list)
+        # file_j.close()
+        print("=========> Catatan jackpot telah ditulis ")
     except:
         print("\nModus tidak dapat dihitung (data terlalu unik).")
     predict_next_jackpot_mle(jackpot_list)
 
-  # iteration untuk loop terakhir
+    # iteration untuk loop terakhir
     ii_terakhir = 0
-  # bukti loop tambahan
+    # bukti loop tambahan
     bukti = 0
 
     while loop_terakhir:
-    # tujuan adalah jika off chance pull lebih dari prediksi 95% maka akhiri loop
-        if ii_terakhir >= (p100_pred - 10 ): # <============== Atur nilai ini sesuai dengan prediksi 99% jackpot
+        # tujuan adalah jika off chance pull lebih dari prediksi 95% maka akhiri loop
+        if ii_terakhir >= (
+            p100_pred - 10
+        ):  # <============== Atur nilai ini sesuai dengan prediksi 99% jackpot
             a_03 = False
-            print(f"\033[34m ===================== Belum Jackpot ======================= \033[0m")
+            print(
+                f"\033[34m ===================== Belum Jackpot ======================= \033[0m"
+            )
             print("loop berakhir")
-            print(f"\033[34m ===================== Semua loop selesai  ======================= \033[0m")
-            print("\033[32m ====================> Real World Pull Now! <================= \033[0m")
-            print(f"\n ==========================> Game : {game_name} <=========================")
-      # Akhiri loop ini jika minimum.               
+            print(
+                f"\033[34m ===================== Semua loop selesai  ======================= \033[0m"
+            )
+            print(
+                "\033[32m ====================> Real World Pull Now! <================= \033[0m"
+            )
+            print(
+                f"\n ==========================> Game : {game_name} <========================="
+            )
+            # Akhiri loop ini jika minimum.
             loop_terakhir = False
-      # akhiri semua loop, ini untuk mastikan bagian kedua berakhir
+            # akhiri semua loop, ini untuk mastikan bagian kedua berakhir
             loop_bagian_dua = False
             # On Going pull
-            #on_pull += ii_terakhir
+            # on_pull += ii_terakhir
 
             # reset new pull
             new_pull = 0
             break
-    # tujuan jika belum jackpot, lakukan pull normal secara loop ke 95%
+        # tujuan jika belum jackpot, lakukan pull normal secara loop ke 95%
         else:
             a_satu_pull(p100_pred)
             bukti += 1
             ii_terakhir += a_little_batch_size
 
-    # ---- remainder of your original function (printing results, df.describe(), 
+    # ---- remainder of your original function (printing results, df.describe(),
     #       predict_next_jackpot_mle, and the final while loop) stays exactly the same ----
-
 
 
 # opsi 4
 def reset_button():
-  """Reset semua variabel"""
-  global total_pulls, total_jackpot, jarak_jackpot, total_jackpot_terakhir, jackpot_list, new_pull, ii_terakhir, bukti, loop_terakhir, on_pull
-  # ======================== Variabel Modification on process =======================================================
-  # keseluruhan pull yang dilakukan
-  total_pulls = 0
-  # Banyak jackpot yang didapatkan
-  total_jackpot = 0
-  # Banyak percobaan yang dilakukan sekarang untuk menuju jackpot
-  jarak_jackpot = 0
-  # banyak percobaan untukk jackpot sebelumnya
-  total_jackpot_terakhir = 0
-  # list jackpot
-  jackpot_list = [0]
-  # nilai total pull baru untuk simulasi selain automatic
-  new_pull = 0
-  # loop untuk mendekati 95% jackpot
-  ii_terakhir = 0
-  # bukti loop tambahan
-  bukti = 0
-  # jalankan loop tambahan
-  loop_terakhir = True
-  # ======================== Variabel Modification on process =======================================================
-  clear_screen()
-  print("Semua variabel telah direset.")
+    """Reset semua variabel"""
+    global \
+        total_pulls, \
+        total_jackpot, \
+        jarak_jackpot, \
+        total_jackpot_terakhir, \
+        jackpot_list, \
+        new_pull, \
+        ii_terakhir, \
+        bukti, \
+        loop_terakhir, \
+        on_pull
+    # ======================== Variabel Modification on process =======================================================
+    # keseluruhan pull yang dilakukan
+    total_pulls = 0
+    # Banyak jackpot yang didapatkan
+    total_jackpot = 0
+    # Banyak percobaan yang dilakukan sekarang untuk menuju jackpot
+    jarak_jackpot = 0
+    # banyak percobaan untukk jackpot sebelumnya
+    total_jackpot_terakhir = 0
+    # list jackpot
+    jackpot_list_02 = jackpot_list
+    # hapus list jackpot original
+    jackpot_list = [0]
+
+    # nilai total pull baru untuk simulasi selain automatic
+    new_pull = 0
+    # loop untuk mendekati 95% jackpot
+    ii_terakhir = 0
+    # bukti loop tambahan
+    bukti = 0
+    # jalankan loop tambahan
+    loop_terakhir = True
+    # ======================== Variabel Modification on process =======================================================
+    clear_screen()
+    print("Semua variabel telah direset.")
+    predict_next_jackpot_mle(jackpot_list_02)
+    print(f" Jakpot tertinggi adalah : {max(jackpot_list_02)}")
 
 
 # ========================================================= Opsi 03b : Multiprocessing Alternative
@@ -862,7 +954,7 @@ def automatic_pull_mp(workers=None):
     print(f"⚡ Starting multiprocessing with {cores} processes")
 
     manager = mp.Manager()
-    stop_value = manager.Value('i', 0)   # updated when p100_pred known
+    stop_value = manager.Value("i", 0)  # updated when p100_pred known
     q = manager.Queue()
 
     seeds = [int(time.time()) + i for i in range(cores)]
@@ -900,8 +992,12 @@ def automatic_pull_mp(workers=None):
         # mirror old automatic_pull() progress output
         if time.time() - last_log >= log_interval:
             clear_screen()
-            print("=====================>  Fast Pull System (MP)  <====================\n")
-            print(f"kamu tidak beruntung, Pull sebelum jackpot: {total_jackpot_terakhir:,}")
+            print(
+                "=====================>  Fast Pull System (MP)  <====================\n"
+            )
+            print(
+                f"kamu tidak beruntung, Pull sebelum jackpot: {total_jackpot_terakhir:,}"
+            )
             if stop_value.value:
                 print(f"Target jarak adalah : {stop_value.value}")
             print(f"Jackpot tertinggi : {max(jackpot_list) if jackpot_list else 0:,}")
@@ -918,8 +1014,10 @@ def automatic_pull_mp(workers=None):
     pool.join()
 
     elapsed = time.time() - start_time
-    print("\n✅ Multiprocessing finished in "
-          f"{elapsed:.2f}s ({total_pulls/elapsed:,.0f} pulls/sec)")
+    print(
+        "\n✅ Multiprocessing finished in "
+        f"{elapsed:.2f}s ({total_pulls / elapsed:,.0f} pulls/sec)"
+    )
 
     # final stats just like automatic_pull()
     df = pd.DataFrame(jackpot_list, columns=["Jarak Jackpot"])
@@ -939,76 +1037,89 @@ def automatic_pull_mp(workers=None):
     loop_bagian_dua = False
 
 
-
 # ======================================== Langsung
 def langsung():
-  while loop_bagian_dua:
+    while loop_bagian_dua:
         reset_button()
         if pull_method == "NO":
-          automatic_pull()
+            automatic_pull()
         elif pull_method == "MP":
-          automatic_pull_mp()
-  print("\033[93m =============================== Semua loop selesai ===================================== \033[0m")
-  print("\033[93m =============================== Realword Pull      ===================================== \033[0m")
+            automatic_pull_mp()
+    print(
+        "\033[93m =============================== Semua loop selesai ===================================== \033[0m"
+    )
+    print(
+        "\033[93m =============================== Realword Pull      ===================================== \033[0m"
+    )
 
 
 # ========================= Starter =======================================================
 
+
 def main():
-  global total_jackpot
+    global total_jackpot
 
-  # Get the current date and time
-  current_datetime = datetime.now()
+    # Get the current date and time
+    current_datetime = datetime.now()
 
-  # Format the datetime object to a string showing only hour, minute, and second
-  formatted_time = current_datetime.strftime("%H:%M:%S")
+    # Format the datetime object to a string showing only hour, minute, and second
+    formatted_time = current_datetime.strftime("%H:%M:%S")
 
-  # Buat penanda waktu untuk file
-  with open("jackpot.txt", "a") as f:
-      f.write(f"\n ============  Game Name : {game_name} Time: {formatted_time} ============= \n")
-  # Lagnsung simulasi
-  langsung()
-  while True:
-      
-      print("\n================= Simulasi Gacha V2 =====================")
-      print(f"\n================= Game Name: {game_name} =====================")
-      print(f"Nilai Pull baru                : {new_pull}")
-      print(f"Banyak percobaan yang dilakukan sekarang untuk menuju jackpot : {jarak_jackpot}")
-      print(f"Bentuk on going setelah mengikuti panduan prediksi : {on_pull}")
-      print(f"banyak percobaan untukk jackpot sebelumnya  : {total_jackpot_terakhir}")
-      print("1. Pull 1 kali")
-      print("2. Pull 10 kali")
-      
-      if a_03 == True:
-        print("3. Automatic pull fast")
-      else:
-        print('.')
-      print("4. Manual pull input")
-      choice = input("Pilih opsi: ")
+    # Buat penanda waktu untuk file
+    with open("jackpot.txt", "a") as f:
+        f.write(
+            f"\n ============  Game Name : {game_name} Time: {formatted_time} ============= \n"
+        )
+    # Lagnsung simulasi
+    langsung()
+    while True:
+        print("\n================= Simulasi Gacha V2 =====================")
+        print(f"\n================= Game Name: {game_name} =====================")
+        print(f"Nilai Pull baru                : {new_pull}")
+        print(
+            f"Banyak percobaan yang dilakukan sekarang untuk menuju jackpot : {jarak_jackpot}"
+        )
+        print(f"Bentuk on going setelah mengikuti panduan prediksi : {on_pull}")
+        print(f"banyak percobaan untukk jackpot sebelumnya  : {total_jackpot_terakhir}")
+        print("1. Pull 1 kali")
+        print("2. Pull 10 kali")
 
-      if choice == "1":
-        satu_pull()
-      elif choice == "2":
-        sepuluh_pull()
-      elif choice == "3":
         if a_03 == True:
-          while loop_bagian_dua:
-            reset_button()
-            automatic_pull()
-          print("\033[93m =============================== Semua loop selesai ===================================== \033[0m")
-          print("\033[93m =============================== Realword Pull      ===================================== \033[0m")
+            print("3. Automatic pull fast")
         else:
-          print('03 empty')
-      elif choice == "4":
-        usIN = input("Pilih berapa banyak pull: ")
-        with open("jackpot.txt", "a") as f:
-          f.write(f"\n Ini nilai percobaan : {usIN} , Nilai pull baru: {new_pull} , Total pull: {jarak_jackpot}")
-        manual_pull(int(usIN))
-        # Catatan pull terbaru yang lama
-        rec_new_pull = new_pull
-      else:
-          print("Opsi tidak valid, coba lagi.")
+            print(".")
+        print("4. Manual pull input")
+        choice = input("Pilih opsi: ")
+
+        if choice == "1":
+            satu_pull()
+        elif choice == "2":
+            sepuluh_pull()
+        elif choice == "3":
+            if a_03 == True:
+                while loop_bagian_dua:
+                    reset_button()
+                    automatic_pull()
+                print(
+                    "\033[93m =============================== Semua loop selesai ===================================== \033[0m"
+                )
+                print(
+                    "\033[93m =============================== Realword Pull      ===================================== \033[0m"
+                )
+            else:
+                print("03 empty")
+        elif choice == "4":
+            usIN = input("Pilih berapa banyak pull: ")
+            with open("jackpot.txt", "a") as f:
+                f.write(
+                    f"\n Ini nilai percobaan : {usIN} , Nilai pull baru: {new_pull} , Total pull: {jarak_jackpot}"
+                )
+            manual_pull(int(usIN))
+            # Catatan pull terbaru yang lama
+            rec_new_pull = new_pull
+        else:
+            print("Opsi tidak valid, coba lagi.")
 
 
 if __name__ == "__main__":
-  main()
+    main()
