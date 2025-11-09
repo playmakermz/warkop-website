@@ -373,6 +373,8 @@ pull Baru: 12810
 Total: 13226
 """
 
+#Note:
+# 26_000 dan 0.99 = 33000
 
 # =============================================================> Cukup Modifikasi bagian sini! <===================================================================
 
@@ -383,7 +385,7 @@ game_name = "System 02 - HSR Scharacter"
 # a_probability = 0.0008
 a_probability = 0.0006
 # Berapa banyak minimum percobaan
-a_percobaan = 25_000
+a_percobaan = 23_000
 # Batch  size terkecil mau berapa
 a_batchSize = 600
 # alternative batch size
@@ -394,7 +396,7 @@ a_little_batch_size = 300
 # MP : Multiprocess
 pull_method = "NO"
 # p100 (0.9999)
-pp100 = 0.99
+pp100 = 0.999
 
 
 # =============================================================> Cukup Modifikasi bagian sini! <===================================================================
