@@ -6,14 +6,14 @@
 3. intinya dengan simulasi ini, intinya "Strike when iron is hot".
 4. jangan takut gagal di simulasi trial. Ambil yang menurutmu paling tinggi. kalau gagal bisa coba lagi nanti.
 
-# Teori dasar ke dua
+## Teori dasar ke dua
 
 Bayangkan ini adalah lomba lempar dadu untuk mendapatkan angka 6. ada dua dadu: dadu pertama berbentuk lacip dan kotak sempurna, dadu kedua bentuknya lebih halus pada setiap sisinya.
 simulasi kita ibaratkan sebagai dadu halus, sedangkan real adalah dadu lancip. tentu ada perbedaan pada permukaan dadu, yang memungkinkan mereka tidak berjalan sepenuhnya sama 100%.
 Tetapi yang paling penting disini adalah sebuah 'act' untuk mencari hasil terdekat dengan jackpot pada dadu lancip. karena dasar perbandingan antara dadu lancip dan dadu halus adalah sama-sama 1/6.
 ini adalah 'act' untuk mendekati.
 
-# Teori dalam bentuk matematika
+## Teori dalam bentuk matematika
 
 Jawabannya: Tono jauh lebih mungkin dapat “dua angka enam”.
 
@@ -30,12 +30,13 @@ Jadi peluang minimal sekali dapat dua-enam =
 Intuisi sederhana: satu percobaan peluangnya kecil (≈2,78%). Dengan 10 percobaan independen, kesempatan “minimal sekali berhasil” naik jadi ≈24,6%. Per percobaan tetap sama sulitnya, tapi banyak percobaan meningkatkan peluang kumulatif.
 
 
-# Mengenai waktu kapan pull
+## Mengenai waktu kapan pull
 
 Pada teori probabilitas, kapan dilakukan pull tidak akan berpengaruh, karena semua total pull yang akan kita lakkukan dihitunga jadi satu.
 Semisal kita melempar dua dadu pada hari senin, dan hari selasa, maka total percobaan yang kita lakukan adalah 2 kali.
 
-# ======================================== Catatan Pull ==============================================================
+
+###  Catatan Pull 
 
 0. Mengubah Persen ke desimal: 0.50% / 100 = 0,0050
 
@@ -56,7 +57,7 @@ Cara Penggunaan V2:
 
 *Hati-hati terkadang ampas itu menyertai simulasi. Untuk HSR gunakan simulasi satu hari satu kali
 
-# =========================================== pendekatan ===================================
+### pendekatan 
 
 ## pendekatan 1
 
@@ -72,10 +73,7 @@ Cara Penggunaan V2:
 2. Real world pull
 3. Reset dan mulai tahapan 1-2 dari awal lagi.
 
-
-# ========================================= Pendekatan ===================================
-
-## Informasi Fast Pull
+# Informasi Fast Pull
 
 Fast pull ini adalah simulasi pull yang dilakukan dalam satu kali perulangan. Semisal kita melakukan 100 pull dalam satu kali perulangan, maka kita tidak perlu melakukan 100 kali perulangan.
 
@@ -85,7 +83,9 @@ semisal untuk AK batch size 100, untuk HSR batch size 600.
 
 jangan terlalu besar ukuran batch size, karena akan membuat simulasi kurang detail. semisal nilai jackpot adalah 5000, dengan setiap batch loop adalah 1000, maka simulasi akan kurang detail.
 
-------------------------------------------------------------------------------- [ PGR  ] -------------------------------------------------------------------------------------------------
+# PGR 
+```
+[ PGR  ] 
 
 
 #Game Name
@@ -118,8 +118,12 @@ a_little_batch_size = 1
 # 2 kali sukses. pity 80/100
 
 
+```
 
--------------------------------------------------------------------------[Arknight]-----------------------------------------------------------------------
+# Arknight 
+```
+[Arknight]
+
 > Laporan pull Ak (2% atau 0.0020):
 tertinggi adalah :     10742
 lakukan percobaan di : 8000
@@ -192,10 +196,15 @@ total: 9870
 
 tambahan : 8 ( 1, simulasi, 7 )
 
+
 ============================== > Theory < ===========================
 
 adalah untuk pastikan dapatkan nilai simulasi paling tinggi, minimal 9800. lalu lanjutkan dengan pull asli tanpa mempedulikan simulasi, jalankan terus pull asli tersebut tanpa simulai hingga jackpot.
----------------------------------------------------------------------- [ HSR ] ------------------------------------------------------------------------------------------------------------------------------
+```
+
+# HSR 
+```
+ [ HSR ] 
 > Laporan pull HSR (0.6% atau 0.0006):
 Streak tertinggi adalah :    34_487 | gunakan 20_000 - 21_000
 Modus Jackpot adalah 3986
@@ -319,6 +328,7 @@ pull_method = 'NO'
 
 Tujuan adalah gacha Evernight dengan pengeluaran paling sedikit ( 14 pull total untuk evernight ).
 Disini dilakukan dua pendekatan sekaligus
+```
 
 ## pendekatan 1
 - Simulasi sampai selesai
