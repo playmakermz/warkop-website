@@ -328,6 +328,21 @@ pull_method = 'NO'
 
 Tujuan adalah gacha Evernight dengan pengeluaran paling sedikit ( 14 pull total untuk evernight ).
 Disini dilakukan dua pendekatan sekaligus
+
+# ============================ Pendekatan 24/11/2025 =========
+
+ ============  Game Name : System 02 - HSR Scharacter Time: 18:15:45 ============= 
+
+ ------> Kegagalan pada simulasi ke: 1646 , pull baru: 1646 , Total pull: 32847
+ ------> Kegagalan pada simulasi ke: 1948 , pull baru: 1948 , Total pull: 33150
+ ------> Kegagalan pada simulasi ke: 3210 , pull baru: 3210 , Total pull: 34413
+ ------> Kegagalan pada simulasi ke: 3454 , pull baru: 3454 , Total pull: 34658
+ ------> Kegagalan pada simulasi ke: 3855 , pull baru: 3855 , Total pull: 35060
+ ------> Kegagalan pada simulasi ke: 7340 , pull baru: 7340 , Total pull: 38546
+ ------> Kegagalan pada simulasi ke: 8377 , pull baru: 8377 , Total pull: 39584
+ ------> Kegagalan pada simulasi ke: 9086 , pull baru: 9086 , Total pull: 40294
+ ------> Kegagalan pada simulasi ke: 9106 , pull baru: 9106 , Total pull: 40315
+ ------> Kegagalan pada simulasi ke: 12594 , pull baru: 12594 , Total pull: 43804
 ```
 
 ## pendekatan 1
