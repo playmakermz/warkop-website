@@ -1,6 +1,5 @@
 # Data management practice
 
-# Data Management Practice
 # MODULE 2: DATA CLEANING & PREPARATION
 ## Quick Reference Guide for Caelus
 
