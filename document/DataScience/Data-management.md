@@ -573,3 +573,20 @@ Median: Middle value = 20          ✓ (accurate representation)
 
 ---
 
+***
+# Kesimpulan Bab 1-3
+
+# Urutan pengelolahan dataset.
+
+1. Analisa dataset secara manual 
+2. Atur format item strings didalam kolomn. mulai dari huruf besar kecil dan spasi kossong
+3. Mengurusi duplikat persis(mulai dari id dan seluruhnya)
+4. Menandai yang mirip tetapi bisa di investigasi
+5. Manage dan mengurusi data yang hilang (Dengan: mean, median, mode, dll)
+6. Pastikan tidak ada nilai kosong. `print(df.isnull().sum())`
+7. Lakukan perhitungan statistik
+8. Print dan save data
+
+Praktik: [https://github.com/playmakermz/warkop-website/blob/main/document/DataScience/code/mod_2and3.py]
+
+
