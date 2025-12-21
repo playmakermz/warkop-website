@@ -44,7 +44,8 @@ df.to_csv('temple_donation_copy.csv', index = False)
 #KeyError: 'Amount'
 ```
 
-## 1.2
+***
+# 1.2
 
 # MODULE 2: DATA CLEANING & PREPARATION
 ## Quick Reference Guide for Caelus
@@ -175,3 +176,37 @@ df.to_csv('cleaned_data.csv', index=False)
 ✓ Unknown names? Use placeholder like 'Unknown_Donor' to flag investigation needed
 
 ---
+
+***
+
+# 2.1 Statistik deskriptif
+
+Mencari tau apa arti didalam data
+
+## Konsep:
+
+Nama | Deskripsi
+--- | ---
+SKEWED (Kemencengan) |  tells you the story of your data. If donations are right-skewed, you know most people give small amounts. If they're symmetric, people give fairly evenly.LEFT-SKEWED is the opposite. Imagine if most people donated large amounts, but a few very poor people donated tiny amounts. The tail would pull left. Are your donations pulling toward one extreme, or balanced?
+Variance (Varians) | Variance is the mathematical way to measure that 'spreadingness.' It calculates the average of how far each value is from the mean. Why does this matter? If your donation amounts have high variance, you can't predict what you'll receive. If they have low variance, donations are predictable and stable How scattered are your donations?
+Standart deviation | It's literally the square root of variance. This is much more useful than variance because the number is in the same units as your original data. With variance, the units are squared (weird). With standard deviation, it's just... money. Why does this matter for you? If you're planning the temple's budget, standard deviation tells you: 'Expect most donations to fall in this range.' That's actionable information.  What's the typical range donors fall within?
+kurtosis | Should you expect shocking outliers, or is everything predictable?
+
+
+
+<img width="514" height="280" alt="image" src="https://github.com/user-attachments/assets/abec01e8-eb58-43e1-a69a-f3c6ce88001e" />
+
+> Skew
+
+```
+Low end:  7,826 - 2,800 = 5,026
+High end: 7,826 + 2,800 = 10,626
+
+Most donations are between 5,026 and 10,626
+```
+> Standart deviation, std.
+
+<img width="634" height="265" alt="image" src="https://github.com/user-attachments/assets/5fae36b2-e32e-4b5e-9283-ebfd946523ec" />
+
+> Kurtosis
+
