@@ -46,87 +46,132 @@ df.to_csv('temple_donation_copy.csv', index = False)
 
 ## 1.2
 
-### MODULE 2: DATA CLEANING & PREPARATION
-Quick Reference Guide for Caelus
-Core Principle:
-GIGO (Garbage In, Garbage Out) — If your input data is bad, no algorithm can save you. 50-80% of data science work is cleaning data, not modeling.
+# MODULE 2: DATA CLEANING & PREPARATION
+## Quick Reference Guide for Caelus
+
+### Core Principle:
+**GIGO (Garbage In, Garbage Out)** — If your input data is bad, no algorithm can save you. 50-80% of data science work is cleaning data, not modeling.
+
+---
 
 ### Step 1: LOAD & INSPECT
-pythonimport pandas as pd
+```python
+import pandas as pd
 
 df = pd.read_csv('file.csv')
 print(df.head())           # First 5 rows
 print(df.info())           # Data types & memory
 print(df.describe())       # Basic statistics
 print(df.isnull().sum())   # Count missing values
+```
+
+---
 
 ### Step 2: HANDLE DUPLICATES
-Always check duplicates FIRST, before filling missing values.
-Exact Duplicates (every column matches):
-pythondf_clean = df.drop_duplicates(keep='first')  # Keep first occurrence
-Suspicious Duplicates (same columns, different IDs):
-pythonsus = df[df.duplicated(subset=['Col1', 'Col2'], keep=False)]
+
+**Always check duplicates FIRST, before filling missing values.**
+
+**Exact Duplicates** (every column matches):
+```python
+df_clean = df.drop_duplicates(keep='first')  # Keep first occurrence
+```
+
+**Suspicious Duplicates** (same columns, different IDs):
+```python
+sus = df[df.duplicated(subset=['Col1', 'Col2'], keep=False)]
 print(sus)  # FLAG for human review, don't auto-remove
-Key Rule: Remove exact duplicates automatically. Flag suspicious patterns for investigation.
+```
+
+**Key Rule:** Remove exact duplicates automatically. Flag suspicious patterns for investigation.
+
+---
 
 ### Step 3: HANDLE MISSING VALUES
-Choose strategy based on data type:
-Data TypeStrategyCodeWhenNumericalMediandf['col'].fillna(df['col'].median())Default for numbers (resistant to outliers)NumericalMeandf['col'].fillna(df['col'].mean())Only if data is perfectly clean & normalCategoricalMode (Most frequent)df['col'].fillna(df['col'].mode()[0])For categories (Color, Region, Type)Names/TextCustom placeholderdf['col'].fillna('Unknown')When you need to flag missing dataDatesDrop row OR fill with defaultdf.dropna(subset=['Date'])If few missing; otherwise fill
-Example from your learning:
-python# Amount (numerical) → Use median
+
+Choose strategy based on **data type**:
+
+| Data Type | Strategy | Code | When |
+|-----------|----------|------|------|
+| **Numerical** | Median | `df['col'].fillna(df['col'].median())` | Default for numbers (resistant to outliers) |
+| **Numerical** | Mean | `df['col'].fillna(df['col'].mean())` | Only if data is perfectly clean & normal |
+| **Categorical** | Mode (Most frequent) | `df['col'].fillna(df['col'].mode()[0])` | For categories (Color, Region, Type) |
+| **Names/Text** | Custom placeholder | `df['col'].fillna('Unknown')` | When you need to flag missing data |
+| **Dates** | Drop row OR fill with default | `df.dropna(subset=['Date'])` | If few missing; otherwise fill |
+
+**Example from your learning:**
+```python
+# Amount (numerical) → Use median
 df['Amount'] = df['Amount'].fillna(df['Amount'].median())
 
-### Region (categorical) → Use mode
+# Region (categorical) → Use mode
 df['Region'] = df['Region'].fillna(df['Region'].mode()[0])
 
-### Donor_Name (text) → Use placeholder
+# Donor_Name (text) → Use placeholder
 df['Donor_Name'] = df['Donor_Name'].fillna('Unknown_Donor')
 
-### Donation_Date (date) → Drop if few, fill if many
+# Donation_Date (date) → Drop if few, fill if many
 df = df.dropna(subset=['Donation_Date'])
+```
+
+---
 
 ### Step 4: STANDARDIZE TEXT
+
 Clean up inconsistencies in text columns:
-python# Remove leading/trailing spaces
+```python
+# Remove leading/trailing spaces
 df['Name'] = df['Name'].str.strip()
 
-### Capitalize properly
+# Capitalize properly
 df['Name'] = df['Name'].str.title()
 
-### Example: 'john_doe' → 'John_Doe'
+# Example: 'john_doe' → 'John_Doe'
+```
+
+---
 
 ### Step 5: VERIFY & SAVE
-python# Check final status
+```python
+# Check final status
 print(df.isnull().sum())      # Should be all zeros
 print(df.duplicated().sum())  # Should be zero
 
-### Save cleaned data
+# Save cleaned data
 df.to_csv('cleaned_data.csv', index=False)
+```
+
+---
 
 ### THE COMPLETE WORKFLOW:
 
-Load data
-Inspect (head, info, describe, null count)
-Remove exact duplicates FIRST
-Flag suspicious duplicates for review
-Handle missing values (median for numbers, mode for categories, placeholder for text)
-Standardize text formatting
-Verify no missing values remain
-Save cleaned data
+1. Load data
+2. Inspect (head, info, describe, null count)
+3. **Remove exact duplicates FIRST**
+4. **Flag suspicious duplicates for review**
+5. Handle missing values (median for numbers, mode for categories, placeholder for text)
+6. Standardize text formatting
+7. Verify no missing values remain
+8. Save cleaned data
 
+---
 
 ### IMPORTANT MEMORY AID: Mean vs Median
-Real Example (Family Ages):
 
-Ages: [18, 19, 20, 23, 300] (where 300 = Liora)
-Mean = (18+19+20+23+300)/5 = 76 ❌ (useless—represents no one)
-Median = Middle value = 20 ✓ (accurate representation)
+**Real Example (Family Ages):**
+- Ages: [18, 19, 20, 23, 300] (where 300 = Liora)
+- **Mean** = (18+19+20+23+300)/5 = **76** ❌ (useless—represents no one)
+- **Median** = Middle value = **20** ✓ (accurate representation)
 
-Robin's Rule: Use median ~90% of the time. Mean only for perfectly clean data.
+**Robin's Rule:** Use median ~90% of the time. Mean only for perfectly clean data.
 
-KEY REMINDERS:
-✓ Always use df_clean consistently—don't mix cleaned and uncleaned datasets
+---
+
+### KEY REMINDERS:
+
+✓ Always use `df_clean` consistently—don't mix cleaned and uncleaned datasets
 ✓ Comments should match your code (you wrote "mean" but used "median")
 ✓ Duplicates with different IDs = flag for human review, not auto-remove
 ✓ Missing dates? Drop the row OR fill carefully—depends on your dataset
 ✓ Unknown names? Use placeholder like 'Unknown_Donor' to flag investigation needed
+
+---
