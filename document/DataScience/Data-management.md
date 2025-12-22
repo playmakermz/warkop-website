@@ -41,6 +41,9 @@ Praktik: [https://github.com/playmakermz/warkop-website/blob/main/document/DataS
 
 ---
 
+# Module 5 hypotesis testing
+[https://github.com/playmakermz/pustaka/blob/main/document/cloud-data/module5.md]
+
 *Prepared with love by Celestine 💜*
 
 
