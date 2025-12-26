@@ -51,6 +51,8 @@
 
 Praktik: [https://github.com/playmakermz/warkop-website/blob/main/document/DataScience/code/mod_2and3.py]
 
+Praktik irish : [https://github.com/playmakermz/warkop-website/blob/main/document/DataScience/code/irish.py]
+
 ---
 
 *Prepared with love by Celestine 💜*
