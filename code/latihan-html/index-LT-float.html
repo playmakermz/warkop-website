@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Homepage </title>
+
+    <style>
+        /*main area */
+
+        main {
+            padding: 10px;
+                border: 1px solid green;
+        }
+
+        /* clear float */
+        .clearfix:after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        /* Pengaturan Float */ 
+        .main-text {
+            box-sizing: border-box;
+            float: left;
+                width: 60%;
+                    border: 1px solid red; 
+        }
+
+        .side-text {
+            box-sizing: border-box;
+                float: right;
+                width: 40%; 
+                    border: 1px solid blue;
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+    <main class="clearfix">
+
+        <div class="main-text">
+
+            Float Left
+
+            Adipisicing quia consequatur magnam repellat et voluptatibus sequi Perspiciatis
+            commodi cum adipisci asperiores vero. Modi soluta molestiae veritatis
+            praesentium nulla modi pariatur veritatis Quas eveniet veritatis excepturi
+            velit modi alias!
+
+        </div>
+
+        <div class="side-text">
+
+            Float Right
+
+            Adipisicing deserunt voluptatibus nisi est suscipit! Nulla unde temporibus sequi
+            id officia, distinctio Maiores corporis placeat unde quos iste maxime
+            laudantium Suscipit unde adipisci atque et deleniti animi ullam minus.
+
+        </div>
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+{
+    "_README": "JANGAN edit file ini! Copy ke config.json dan isi kredensial di sana.",
+    
+    "settings": {
+        "output_directory": "./downloaded_images",
+        "max_workers": 5,
+        "request_delay": 0.5,
+        "request_timeout": 30,
+        "use_gallery_dl": true,
+        "fallback_to_crawler": true
+    },
+    
+    "credentials": {
+        "pixiv": {
+            "_help": "Gunakan salah satu: username+password ATAU refresh_token",
+            "_get_token": "Install gppt (pip install gppt), lalu jalankan: gppt login",
+            "username": "YOUR_EMAIL",
+            "password": "YOUR_PASSWORD",
+            "refresh_token": "YOUR_REFRESH_TOKEN"
+        },
+        "twitter": {
+            "_help": "Gunakan salah satu: cookies_file ATAU auth_token",
+            "_get_cookies": "Install extension 'Get cookies.txt', login Twitter, export cookies",
+            "_get_token": "Developer Tools > Application > Cookies > auth_token",
+            "cookies_file": "cookies/twitter_cookies.txt",
+            "auth_token": "YOUR_AUTH_TOKEN"
+        },
+        "instagram": {
+            "_help": "Gunakan salah satu: username+password ATAU session_id",
+            "_get_session": "Developer Tools > Application > Cookies > sessionid",
+            "username": "YOUR_USERNAME",
+            "password": "YOUR_PASSWORD",
+            "session_id": "YOUR_SESSION_ID"
+        },
+        "deviantart": {
+            "_help": "Dapatkan dari https://www.deviantart.com/developers/",
+            "client_id": "YOUR_CLIENT_ID",
+            "client_secret": "YOUR_CLIENT_SECRET"
+        },
+        "danbooru": {
+            "_help": "API key dari profile settings di Danbooru",
+            "username": "YOUR_USERNAME",
+            "api_key": "YOUR_API_KEY"
+        },
+        "imgur": {
+            "_help": "Dapatkan dari https://api.imgur.com/oauth2/addclient",
+            "client_id": "YOUR_CLIENT_ID"
+        },
+        "tumblr": {
+            "_help": "Dapatkan dari https://www.tumblr.com/oauth/apps",
+            "api_key": "YOUR_API_KEY",
+            "api_secret": "YOUR_API_SECRET"
+        },
+        "flickr": {
+            "_help": "Dapatkan dari https://www.flickr.com/services/apps/create/",
+            "api_key": "YOUR_API_KEY"
+        },
+        "reddit": {
+            "_help": "Buat app di https://www.reddit.com/prefs/apps (pilih 'script')",
+            "client_id": "YOUR_CLIENT_ID",
+            "client_secret": "YOUR_CLIENT_SECRET",
+            "user_agent": "ImageCrawler/2.0 by YOUR_USERNAME"
+        }
+    },
+    
+    "gallery_dl_options": {
+        "pixiv": {
+            "ugoira": true,
+            "metadata": true,
+            "tags": true
+        },
+        "twitter": {
+            "retweets": false,
+            "videos": true,
+            "cards": false
+        },
+        "instagram": {
+            "stories": true,
+            "highlights": true,
+            "videos": true
+        }
+    }
+}

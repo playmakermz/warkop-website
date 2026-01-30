@@ -1,0 +1,30 @@
+
+ ============  Game Name : System 02 - HSR Scharacter Time: 13:43:42 ============= 
+
+ ============  Game Name : System 02 - HSR Scharacter Time: 14:12:18 ============= 
+
+ ============  Game Name : System 02 - HSR Scharacter Time: 14:56:45 ============= 
+
+ ============  Game Name : System 02 - HSR Scharacter Time: 15:36:13 ============= 
+
+ ============  Game Name : System 02 - HSR Scharacter Time: 16:47:22 ============= 
+
+ ============  Game Name : System 02 - HSR Scharacter Time: 17:05:38 ============= 
+
+ Ini nilai percobaan : 1 , Nilai pull baru: 11460 , Total pull: 12534
+ Ini nilai percobaan : 1000 , Nilai pull baru: 11461 , Total pull: 12535
+ ------> Kegagalan pada simulasi ke: 11517 , pull baru: 11517 , Total pull: 12592
+ ------> Kegagalan pada simulasi ke: 747 , pull baru: 747 , Total pull: 748
+ ============  Game Name : System 02 - HSR Scharacter Time: 20:13:31 ============= 
+
+ Ini nilai percobaan : 800 , Nilai pull baru: 11560 , Total pull: 12023
+ ------> Kegagalan pada simulasi ke: 11784 , pull baru: 11784 , Total pull: 12248
+ ============  Game Name : System 02 - HSR Scharacter Time: 21:05:18 ============= 
+
+ Ini nilai percobaan : 700 , Nilai pull baru: 11510 , Total pull: 11926
+ Ini nilai percobaan : 300 , Nilai pull baru: 12210 , Total pull: 12626
+ Ini nilai percobaan : 300 , Nilai pull baru: 12510 , Total pull: 12926
+ Ini nilai percobaan : 1000 , Nilai pull baru: 12810 , Total pull: 13226
+ Ini nilai percobaan : 1000 , Nilai pull baru: 13810 , Total pull: 14226
+ Ini nilai percobaan : 1000 , Nilai pull baru: 14810 , Total pull: 15226
+ ------> Kegagalan pada simulasi ke: 15652 , pull baru: 15652 , Total pull: 16069

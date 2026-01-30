@@ -1,0 +1,21 @@
+============================================================
+HASIL WEB CRAWLING
+============================================================
+
+Kata Kunci  : pemrograman python object oriented untuk pemula
+Jumlah Hasil: 5
+Waktu       : 2026-01-30 10:30:45
+
+------------------------------------------------------------
+DAFTAR URL:
+------------------------------------------------------------
+
+[1] https://www.petanikode.com/python-oop/
+[2] https://www.dicoding.com/blog/mengenal-object-oriented-programming-oop/
+[3] https://www.pythonindo.com/tutorial-python-oop/
+[4] https://www.codepolitan.com/belajar-python-oop-untuk-pemula
+[5] https://www.belajarpython.com/tutorial/oop-python
+
+============================================================
+Dihasilkan oleh Web Crawler Python
+============================================================

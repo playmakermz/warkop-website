@@ -1,0 +1,36 @@
+ ============  Game Name : HSR Scharacter Time: 21:49:35 ============= 
+
+ Ini nilai percobaan : 760 , Nilai pull baru: 12020 , Total pull: 35515
+ ------> Kegagalan pada simulasi ke: 134 , pull baru: 12150 , Total pull: 35646
+ ============  Game Name : HSR Scharacter Time: 23:47:23 ============= 
+
+ Ini nilai percobaan : 700 , Nilai pull baru: 11370 , Total pull: 32799
+ ------> Kegagalan pada simulasi ke: 458 , pull baru: 11827 , Total pull: 33257
+ ============  Game Name : HSR Scharacter Time: 00:05:53 ============= 
+
+ ============  Game Name : HSR Scharacter Time: 12:25:55 ============= 
+
+ Ini nilai percobaan : 500 , Nilai pull baru: 11510 , Total pull: 32297
+ Ini nilai percobaan : 500 , Nilai pull baru: 12010 , Total pull: 32797
+ Ini nilai percobaan : 400 , Nilai pull baru: 12510 , Total pull: 33297
+ Ini nilai percobaan : 400 , Nilai pull baru: 12910 , Total pull: 33697
+ Ini nilai percobaan : 400 , Nilai pull baru: 13310 , Total pull: 34097
+ Ini nilai percobaan : 400 , Nilai pull baru: 13710 , Total pull: 34497
+ ------> Kegagalan pada simulasi ke: 60 , pull baru: 13769 , Total pull: 34557
+ ============  Game Name : HSR Scharacter Time: 12:42:31 ============= 
+
+ Ini nilai percobaan : 400 , Nilai pull baru: 11420 , Total pull: 34852
+ Ini nilai percobaan : 400 , Nilai pull baru: 11820 , Total pull: 35252
+ Ini nilai percobaan : 400 , Nilai pull baru: 12220 , Total pull: 35652
+ Ini nilai percobaan : 400 , Nilai pull baru: 12620 , Total pull: 36052
+ Ini nilai percobaan : 400 , Nilai pull baru: 13020 , Total pull: 36452
+ ------> Kegagalan pada simulasi ke: 93 , pull baru: 13112 , Total pull: 36545
+ ============  Game Name : HSR Scharacter Time: 14:05:44 ============= 
+
+ Ini nilai percobaan : 600 , Nilai pull baru: 11510 , Total pull: 33739
+ ------> Kegagalan pada simulasi ke: 11913 , pull baru: 11913 , Total pull: 34143
+ ============  Game Name : HSR Scharacter Time: 16:10:09 ============= 
+
+ Ini nilai percobaan : 600 , Nilai pull baru: 11520 , Total pull: 32334
+ Ini nilai percobaan : 600 , Nilai pull baru: 12120 , Total pull: 32934
+ Ini nilai percobaan : 400 , Nilai pull baru: 12720 , Total pull: 33534
